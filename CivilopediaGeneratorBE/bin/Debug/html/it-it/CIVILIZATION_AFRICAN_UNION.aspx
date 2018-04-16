@@ -1,0 +1,28 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="Civilizations.master" %>
+
+<script runat="server">
+
+</script>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+	<title>CIVILOPEDIA Online: Unione Africana</title>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+	<div class="title">Unione Africana</div>
+	<img src="/civilopediabe/images/large/CIVILIZATION_AFRICAN_UNION.png" alt="Unione Africana" class="contentimage" />
+	<div class="contentleft">
+		<h2>Leader:</h2><div class="infobox"><a href="LEADER_AFRICAN_UNION.aspx" onmouseover="return tooltip('Samatar Jama Barre');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/LEADER_AFRICAN_UNION.png" /></a></div>
+	</div>
+	<div class="contentright">
+		
+<h2>Un continente diviso</h2><div class="infobox">Bench&eacute; fosse rimasto intoccato dalle conseguenze del Grande Errore, il continente africano patì le migrazioni dei molti profughi che avevano abbandonato le loro case. L'innalzamento dei mari spinse altri rifugiati ad abbandonare il Nordafrica e le nazioni sulla costa. il disastro umanitario mandò in pezzi la fragile economia di molti stati africani, destabilizzando i governi della regione. Ne seguì un lungo ciclo di colpi di stato ed effimere dittature, mentre guerre di frontiera dilaniavano l'Africa da un estremo all'altro. Alla fine gran parte del Nordafrica entrò nella nuova Unione Europea Franco-Iberica, alleviando in questo modo la pressione interna, ma le nazioni sub-sahariane continuarono a inseguire il ritorno all'ordine.</div>
+<h2>Forgiati dalla crisi</h2><div class="infobox">In questo vuoto di potere si fecero strada i leader della vecchia Unione Africana e del COMESA (Mercato Comune dell'Africa Orientale e Meridionale). Entrambe le organizzazioni esistevano da decenni ed erano molto stimate dai cittadini africani. I membri della vecchia Unione Africana cercarono di arrivare a una stabilit&agrave; politica e militare facendo appello a poteri sovranazionali ignorati sino a quel momento ma presenti nella carta formativa dell'Unione. Sulla spinta di alcuni stati fondatori del COMESA venne costituita una nuova Unione Africana "dei Popoli". Diverse delle pi&ugrave; progressiste nazioni africane si unirono subito alla nuova entit&agrave; politica; fecero seguito alcune delle pi&ugrave; stabili repubbliche dell'Africa sub-sahariana. Gli stati governati da dittatori o dilaniati dalle guerre civili, invece, si rifiutarono.</div>
+<h2>Una nuova Unione</h2><div class="infobox">I membri pi&ugrave; potenti della nuova Unione Africana dei Popoli coordinarono le loro forze militari sotto un comando unificato e scesero in campo per porre fine alle rivolte e all'instabilit&agrave; politica, sostituendo i vari despoti locali con nuovi regimi che confluirono rapidamente nell'Unione. Mentre il processo proseguiva, l'esercito si mosse contro banditi, pirati, signori della guerra e altri elementi che minacciavano i cittadini di un'Africa gi&agrave; concepita come unita. Nuove tradizioni militari si imposero e un nuovo senso di orgoglio fu associato alla carriera militare. Molti nuovi stati dell'Unione Africana elessero o nominarono ufficiali dell'esercito come loro leader.</div>
+<h2>Recupero</h2><div class="infobox">Intanto il COMESA, grazie ai vecchi legami con le unioni africane vecchia e nuova, si muoveva per portare stabilit&agrave; economica e prosperit&agrave; al continente. Il primo passo fu l'istituzione di una moneta comune; il secondo l'abrogazione del sistema di dazi e tassazioni dei vari stati membri. Finalmente il COMESA pot&eacute; rivolgere gli sforzi allo sfruttamento delle prodigiose risorse naturali e agricole dell'Africa, proteggendo nel contempo la diversit&agrave; biologica del continente attraverso la creazione di grandi riserve e la valorizzazione delle sue meraviglie naturali. I progetti finanziati includevano dighe, nuove fonti energetiche come parchi eolici, nonch&eacute; la bonifica e il recupero delle coste e del letto del fiume Congo. Il Mercato Comune africano dedicò anche molta attenzione all'istruzione delle generazioni post-Errore e ai progetti umanitari, soprattutto nell'ambito dell'assistenza sanitaria e dei diritti umani. Vennero perseguiti nuovi obiettivi industriali, tanto che l'Unione divenne uno dei protagonisti del mercato internazionale. Tuttavia, rimangono ancora molti problemi, anche se l'Unione Africana dei Popoli continua a sperimentare politiche per affrontarli: il pi&ugrave; eclatante sono il persistere del nepotismo e la corruzione che affliggono alcune nazioni membro, oltre a qualche occasionale recrudescenza di conflitti tribali e/o religiosi.</div>
+<h2>Espansione all'esterno</h2><div class="infobox">Come in tanti altri aspetti della vita dell'Unione, quando la Semina ebbe inizio i mercanti presero in mano la situazione. La maggior parte delle missioni fu comandata e popolata da importanti uomini d'affari e funzionari pubblici rispettati. Il governo e le caratteristiche delle colonie avrebbero preso molte forme, ma tutte affondavano profondamente le loro radici nella storia e nella cultura africana. Se &egrave; superficiale affermare che "ci vuole un villaggio per crescere un bambino", si può invece asserire con certezza che ci vuole un villaggio per sopravvivere come colonia su un mondo lontano. L'atteggiamento dell'amministrazione coloniale si può riassumere con il motto non ufficiale dell'Unione Africana dei Popoli, il vecchio proverbio Bondei che recita: "I rami raccolti in fascio non si possono spezzare".</div>
+		
+<h2></h2>
+		<div class="infobox"></div>
+	</div>
+</asp:Content>
+

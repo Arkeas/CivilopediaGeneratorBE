@@ -1,0 +1,604 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-it">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,concept,concepts" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('Nozioni di gioco');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_on.png" class="tab" id="tab01" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('Tecnologie');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('Unit&agrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('Aggiornamenti delle unit&agrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('Edifici');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('Meraviglie');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('Virt&ugrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('Operazioni segrete');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('Sponsor e leader');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('Missioni');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('Terreni e caratteristiche');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('Risorse');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('Miglioramenti');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('Affinit&agrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('Stazioni');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">Nozioni di gioco
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="CONCEPT_HOME.aspx"><div id="CONCEPT_HOME" class="menuitem">Premessa alle nozioni di gioco</div></a>
+			<div id="GROUP_1" class="menugroupcontainer"><a href="javascript:togglediv('1_CONTENT');"><div id="1" class="menugroup">Affinit&agrave;</div></a><div id="1_CONTENT">
+				<a href="CONCEPT_AFFINITY.aspx"><div id="CONCEPT_AFFINITY" class="menuitem">Affinit&agrave;</div></a>
+				<a href="CONCEPT_AFFINITY_HARMONY.aspx"><div id="CONCEPT_AFFINITY_HARMONY" class="menuitem">Armonia</div></a>
+				<a href="CONCEPT_AFFINITY_SUPREMACY.aspx"><div id="CONCEPT_AFFINITY_SUPREMACY" class="menuitem">Supremazia</div></a>
+				<a href="CONCEPT_AFFINITY_PURITY.aspx"><div id="CONCEPT_AFFINITY_PURITY" class="menuitem">Purezza</div></a>
+				<a href="CONCEPT_AFFINITY_PROGRESS.aspx"><div id="CONCEPT_AFFINITY_PROGRESS" class="menuitem">Progresso nelle Affinit&agrave;</div></a>
+				<a href="CONCEPT_AFFINITY_STYLE.aspx"><div id="CONCEPT_AFFINITY_STYLE" class="menuitem">Stile di gioco</div></a>
+				<a href="CONCEPT_AFFINITY_ACQUIRE.aspx"><div id="CONCEPT_AFFINITY_ACQUIRE" class="menuitem">Acquisire Affinit&agrave;</div></a>
+				<a href="CONCEPT_AFFINITY_UPGRADES.aspx"><div id="CONCEPT_AFFINITY_UPGRADES" class="menuitem">Aggiornare le unit&agrave;</div></a>
+				<a href="CONCEPT_AFFINITY_UNITS.aspx"><div id="CONCEPT_AFFINITY_UNITS" class="menuitem">Unit&agrave; specifiche delle Affinit&agrave;</div></a>
+			</div></div>
+			<div id="GROUP_2" class="menugroupcontainer"><a href="javascript:togglediv('2_CONTENT');"><div id="2" class="menugroup">Citt&agrave;</div></a><div id="2_CONTENT">
+				<a href="CONCEPT_CITIES.aspx"><div id="CONCEPT_CITIES" class="menuitem">Citt&agrave;</div></a>
+				<a href="CONCEPT_OUTPOSTS.aspx"><div id="CONCEPT_OUTPOSTS" class="menuitem">Avamposti</div></a>
+				<a href="CONCEPT_FOUNDING_CITIES.aspx"><div id="CONCEPT_FOUNDING_CITIES" class="menuitem">Come fondare nuove citt&agrave;</div></a>
+				<a href="CONCEPT_WHERE_TO_FOUND_CITIES.aspx"><div id="CONCEPT_WHERE_TO_FOUND_CITIES" class="menuitem">Dove fondare gli avamposti</div></a>
+				<a href="CONCEPT_CITY_BANNER.aspx"><div id="CONCEPT_CITY_BANNER" class="menuitem">La bandiera della citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_SCREEN.aspx"><div id="CONCEPT_CITY_SCREEN" class="menuitem">La Schermata della citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_COMBATUNITS.aspx"><div id="CONCEPT_CITY_COMBATUNITS" class="menuitem">Unit&agrave; da combattimento</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTION.aspx"><div id="CONCEPT_CITY_CONSTRUCTION" class="menuitem">Costruzione nelle citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_BUILD.aspx"><div id="CONCEPT_CITY_BUILD" class="menuitem">Il menu di costruzione</div></a>
+				<a href="CONCEPT_CITY_CHANGE_BUILD.aspx"><div id="CONCEPT_CITY_CHANGE_BUILD" class="menuitem">Modificare la produzione</div></a>
+				<a href="CONCEPT_CITY_PURCHASEITEM.aspx"><div id="CONCEPT_CITY_PURCHASEITEM" class="menuitem">Acquistare un oggetto</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTING_UNITS.aspx"><div id="CONCEPT_CITY_CONSTRUCTING_UNITS" class="menuitem">Costruire unit&agrave;</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTING_BUILDINGS.aspx"><div id="CONCEPT_CITY_CONSTRUCTING_BUILDINGS" class="menuitem">Costruire edifici</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTING_WONDERS.aspx"><div id="CONCEPT_CITY_CONSTRUCTING_WONDERS" class="menuitem">Costruire Meraviglie</div></a>
+				<a href="CONCEPT_CITY_WORKINGLAND.aspx"><div id="CONCEPT_CITY_WORKINGLAND" class="menuitem">Sfruttare le caselle</div></a>
+				<a href="CONCEPT_CITY_ASSIGNINGCITIZENS.aspx"><div id="CONCEPT_CITY_ASSIGNINGCITIZENS" class="menuitem">Assegnare i cittadini al lavoro nelle caselle</div></a>
+				<a href="CONCEPT_CITY_IMPROVINGLAND.aspx"><div id="CONCEPT_CITY_IMPROVINGLAND" class="menuitem">Migliorare le caselle</div></a>
+				<a href="CONCEPT_CITY_UNEMPLOYED_CITIZENS.aspx"><div id="CONCEPT_CITY_UNEMPLOYED_CITIZENS" class="menuitem">Cittadini disoccupati</div></a>
+				<a href="CONCEPT_CITY_COMBAT.aspx"><div id="CONCEPT_CITY_COMBAT" class="menuitem">Combattimento contro le citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_ATTACKING_MELEE.aspx"><div id="CONCEPT_CITY_ATTACKING_MELEE" class="menuitem">Attaccare una citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_ATTACKING_RANGED.aspx"><div id="CONCEPT_CITY_ATTACKING_RANGED" class="menuitem">Attaccare con unit&agrave; a distanza</div></a>
+				<a href="CONCEPT_CITY_DEFENDING.aspx"><div id="CONCEPT_CITY_DEFENDING" class="menuitem">Difendere una citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_CONQUERING.aspx"><div id="CONCEPT_CITY_CONQUERING" class="menuitem">Catturare una citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_DESTROY.aspx"><div id="CONCEPT_CITY_DESTROY" class="menuitem">Radere al suolo la citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_INDESTRUCTABLE.aspx"><div id="CONCEPT_CITY_INDESTRUCTABLE" class="menuitem">Citt&agrave; indistruttibili</div></a>
+				<a href="CONCEPT_CITY_ANNEX.aspx"><div id="CONCEPT_CITY_ANNEX" class="menuitem">Annettere la citt&agrave;</div></a>
+				<a href="CONCEPT_CITY_PUPPET.aspx"><div id="CONCEPT_CITY_PUPPET" class="menuitem">Fare di una citt&agrave; uno stato fantoccio</div></a>
+				<a href="CONCEPT_CITY_MARTIAL_LAW.aspx"><div id="CONCEPT_CITY_MARTIAL_LAW" class="menuitem">Legge marziale</div></a>
+				<a href="CONCEPT_CITY_RESISTANCE.aspx"><div id="CONCEPT_CITY_RESISTANCE" class="menuitem">Resistenza</div></a>
+				<a href="CONCEPT_BUILDINGS_SPECIALISTS.aspx"><div id="CONCEPT_BUILDINGS_SPECIALISTS" class="menuitem">Specialisti</div></a>
+				<a href="CONCEPT_BUILDINGS.aspx"><div id="CONCEPT_BUILDINGS" class="menuitem">Edifici</div></a>
+				<a href="CONCEPT_BUILDINGS_CONSTRUCTION.aspx"><div id="CONCEPT_BUILDINGS_CONSTRUCTION" class="menuitem">Come costruire gli edifici</div></a>
+				<a href="CONCEPT_BUILDINGS_PURCHASING.aspx"><div id="CONCEPT_BUILDINGS_PURCHASING" class="menuitem">Modificare la costruzione e acquistare oggetti</div></a>
+				<a href="CONCEPT_BUILDINGS_PREREQUISITES.aspx"><div id="CONCEPT_BUILDINGS_PREREQUISITES" class="menuitem">Prerequisiti per la costruzione</div></a>
+				<a href="CONCEPT_BUILDINGS_MAINTENANCE.aspx"><div id="CONCEPT_BUILDINGS_MAINTENANCE" class="menuitem">Manutenzione degli edifici</div></a>
+				<a href="CONCEPT_BUILDINGS_PALACE.aspx"><div id="CONCEPT_BUILDINGS_PALACE" class="menuitem">Il Quartier generale</div></a>
+			</div></div>
+			<div id="GROUP_3" class="menugroupcontainer"><a href="javascript:togglediv('3_CONTENT');"><div id="3" class="menugroup">Regole per il combattimento</div></a><div id="3_CONTENT">
+				<a href="CONCEPT_COMBAT.aspx"><div id="CONCEPT_COMBAT" class="menuitem">Combattimento</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR" class="menuitem">Dichiarare guerra</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_DIPLOMATICALLY.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_DIPLOMATICALLY" class="menuitem">Dichiarare guerra attraverso la diplomazia</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_ATTACK_UNIT.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_ATTACK_UNIT" class="menuitem">Attaccare un'altra unit&agrave;</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_ENTER_TERRITORY.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_ENTER_TERRITORY" class="menuitem">Entrare nel territorio di una colonia</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_RECEIVED.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_RECEIVED" class="menuitem">Dichiarazioni di guerra dei nemici</div></a>
+				<a href="CONCEPT_COMBAT_END_WAR.aspx"><div id="CONCEPT_COMBAT_END_WAR" class="menuitem">Porre fine a una guerra</div></a>
+				<a href="CONCEPT_COMBAT_WHICH_UNITS_CAN_FIGHT.aspx"><div id="CONCEPT_COMBAT_WHICH_UNITS_CAN_FIGHT" class="menuitem">Quali unit&agrave; possono combattere</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS" class="menuitem">Statistiche di combattimento delle unit&agrave;</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_RANGED_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_RANGED_COMBAT_STRENGTH" class="menuitem">Forza di combattimento a distanza</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_RANGE.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_RANGE" class="menuitem">Raggio di tiro</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_COMBAT_STRENGTH" class="menuitem">Forza di combattimento</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_HIT_POINTS.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_HIT_POINTS" class="menuitem">Punti ferita</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_COMBAT.aspx"><div id="CONCEPT_COMBAT_MELEE_COMBAT" class="menuitem">Combattimento ravvicinato</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_COMBAT_RESOLVE.aspx"><div id="CONCEPT_COMBAT_MELEE_COMBAT_RESOLVE" class="menuitem">Risolvere il combattimento ravvicinato</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_MULTIPLE_UNITS.aspx"><div id="CONCEPT_COMBAT_MELEE_MULTIPLE_UNITS" class="menuitem">Combattimento con pi&ugrave; unit&agrave;</div></a>
+				<a href="CONCEPT_COMBAT_COMBAT_INFORMATION_TABLE.aspx"><div id="CONCEPT_COMBAT_COMBAT_INFORMATION_TABLE" class="menuitem">Tabella delle informazioni sul combattimento</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_INITIATING_COMBAT.aspx"><div id="CONCEPT_COMBAT_MELEE_INITIATING_COMBAT" class="menuitem">Iniziare un combattimento in mischia</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_RESULTS.aspx"><div id="CONCEPT_COMBAT_MELEE_RESULTS" class="menuitem">Risultati del combattimento ravvicinato</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_COMBAT.aspx"><div id="CONCEPT_COMBAT_RANGED_COMBAT" class="menuitem">Combattimento a distanza</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_RANGED_COMBAT_STRENGTH" class="menuitem">Forza di combattimento a distanza</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_COMBAT_RANGE.aspx"><div id="CONCEPT_COMBAT_RANGED_COMBAT_RANGE" class="menuitem">Raggio di tiro</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_LINE_OF_SIGHT.aspx"><div id="CONCEPT_COMBAT_RANGED_LINE_OF_SIGHT" class="menuitem">Linea di visione</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_INITIATING_COMBAT.aspx"><div id="CONCEPT_COMBAT_RANGED_INITIATING_COMBAT" class="menuitem">Iniziare un combattimento a distanza</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_RESULTS.aspx"><div id="CONCEPT_COMBAT_RANGED_RESULTS" class="menuitem">Risultati del combattimento a distanza</div></a>
+				<a href="CONCEPT_COMBAT_BONUSES.aspx"><div id="CONCEPT_COMBAT_BONUSES" class="menuitem">Bonus al combattimento</div></a>
+				<a href="CONCEPT_COMBAT_BONUSES_TERRAIN.aspx"><div id="CONCEPT_COMBAT_BONUSES_TERRAIN" class="menuitem">Bonus legati al terreno</div></a>
+				<a href="CONCEPT_COMBAT_FORTIFICATION_EXPLANATION.aspx"><div id="CONCEPT_COMBAT_FORTIFICATION_EXPLANATION" class="menuitem">Fortificazioni</div></a>
+				<a href="CONCEPT_COMBAT_FORTIFICATION_WHICH_UNITS_CAN_FORTIFY.aspx"><div id="CONCEPT_COMBAT_FORTIFICATION_WHICH_UNITS_CAN_FORTIFY" class="menuitem">Quali unit&agrave; possono fortificarsi</div></a>
+				<a href="CONCEPT_COMBAT_BONUSES_FORTIFICATION.aspx"><div id="CONCEPT_COMBAT_BONUSES_FORTIFICATION" class="menuitem">Bonus per la fortificazione</div></a>
+				<a href="CONCEPT_COMBAT_ALERT.aspx"><div id="CONCEPT_COMBAT_ALERT" class="menuitem">L'ordine Vigila</div></a>
+				<a href="CONCEPT_COMBAT_NAVAL.aspx"><div id="CONCEPT_COMBAT_NAVAL" class="menuitem">Combattimento navale</div></a>
+				<a href="CONCEPT_COMBAT_CITY_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_CITY_COMBAT_STRENGTH" class="menuitem">Combattimento cittadino</div></a>
+				<a href="CONCEPT_COMBAT_CITY_HIT_POINTS.aspx"><div id="CONCEPT_COMBAT_CITY_HIT_POINTS" class="menuitem">Punti ferita delle citt&agrave;</div></a>
+				<a href="CONCEPT_COMBAT_CITY_ATTACKING_WITH_RANGED_UNITS.aspx"><div id="CONCEPT_COMBAT_CITY_ATTACKING_WITH_RANGED_UNITS" class="menuitem">Attaccare le citt&agrave; con unit&agrave; a distanza</div></a>
+				<a href="CONCEPT_COMBAT_CITY_ATTACKING_WITH_MELEE_UNITS.aspx"><div id="CONCEPT_COMBAT_CITY_ATTACKING_WITH_MELEE_UNITS" class="menuitem">Attaccare le citt&agrave; in combattimento ravvicinato</div></a>
+				<a href="CONCEPT_COMBAT_CITY_GARRISON.aspx"><div id="CONCEPT_COMBAT_CITY_GARRISON" class="menuitem">Stanziare le unit&agrave; in citt&agrave; come guarnigione</div></a>
+				<a href="CONCEPT_COMBAT_CITY_BOMBARD.aspx"><div id="CONCEPT_COMBAT_CITY_BOMBARD" class="menuitem">Bombardamento delle citt&agrave; contro gli attaccanti</div></a>
+				<a href="CONCEPT_COMBAT_CITY_CAPTURE.aspx"><div id="CONCEPT_COMBAT_CITY_CAPTURE" class="menuitem">Catturare citt&agrave;</div></a>
+				<a href="CONCEPT_COMBAT_SIEGE.aspx"><div id="CONCEPT_COMBAT_SIEGE" class="menuitem">Unit&agrave; d'assedio</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_COMBAT_DAMAGE.aspx"><div id="CONCEPT_COMBAT_UNIT_COMBAT_DAMAGE" class="menuitem">Danno in combattimento</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_GROUND_HEALING_DAMAGE.aspx"><div id="CONCEPT_COMBAT_UNIT_GROUND_HEALING_DAMAGE" class="menuitem">Curare il danno subito dalle citt&agrave;</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_NAVAL_HEALING_DAMAGE.aspx"><div id="CONCEPT_COMBAT_UNIT_NAVAL_HEALING_DAMAGE" class="menuitem">Cura del danno subito da unit&agrave; navali</div></a>
+				<a href="CONCEPT_COMBAT_FORTIFY_UNTIL_HEALED.aspx"><div id="CONCEPT_COMBAT_FORTIFY_UNTIL_HEALED" class="menuitem">Il pulsante Fortifica finch&eacute; guarita</div></a>
+				<a href="CONCEPT_COMBAT_EXPERIENCE_AND_PROMOTIONS.aspx"><div id="CONCEPT_COMBAT_EXPERIENCE_AND_PROMOTIONS" class="menuitem">Punti esperienza e promozioni</div></a>
+				<a href="CONCEPT_COMBAT_EXPERIENCE_ACCUMULATING_COMBAT.aspx"><div id="CONCEPT_COMBAT_EXPERIENCE_ACCUMULATING_COMBAT" class="menuitem">Ottenere XP in combattimento</div></a>
+				<a href="CONCEPT_COMBAT_EXPERIENCE_SPENDING.aspx"><div id="CONCEPT_COMBAT_EXPERIENCE_SPENDING" class="menuitem">Spendere XP</div></a>
+				<a href="CONCEPT_COMBAT_PROMOTIONS.aspx"><div id="CONCEPT_COMBAT_PROMOTIONS" class="menuitem">Aggiornamenti</div></a>
+			</div></div>
+			<div id="GROUP_4" class="menugroupcontainer"><a href="javascript:togglediv('4_CONTENT');"><div id="4" class="menugroup">Terreni e caratteristiche</div></a><div id="4_CONTENT">
+				<a href="CONCEPT_TERRAIN.aspx"><div id="CONCEPT_TERRAIN" class="menuitem">Terreno</div></a>
+				<a href="CONCEPT_TERRAIN_RESOURCES.aspx"><div id="CONCEPT_TERRAIN_RESOURCES" class="menuitem">Risorse</div></a>
+				<a href="CONCEPT_TERRAIN_TABLES.aspx"><div id="CONCEPT_TERRAIN_TABLES" class="menuitem">Le Tabelle dei terreni</div></a>
+				<a href="CONCEPT_TERRAIN_TYPES.aspx"><div id="CONCEPT_TERRAIN_TYPES" class="menuitem">Tipi di terreno</div></a>
+				<a href="CONCEPT_TERRAIN_VALUES.aspx"><div id="CONCEPT_TERRAIN_VALUES" class="menuitem">Spiegazione dei valori dei terreni</div></a>
+				<a href="CONCEPT_TERRAIN_COAST.aspx"><div id="CONCEPT_TERRAIN_COAST" class="menuitem">Costa</div></a>
+				<a href="CONCEPT_TERRAIN_DESERT.aspx"><div id="CONCEPT_TERRAIN_DESERT" class="menuitem">Deserto</div></a>
+				<a href="CONCEPT_TERRAIN_GRASSLAND.aspx"><div id="CONCEPT_TERRAIN_GRASSLAND" class="menuitem">Prateria</div></a>
+				<a href="CONCEPT_TERRAIN_HILLS.aspx"><div id="CONCEPT_TERRAIN_HILLS" class="menuitem">Colline</div></a>
+				<a href="CONCEPT_TERRAIN_MOUNTAINS.aspx"><div id="CONCEPT_TERRAIN_MOUNTAINS" class="menuitem">Montagne e Crateri</div></a>
+				<a href="CONCEPT_TERRAIN_OCEANS.aspx"><div id="CONCEPT_TERRAIN_OCEANS" class="menuitem">Oceano</div></a>
+				<a href="CONCEPT_TERRAIN_PLAINS.aspx"><div id="CONCEPT_TERRAIN_PLAINS" class="menuitem">Pianura</div></a>
+				<a href="CONCEPT_TERRAIN_SNOW.aspx"><div id="CONCEPT_TERRAIN_SNOW" class="menuitem">Neve</div></a>
+				<a href="CONCEPT_TERRAIN_TUNDRA.aspx"><div id="CONCEPT_TERRAIN_TUNDRA" class="menuitem">Tundra</div></a>
+				<a href="CONCEPT_TERRAIN_CANYONS.aspx"><div id="CONCEPT_TERRAIN_CANYONS" class="menuitem">Canyon</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURES.aspx"><div id="CONCEPT_TERRAIN_FEATURES" class="menuitem">Caratteristiche</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_VALUES.aspx"><div id="CONCEPT_TERRAIN_FEATURE_VALUES" class="menuitem">Valori delle caratteristiche</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_FLOOD_PLAINS.aspx"><div id="CONCEPT_TERRAIN_FEATURE_FLOOD_PLAINS" class="menuitem">Terreni allagati</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_FORESTS.aspx"><div id="CONCEPT_TERRAIN_FEATURE_FORESTS" class="menuitem">Foresta</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_ICE.aspx"><div id="CONCEPT_TERRAIN_FEATURE_ICE" class="menuitem">Ghiaccio</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_MARSH.aspx"><div id="CONCEPT_TERRAIN_FEATURE_MARSH" class="menuitem">Palude</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_MIASMA.aspx"><div id="CONCEPT_TERRAIN_FEATURE_MIASMA" class="menuitem">Miasma</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS.aspx"><div id="CONCEPT_TERRAIN_RIVERS" class="menuitem">Fiumi</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_TILES.aspx"><div id="CONCEPT_TERRAIN_RIVERS_TILES" class="menuitem">Posizione dei fiumi</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_YIELD.aspx"><div id="CONCEPT_TERRAIN_RIVERS_YIELD" class="menuitem">Modificatore rese della citt&agrave;</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_COMBAT.aspx"><div id="CONCEPT_TERRAIN_RIVERS_COMBAT" class="menuitem">Penalit&agrave; in attacco</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_MOVEMENT.aspx"><div id="CONCEPT_TERRAIN_RIVERS_MOVEMENT" class="menuitem">Effetto sul movimento</div></a>
+				<a href="CONCEPT_MIASMA.aspx"><div id="CONCEPT_MIASMA" class="menuitem">Miasma</div></a>
+			</div></div>
+			<div id="GROUP_5" class="menugroupcontainer"><a href="javascript:togglediv('5_CONTENT');"><div id="5" class="menugroup">Risorse</div></a><div id="5_CONTENT">
+				<a href="CONCEPT_RESOURCES.aspx"><div id="CONCEPT_RESOURCES" class="menuitem">Risorse</div></a>
+				<a href="CONCEPT_RESOURCES_BONUS.aspx"><div id="CONCEPT_RESOURCES_BONUS" class="menuitem">Risorse base</div></a>
+				<a href="CONCEPT_RESOURCES_STRATEGIC.aspx"><div id="CONCEPT_RESOURCES_STRATEGIC" class="menuitem">Risorse strategiche</div></a>
+				<a href="CONCEPT_RESOURCES_OWNING.aspx"><div id="CONCEPT_RESOURCES_OWNING" class="menuitem">Possedere le risorse</div></a>
+				<a href="CONCEPT_RESOURCES_IMPROVING.aspx"><div id="CONCEPT_RESOURCES_IMPROVING" class="menuitem">Sfruttare le risorse</div></a>
+				<a href="CONCEPT_RESOURCES_TRADING.aspx"><div id="CONCEPT_RESOURCES_TRADING" class="menuitem">Scambiare le risorse</div></a>
+			</div></div>
+			<div id="GROUP_6" class="menugroupcontainer"><a href="javascript:togglediv('6_CONTENT');"><div id="6" class="menugroup">Costruire miglioramenti</div></a><div id="6_CONTENT">
+				<a href="CONCEPT_WORKERS.aspx"><div id="CONCEPT_WORKERS" class="menuitem">Lavoratori e miglioramenti</div></a>
+				<a href="CONCEPT_WORKERS_CREATING.aspx"><div id="CONCEPT_WORKERS_CREATING" class="menuitem">Costruire Lavoratori</div></a>
+				<a href="CONCEPT_WORKERS_COMBAT.aspx"><div id="CONCEPT_WORKERS_COMBAT" class="menuitem">I Lavoratori e il combattimento</div></a>
+				<a href="CONCEPT_WORKERS_ACTION_PANEL.aspx"><div id="CONCEPT_WORKERS_ACTION_PANEL" class="menuitem">Il pannello delle azioni dei Lavoratori</div></a>
+				<a href="CONCEPT_WORKERS_CLEARINGLAND.aspx"><div id="CONCEPT_WORKERS_CLEARINGLAND" class="menuitem">Disboscare o bonificare una casella</div></a>
+				<a href="CONCEPT_WORKERS_ROADS.aspx"><div id="CONCEPT_WORKERS_ROADS" class="menuitem">Costruire strade e magnetovie</div></a>
+				<a href="CONCEPT_WORKERS_ROADS_TIME.aspx"><div id="CONCEPT_WORKERS_ROADS_TIME" class="menuitem">Tempo necessario per costruire strade e magnetovie</div></a>
+				<a href="CONCEPT_WORKERS_ROADS_TRADE_ROUTES.aspx"><div id="CONCEPT_WORKERS_ROADS_TRADE_ROUTES" class="menuitem">Strade, magnetovie e Collegamenti tra citt&agrave;</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS" class="menuitem">Costruire miglioramenti</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_WHERE.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_WHERE" class="menuitem">Dove costruire i miglioramenti</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_TIME.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_TIME" class="menuitem">Durata delle azioni di costruzione</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_LEAVING.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_LEAVING" class="menuitem">Interrompere e riprendere la costruzione di un miglioramento</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_FARM.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_FARM" class="menuitem">Il miglioramento Fattoria</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_MINE.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_MINE" class="menuitem">Miniere</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_GENERATOR.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_GENERATOR" class="menuitem">Miglioramento Generatore</div></a>
+				<a href="CONCEPT_WORKERS_WORKBOATS.aspx"><div id="CONCEPT_WORKERS_WORKBOATS" class="menuitem">Miglioramento Chiatta</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_OTHER.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_OTHER" class="menuitem">Altri miglioramenti</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_ADVANCED.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_ADVANCED" class="menuitem">Miglioramenti avanzati</div></a>
+				<a href="CONCEPT_WORKERS_PILLAGE.aspx"><div id="CONCEPT_WORKERS_PILLAGE" class="menuitem">Saccheggiare strade e miglioramenti</div></a>
+				<a href="CONCEPT_WORKERS_REPAIR.aspx"><div id="CONCEPT_WORKERS_REPAIR" class="menuitem">Riparare strade e miglioramenti</div></a>
+				<a href="CONCEPT_WORKERS_REMOVE.aspx"><div id="CONCEPT_WORKERS_REMOVE" class="menuitem">Rimuovere il miasma</div></a>
+				<a href="CONCEPT_WORKERS_PLACE.aspx"><div id="CONCEPT_WORKERS_PLACE" class="menuitem">Posizionare il miasma</div></a>
+			</div></div>
+			<div id="GROUP_7" class="menugroupcontainer"><a href="javascript:togglediv('7_CONTENT');"><div id="7" class="menugroup">Il cibo e la crescita di una citt&agrave;</div></a><div id="7_CONTENT">
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH" class="menuitem">Il cibo e la crescita della citt&agrave;</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_MECHANICS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_MECHANICS" class="menuitem">Citt&agrave; e Cibo</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GETTING_MORE_FOOD.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GETTING_MORE_FOOD" class="menuitem">Procurarsi pi&ugrave; cibo</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_BEST_FOOD_TILES.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_BEST_FOOD_TILES" class="menuitem">Caselle migliori per il cibo</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_BONUS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_BONUS" class="menuitem">Risorse base</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_FLOOD_PLAINS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_FLOOD_PLAINS" class="menuitem">Terreni allagati</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GRASSLAND.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GRASSLAND" class="menuitem">Prateria</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_IMPROVEMENTS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_IMPROVEMENTS" class="menuitem">Miglioramenti</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_BUILDINGS_WONDERS_SOCIAL_POLICIES.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_BUILDINGS_WONDERS_SOCIAL_POLICIES" class="menuitem">Edifici, Meraviglie e Virt&ugrave;</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_UNHEALTH.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_UNHEALTH" class="menuitem">Salute della citt&agrave;</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH" class="menuitem">Crescita della citt&agrave;</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH_BUCKET.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH_BUCKET" class="menuitem">La scorta di cibo per la crescita di una citt&agrave;</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_SETTLERS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_SETTLERS" class="menuitem">Coloni e produzione di cibo</div></a>
+			</div></div>
+			<div id="GROUP_8" class="menugroupcontainer"><a href="javascript:togglediv('8_CONTENT');"><div id="8" class="menugroup">Tecnologia</div></a><div id="8_CONTENT">
+				<a href="CONCEPT_TECHNOLOGY.aspx"><div id="CONCEPT_TECHNOLOGY" class="menuitem">Tecnologia</div></a>
+				<a href="CONCEPT_TECHNOLOGY_TECH_AND_BEAKERS.aspx"><div id="CONCEPT_TECHNOLOGY_TECH_AND_BEAKERS" class="menuitem">Tecnologia e provette</div></a>
+				<a href="CONCEPT_TECHNOLOGY_BEAKERS.aspx"><div id="CONCEPT_TECHNOLOGY_BEAKERS" class="menuitem">Come si ottengono le provette?</div></a>
+				<a href="CONCEPT_TECHNOLOGY_SPEEDING_UP_RESEARCH.aspx"><div id="CONCEPT_TECHNOLOGY_SPEEDING_UP_RESEARCH" class="menuitem">Aumentare le provette</div></a>
+				<a href="CONCEPT_TECHNOLOGY_ANCIENT_RUINS.aspx"><div id="CONCEPT_TECHNOLOGY_ANCIENT_RUINS" class="menuitem">Capsule di risorse</div></a>
+				<a href="CONCEPT_TECHNOLOGY_BUILDINGS.aspx"><div id="CONCEPT_TECHNOLOGY_BUILDINGS" class="menuitem">Edifici</div></a>
+				<a href="CONCEPT_TECHNOLOGY_VIRTUES.aspx"><div id="CONCEPT_TECHNOLOGY_VIRTUES" class="menuitem">Virt&ugrave;</div></a>
+				<a href="CONCEPT_TECHNOLOGY_WONDERS.aspx"><div id="CONCEPT_TECHNOLOGY_WONDERS" class="menuitem">Meraviglie</div></a>
+				<a href="CONCEPT_TECHNOLOGY_EXPEDITIONS.aspx"><div id="CONCEPT_TECHNOLOGY_EXPEDITIONS" class="menuitem">Spedizioni</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSING_TECH.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSING_TECH" class="menuitem">Scegliere la tecnologia da ricercare</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_MENU.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_MENU" class="menuitem">La Rete tecnologica</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_BRANCHES.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_BRANCHES" class="menuitem">Tecnologie ramo</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_LEAVES.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_LEAVES" class="menuitem">Tecnologie foglia</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_THREADS.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_THREADS" class="menuitem">Stringhe</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_AFFINITY.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_AFFINITY" class="menuitem">Progresso nelle Affinit&agrave;</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHANGE_RESEARCH.aspx"><div id="CONCEPT_TECHNOLOGY_CHANGE_RESEARCH" class="menuitem">Cambiare la ricerca</div></a>
+				<a href="CONCEPT_TECHNOLOGY_AVAILABLE.aspx"><div id="CONCEPT_TECHNOLOGY_AVAILABLE" class="menuitem">Quando diventano disponibili le tecnologie</div></a>
+				<a href="CONCEPT_TECHNOLOGY_TECH_TREE.aspx"><div id="CONCEPT_TECHNOLOGY_TECH_TREE" class="menuitem">La possente Rete tecnologica</div></a>
+				<a href="CONCEPT_CONTACT_VICTORY.aspx"><div id="CONCEPT_CONTACT_VICTORY" class="menuitem">La Vittoria per Contatto alieno</div></a>
+			</div></div>
+			<div id="GROUP_9" class="menugroupcontainer"><a href="javascript:togglediv('9_CONTENT');"><div id="9" class="menugroup">Cultura</div></a><div id="9_CONTENT">
+				<a href="CONCEPT_CULTURE.aspx"><div id="CONCEPT_CULTURE" class="menuitem">Cultura</div></a>
+				<a href="CONCEPT_CULTURE_GAINING.aspx"><div id="CONCEPT_CULTURE_GAINING" class="menuitem">Ottenere Cultura</div></a>
+				<a href="CONCEPT_CULTURE_EXPANDING_TERRITORY.aspx"><div id="CONCEPT_CULTURE_EXPANDING_TERRITORY" class="menuitem">Acquisire territorio</div></a>
+				<a href="CONCEPT_CULTURE_ACQUIRING_SOCIAL_POLICY.aspx"><div id="CONCEPT_CULTURE_ACQUIRING_SOCIAL_POLICY" class="menuitem">Acquisire Virt&ugrave;</div></a>
+			</div></div>
+			<div id="GROUP_10" class="menugroupcontainer"><a href="javascript:togglediv('10_CONTENT');"><div id="10" class="menugroup">Diplomazia</div></a><div id="10_CONTENT">
+				<a href="CONCEPT_DIPLOMACY.aspx"><div id="CONCEPT_DIPLOMACY" class="menuitem">Diplomazia</div></a>
+				<a href="CONCEPT_DIPLOMACY_WHO_CAN_CONDUCT.aspx"><div id="CONCEPT_DIPLOMACY_WHO_CAN_CONDUCT" class="menuitem">Chi può condurre la Diplomazia</div></a>
+				<a href="CONCEPT_DIPLOMACY_INITIATING.aspx"><div id="CONCEPT_DIPLOMACY_INITIATING" class="menuitem">Avviare un contatto diplomatico</div></a>
+				<a href="CONCEPT_DIPLOMACY_WITH_CIVS.aspx"><div id="CONCEPT_DIPLOMACY_WITH_CIVS" class="menuitem">Opzioni diplomatiche</div></a>
+				<a href="CONCEPT_DIPLOMACY_TRADE.aspx"><div id="CONCEPT_DIPLOMACY_TRADE" class="menuitem">Accordo</div></a>
+				<a href="CONCEPT_DIPLOMACY_DEMAND.aspx"><div id="CONCEPT_DIPLOMACY_DEMAND" class="menuitem">Richiesta</div></a>
+				<a href="CONCEPT_DIPLOMACY_DISCUSS.aspx"><div id="CONCEPT_DIPLOMACY_DISCUSS" class="menuitem">Discussione</div></a>
+				<a href="CONCEPT_DIPLOMACY_DENOUNCE.aspx"><div id="CONCEPT_DIPLOMACY_DENOUNCE" class="menuitem">Condanna</div></a>
+				<a href="CONCEPT_DIPLOMACY_EXIT.aspx"><div id="CONCEPT_DIPLOMACY_EXIT" class="menuitem">Arrivederci</div></a>
+				<a href="CONCEPT_DIPLOMACY_TRADE_SCREEN.aspx"><div id="CONCEPT_DIPLOMACY_TRADE_SCREEN" class="menuitem">La schermata degli scambi</div></a>
+				<a href="CONCEPT_DIPLOMACY_FAVORS.aspx"><div id="CONCEPT_DIPLOMACY_FAVORS" class="menuitem">Favori</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPEN_BORDERS.aspx"><div id="CONCEPT_DIPLOMACY_OPEN_BORDERS" class="menuitem">Accordo per il Diritto di passaggio</div></a>
+				<a href="CONCEPT_DIPLOMACY_STATES.aspx"><div id="CONCEPT_DIPLOMACY_STATES" class="menuitem">Stati diplomatici</div></a>
+				<a href="CONCEPT_DIPLOMACY_FRIENDSHIP.aspx"><div id="CONCEPT_DIPLOMACY_FRIENDSHIP" class="menuitem">Accordo di cooperazione</div></a>
+				<a href="CONCEPT_DIPLOMACY_ALLIANCE.aspx"><div id="CONCEPT_DIPLOMACY_ALLIANCE" class="menuitem">Alleanza</div></a>
+				<a href="CONCEPT_DIPLOMACY_STATES-OTHER.aspx"><div id="CONCEPT_DIPLOMACY_STATES-OTHER" class="menuitem">Stati diplomatici non esclusivi</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION.aspx"><div id="CONCEPT_DIPLOMACY_OPINION" class="menuitem">Opinioni</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_AFFINITY.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_AFFINITY" class="menuitem">Allineamento delle Affinit&agrave;</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_GIFT.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_GIFT" class="menuitem">Offrire dei doni</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_PROMISE.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_PROMISE" class="menuitem">Fare una promessa</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_ALIENS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_ALIENS" class="menuitem">Approcci comuni verso gli alieni</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_LIBERATE.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_LIBERATE" class="menuitem">Liberare citt&agrave; e unit&agrave;</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_RELATIONS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_RELATIONS" class="menuitem">Migliorare o peggiorare le relazioni</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_DEMANDS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_DEMANDS" class="menuitem">Avanzare o rifiutare una richiesta</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_EXPEDITIONS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_EXPEDITIONS" class="menuitem">Attivit&agrave; delle spedizioni</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_AGGRESSIVE.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_AGGRESSIVE" class="menuitem">Azioni aggressive</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_WARMONGER.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_WARMONGER" class="menuitem">Bellicosit&agrave;</div></a>
+				<a href="CONCEPT_DIPLOMACY_TRADE_CITIES.aspx"><div id="CONCEPT_DIPLOMACY_TRADE_CITIES" class="menuitem">Scambiare Citt&agrave;</div></a>
+				<a href="CONCEPT_DIPLOMACY_OTHER_PLAYERS.aspx"><div id="CONCEPT_DIPLOMACY_OTHER_PLAYERS" class="menuitem">Altri giocatori</div></a>
+				<a href="CONCEPT_DIPLOMACY_RESOURCES.aspx"><div id="CONCEPT_DIPLOMACY_RESOURCES" class="menuitem">Risorse e diplomazia</div></a>
+				<a href="CONCEPT_DIPLOMACY_DECLARING_WAR.aspx"><div id="CONCEPT_DIPLOMACY_DECLARING_WAR" class="menuitem">Dichiarare guerra</div></a>
+				<a href="CONCEPT_DIPLOMACY_NEGOTIATE_PEACE.aspx"><div id="CONCEPT_DIPLOMACY_NEGOTIATE_PEACE" class="menuitem">Negoziare la pace</div></a>
+			</div></div>
+			<div id="GROUP_11" class="menugroupcontainer"><a href="javascript:togglediv('11_CONTENT');"><div id="11" class="menugroup">Salute</div></a><div id="11_CONTENT">
+				<a href="CONCEPT_HEALTH.aspx"><div id="CONCEPT_HEALTH" class="menuitem">Salute</div></a>
+				<a href="CONCEPT_HEALTH_STARTING.aspx"><div id="CONCEPT_HEALTH_STARTING" class="menuitem">Salute iniziale</div></a>
+				<a href="CONCEPT_HEALTH_CAUSES_UNHEALTH.aspx"><div id="CONCEPT_HEALTH_CAUSES_UNHEALTH" class="menuitem">Cosa fa perdere Salute?</div></a>
+				<a href="CONCEPT_HEALTH_CAUSES_HEALTH.aspx"><div id="CONCEPT_HEALTH_CAUSES_HEALTH" class="menuitem">Cosa fa guadagnare Salute</div></a>
+				<a href="CONCEPT_HEALTH_HEALTH_LEVELS.aspx"><div id="CONCEPT_HEALTH_HEALTH_LEVELS" class="menuitem">Livelli di Salute</div></a>
+				<a href="CONCEPT_HEALTH_UNHAHPPY.aspx"><div id="CONCEPT_HEALTH_UNHAHPPY" class="menuitem">Salute negativa</div></a>
+				<a href="CONCEPT_HEALTH_VERY_UNHEALTHY.aspx"><div id="CONCEPT_HEALTH_VERY_UNHEALTHY" class="menuitem">Popolazione molto malata</div></a>
+				<a href="CONCEPT_HEALTH_REVOLT.aspx"><div id="CONCEPT_HEALTH_REVOLT" class="menuitem">Resistenza e Salute</div></a>
+			</div></div>
+			<div id="GROUP_12" class="menugroupcontainer"><a href="javascript:togglediv('12_CONTENT');"><div id="12" class="menugroup">Nebbia di guerra</div></a><div id="12_CONTENT">
+				<a href="CONCEPT_FOG_OF_WAR.aspx"><div id="CONCEPT_FOG_OF_WAR" class="menuitem">Nebbia di guerra</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_THREE_STATES.aspx"><div id="CONCEPT_FOG_OF_WAR_THREE_STATES" class="menuitem">I tre stati di visibilit&agrave;</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_STATE_VISIBLE.aspx"><div id="CONCEPT_FOG_OF_WAR_STATE_VISIBLE" class="menuitem">Visibile</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_STATE_REVEALED.aspx"><div id="CONCEPT_FOG_OF_WAR_STATE_REVEALED" class="menuitem">Rivelata</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_STATE_FOG_OF_WAR.aspx"><div id="CONCEPT_FOG_OF_WAR_STATE_FOG_OF_WAR" class="menuitem">Nebbia di guerra su una casella</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_SEEN.aspx"><div id="CONCEPT_FOG_OF_WAR_SEEN" class="menuitem">Che cosa vedo</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_OBSCURING_TERRAIN.aspx"><div id="CONCEPT_FOG_OF_WAR_OBSCURING_TERRAIN" class="menuitem">Ostacoli alla vista</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_INDIRECT_FIRE.aspx"><div id="CONCEPT_FOG_OF_WAR_INDIRECT_FIRE" class="menuitem">Fuoco indiretto</div></a>
+			</div></div>
+			<div id="GROUP_13" class="menugroupcontainer"><a href="javascript:togglediv('13_CONTENT');"><div id="13" class="menugroup">Virt&ugrave;</div></a><div id="13_CONTENT">
+				<a href="CONCEPT_SOCIAL_POLICY.aspx"><div id="CONCEPT_SOCIAL_POLICY" class="menuitem">Virt&ugrave;</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_GAINING.aspx"><div id="CONCEPT_SOCIAL_POLICY_GAINING" class="menuitem">Ottenere le Virt&ugrave;</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_UNLOCKING.aspx"><div id="CONCEPT_SOCIAL_POLICY_UNLOCKING" class="menuitem">Scegliere una Virt&ugrave;</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_INCREASE.aspx"><div id="CONCEPT_SOCIAL_POLICY_INCREASE" class="menuitem">Costo crescente</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_KICKERS.aspx"><div id="CONCEPT_SOCIAL_POLICY_KICKERS" class="menuitem">Bonus sinergia</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCHES.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCHES" class="menuitem">Categorie di Virt&ugrave;</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_MIGHT.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_MIGHT" class="menuitem">Forza</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_PROSPERITY.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_PROSPERITY" class="menuitem">Prosperit&agrave;</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_KNOWLEDGE.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_KNOWLEDGE" class="menuitem">Conoscenza</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_INDUSTRY.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_INDUSTRY" class="menuitem">Industria</div></a>
+			</div></div>
+			<div id="GROUP_14" class="menugroupcontainer"><a href="javascript:togglediv('14_CONTENT');"><div id="14" class="menugroup">L'Energia e la tua economia </div></a><div id="14_CONTENT">
+				<a href="CONCEPT_ENERGY.aspx"><div id="CONCEPT_ENERGY" class="menuitem">Energia</div></a>
+				<a href="CONCEPT_ENERGY_WHERE_TO_GET.aspx"><div id="CONCEPT_ENERGY_WHERE_TO_GET" class="menuitem">Generare Energia</div></a>
+				<a href="CONCEPT_ENERGY_TERRAIN.aspx"><div id="CONCEPT_ENERGY_TERRAIN" class="menuitem">Tipi di terreno ed Energia</div></a>
+				<a href="CONCEPT_ENERGY_RESOURCES.aspx"><div id="CONCEPT_ENERGY_RESOURCES" class="menuitem">Risorse</div></a>
+				<a href="CONCEPT_ENERGY_GENERATOR.aspx"><div id="CONCEPT_ENERGY_GENERATOR" class="menuitem">Generatori</div></a>
+				<a href="CONCEPT_ENERGY_IMPROVEMENTS.aspx"><div id="CONCEPT_ENERGY_IMPROVEMENTS" class="menuitem">Miglioramenti</div></a>
+				<a href="CONCEPT_ENERGY_BUILDINGS.aspx"><div id="CONCEPT_ENERGY_BUILDINGS" class="menuitem">Edifici</div></a>
+				<a href="CONCEPT_ENERGY_WONDERS.aspx"><div id="CONCEPT_ENERGY_WONDERS" class="menuitem">Meraviglie</div></a>
+				<a href="CONCEPT_ENERGY_TRADE_ROUTES.aspx"><div id="CONCEPT_ENERGY_TRADE_ROUTES" class="menuitem">Collegamenti tra citt&agrave;</div></a>
+				<a href="CONCEPT_ENERGY_TRADE_ROUTES_BLOCKADE.aspx"><div id="CONCEPT_ENERGY_TRADE_ROUTES_BLOCKADE" class="menuitem">Blocco navale</div></a>
+				<a href="CONCEPT_ENERGY_BARBARIAN_CAMPS.aspx"><div id="CONCEPT_ENERGY_BARBARIAN_CAMPS" class="menuitem">Ripulire Nidi alieni</div></a>
+				<a href="CONCEPT_ENERGY_ANCIENT_RUINS.aspx"><div id="CONCEPT_ENERGY_ANCIENT_RUINS" class="menuitem">Manufatti e Capsule di risorse</div></a>
+				<a href="CONCEPT_ENERGY_PILLAGE_IMPROVEMENTS.aspx"><div id="CONCEPT_ENERGY_PILLAGE_IMPROVEMENTS" class="menuitem">Saccheggiare i miglioramenti nemici</div></a>
+				<a href="CONCEPT_ENERGY_CITY_CAPTURE.aspx"><div id="CONCEPT_ENERGY_CITY_CAPTURE" class="menuitem">Catturare una citt&agrave;, un avamposto o una stazione</div></a>
+				<a href="CONCEPT_ENERGY_DIPLOMACY.aspx"><div id="CONCEPT_ENERGY_DIPLOMACY" class="menuitem">Scambi di Energia</div></a>
+				<a href="CONCEPT_ENERGY_SPENDING.aspx"><div id="CONCEPT_ENERGY_SPENDING" class="menuitem">Spendere Energia</div></a>
+				<a href="CONCEPT_ENERGY_UNIT_BUILDING_MAINTENANCE.aspx"><div id="CONCEPT_ENERGY_UNIT_BUILDING_MAINTENANCE" class="menuitem">Mantenimento di edifici e unit&agrave;</div></a>
+				<a href="CONCEPT_ENERGY_ROAD_MAINTENANCE.aspx"><div id="CONCEPT_ENERGY_ROAD_MAINTENANCE" class="menuitem">Manutenzione di strade e magnetovie</div></a>
+				<a href="CONCEPT_ENERGY_STATION.aspx"><div id="CONCEPT_ENERGY_STATION" class="menuitem">Pagamenti alle Stazioni</div></a>
+				<a href="CONCEPT_ENERGY_BEACON.aspx"><div id="CONCEPT_ENERGY_BEACON" class="menuitem">Attivare il Grande Faro</div></a>
+				<a href="CONCEPT_ENERGY_PURCHASE_TILES.aspx"><div id="CONCEPT_ENERGY_PURCHASE_TILES" class="menuitem">Acquistare caselle</div></a>
+				<a href="CONCEPT_ENERGY_PURCHASE_UNITS_BUILDINGS_WONDERS.aspx"><div id="CONCEPT_ENERGY_PURCHASE_UNITS_BUILDINGS_WONDERS" class="menuitem">Acquistare unit&agrave; o edifici</div></a>
+				<a href="CONCEPT_ENERGY_SPENDING_ON_DIPLOMACY.aspx"><div id="CONCEPT_ENERGY_SPENDING_ON_DIPLOMACY" class="menuitem">Diplomazia ed Energia</div></a>
+				<a href="CONCEPT_ENERGY_CITY_CAPTURED_BY_CIV.aspx"><div id="CONCEPT_ENERGY_CITY_CAPTURED_BY_CIV" class="menuitem">Perdere una citt&agrave;</div></a>
+				<a href="CONCEPT_ENERGY_RUNNING_DEFICIT.aspx"><div id="CONCEPT_ENERGY_RUNNING_DEFICIT" class="menuitem">Esaurire l'Energia</div></a>
+			</div></div>
+			<div id="GROUP_15" class="menugroupcontainer"><a href="javascript:togglediv('15_CONTENT');"><div id="15" class="menugroup">Esploratori e Manufatti</div></a><div id="15_CONTENT">
+				<a href="CONCEPT_EXPLORERS.aspx"><div id="CONCEPT_EXPLORERS" class="menuitem">Esploratori e Manufatti</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_ARTIFACTS.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_ARTIFACTS" class="menuitem">Tipi di Manufatti</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_SKELETON.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_SKELETON" class="menuitem">Scheletro alieno</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_RUINS.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_RUINS" class="menuitem">Rovine dei progenitori</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_SAT.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_SAT" class="menuitem">Satelliti schiantati</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_DERELICT.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_DERELICT" class="menuitem">Insediamento abbandonato</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_EXPEDITION.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_EXPEDITION" class="menuitem">Spedizioni</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_EXPEDITION_OPINION.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_EXPEDITION_OPINION" class="menuitem">Attivit&agrave; delle spedizioni</div></a>
+			</div></div>
+			<div id="GROUP_16" class="menugroupcontainer"><a href="javascript:togglediv('16_CONTENT');"><div id="16" class="menugroup">Capsula di risorse e alieni</div></a><div id="16_CONTENT">
+				<a href="CONCEPT_BARBARIANS_AND_ANCIENT_RUINS.aspx"><div id="CONCEPT_BARBARIANS_AND_ANCIENT_RUINS" class="menuitem">Capsula di risorse e alieni</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS.aspx"><div id="CONCEPT_ANCIENT_RUINS" class="menuitem">Capsule di risorse</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS" class="menuitem">Benefici delle Capsule di risorse</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS_FREE_TECHNOLOGY.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS_FREE_TECHNOLOGY" class="menuitem">Ricerca</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS_TREASURE.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS_TREASURE" class="menuitem">Energia</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS_CULTURE.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS_CULTURE" class="menuitem">Cultura dalle Capsule di risorse</div></a>
+				<a href="CONCEPT_BARBARIANS.aspx"><div id="CONCEPT_BARBARIANS" class="menuitem">Alieni</div></a>
+				<a href="CONCEPT_BARBARIANS_ENCAMPMENTS.aspx"><div id="CONCEPT_BARBARIANS_ENCAMPMENTS" class="menuitem">Nidi alieni</div></a>
+				<a href="CONCEPT_BARBARIANS_ENCAMPMENTS_DESTROYING.aspx"><div id="CONCEPT_BARBARIANS_ENCAMPMENTS_DESTROYING" class="menuitem">Distruggere un Nido</div></a>
+				<a href="CONCEPT_BARBARIANS_ENCAMPMENTS_NEW.aspx"><div id="CONCEPT_BARBARIANS_ENCAMPMENTS_NEW" class="menuitem">Nuovi Nidi alieni</div></a>
+				<a href="CONCEPT_BARBARIANS_UNITS.aspx"><div id="CONCEPT_BARBARIANS_UNITS" class="menuitem">Unit&agrave; aliene</div></a>
+				<a href="CONCEPT_BARBARIANS_UNITS_NAVAL.aspx"><div id="CONCEPT_BARBARIANS_UNITS_NAVAL" class="menuitem">Unit&agrave; navali aliene</div></a>
+				<a href="CONCEPT_BARBARIANS_EXPERIENCE_POINT_LIMITS.aspx"><div id="CONCEPT_BARBARIANS_EXPERIENCE_POINT_LIMITS" class="menuitem">Limitazioni ai punti esperienza</div></a>
+			</div></div>
+			<div id="GROUP_17" class="menugroupcontainer"><a href="javascript:togglediv('17_CONTENT');"><div id="17" class="menugroup">Unit&agrave;</div></a><div id="17_CONTENT">
+				<a href="CONCEPT_UNITS.aspx"><div id="CONCEPT_UNITS" class="menuitem">Unit&agrave;</div></a>
+				<a href="CONCEPT_UNITS_CONSTRUCTING.aspx"><div id="CONCEPT_UNITS_CONSTRUCTING" class="menuitem">Costruire unit&agrave;</div></a>
+				<a href="CONCEPT_UNITS_SUPPLY.aspx"><div id="CONCEPT_UNITS_SUPPLY" class="menuitem">Approvvigionamento unit&agrave;</div></a>
+				<a href="CONCEPT_UNITS_CHARACTERISTICS.aspx"><div id="CONCEPT_UNITS_CHARACTERISTICS" class="menuitem">Caratteristiche delle unit&agrave;</div></a>
+				<a href="CONCEPT_UNITS_MOVEMENT_SPEED.aspx"><div id="CONCEPT_UNITS_MOVEMENT_SPEED" class="menuitem">Velocit&agrave; di movimento</div></a>
+				<a href="CONCEPT_UNITS_COMBAT_STRENGTH.aspx"><div id="CONCEPT_UNITS_COMBAT_STRENGTH" class="menuitem">Forza di combattimento</div></a>
+				<a href="CONCEPT_UNITS_SPECIAL_ABILITIES.aspx"><div id="CONCEPT_UNITS_SPECIAL_ABILITIES" class="menuitem">Abilit&agrave; speciali delle unit&agrave;</div></a>
+				<a href="CONCEPT_UNITS_MOVEMENT.aspx"><div id="CONCEPT_UNITS_MOVEMENT" class="menuitem">Movimento delle unit&agrave;</div></a>
+				<a href="CONCEPT_UNITS_COMBAT.aspx"><div id="CONCEPT_UNITS_COMBAT" class="menuitem">Combattimento tra unit&agrave;</div></a>
+				<a href="CONCEPT_UNITS_NON_COMBAT_UNITS.aspx"><div id="CONCEPT_UNITS_NON_COMBAT_UNITS" class="menuitem">Unit&agrave; non combattenti</div></a>
+				<a href="CONCEPT_UNITS_COMBAT_UNITS.aspx"><div id="CONCEPT_UNITS_COMBAT_UNITS" class="menuitem">Unit&agrave; da combattimento</div></a>
+				<a href="CONCEPT_UNITS_MELEE_UNITS.aspx"><div id="CONCEPT_UNITS_MELEE_UNITS" class="menuitem">Unit&agrave; da mischia</div></a>
+				<a href="CONCEPT_UNITS_RANGED_UNITS.aspx"><div id="CONCEPT_UNITS_RANGED_UNITS" class="menuitem">Unit&agrave; a distanza</div></a>
+				<a href="CONCEPT_UNITS_NAVAL_UNITS.aspx"><div id="CONCEPT_UNITS_NAVAL_UNITS" class="menuitem">Unit&agrave; navali</div></a>
+				<a href="CONCEPT_UNITS_HOVER_UNITS.aspx"><div id="CONCEPT_UNITS_HOVER_UNITS" class="menuitem">Unit&agrave; in sospensione</div></a>
+				<a href="CONCEPT_UNITS_AIR_UNITS.aspx"><div id="CONCEPT_UNITS_AIR_UNITS" class="menuitem">Unit&agrave; aeree</div></a>
+				<a href="CONCEPT_UNIT_UPGRADE.aspx"><div id="CONCEPT_UNIT_UPGRADE" class="menuitem">Aggiornamenti delle unit&agrave;</div></a>
+				<a href="CONCEPT_UNIT_VETERANCY.aspx"><div id="CONCEPT_UNIT_VETERANCY" class="menuitem">Unit&agrave; veterane</div></a>
+				<a href="CONCEPT_UNIT_TECHNOLOGY.aspx"><div id="CONCEPT_UNIT_TECHNOLOGY" class="menuitem">Unit&agrave; e tecnologia</div></a>
+			</div></div>
+			<div id="GROUP_18" class="menugroupcontainer"><a href="javascript:togglediv('18_CONTENT');"><div id="18" class="menugroup">Movimento delle unit&agrave;</div></a><div id="18_CONTENT">
+				<a href="CONCEPT_MOVEMENT.aspx"><div id="CONCEPT_MOVEMENT" class="menuitem">Movimento</div></a>
+				<a href="CONCEPT_MOVEMENT_HOW_TO_ORDER.aspx"><div id="CONCEPT_MOVEMENT_HOW_TO_ORDER" class="menuitem">Come ordinare a un'unit&agrave; di muoversi</div></a>
+				<a href="CONCEPT_MOVEMENT_RIGHT_CLICK.aspx"><div id="CONCEPT_MOVEMENT_RIGHT_CLICK" class="menuitem">Pulsante destro del mouse</div></a>
+				<a href="CONCEPT_MOVEMENT_MOVE_MODE.aspx"><div id="CONCEPT_MOVEMENT_MOVE_MODE" class="menuitem">Modalit&agrave; Movimento</div></a>
+				<a href="CONCEPT_MOVEMENT_LEGAL_MOVES.aspx"><div id="CONCEPT_MOVEMENT_LEGAL_MOVES" class="menuitem">Mosse legali e illegali</div></a>
+				<a href="CONCEPT_MOVEMENT_ILLEGAL_MOVES.aspx"><div id="CONCEPT_MOVEMENT_ILLEGAL_MOVES" class="menuitem">Mosse illegali</div></a>
+				<a href="CONCEPT_MOVEMENT_MULTIPLE_TURN_MOVES.aspx"><div id="CONCEPT_MOVEMENT_MULTIPLE_TURN_MOVES" class="menuitem">Movimenti che richiedono pi&ugrave; turni</div></a>
+				<a href="CONCEPT_MOVEMENT_MOVEMENT_POINTS.aspx"><div id="CONCEPT_MOVEMENT_MOVEMENT_POINTS" class="menuitem">Punti movimento</div></a>
+				<a href="CONCEPT_MOVEMENT_EXPENDING_MOVEMENT_POINTS.aspx"><div id="CONCEPT_MOVEMENT_EXPENDING_MOVEMENT_POINTS" class="menuitem">Spendere punti movimento</div></a>
+				<a href="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS.aspx"><div id="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS" class="menuitem">Strade e magnetovie</div></a>
+				<a href="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS_AND_RIVERS.aspx"><div id="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS_AND_RIVERS" class="menuitem">Fiumi e strade/magnetovie</div></a>
+				<a href="CONCEPT_MOVEMENT_STACKING_LIMITS.aspx"><div id="CONCEPT_MOVEMENT_STACKING_LIMITS" class="menuitem">Limiti di raggruppamento</div></a>
+				<a href="CONCEPT_MOVEMENT_COMBAT.aspx"><div id="CONCEPT_MOVEMENT_COMBAT" class="menuitem">Movimento durante il combattimento</div></a>
+				<a href="CONCEPT_MOVEMENT_COMBAT_ATTACK_ORDERS.aspx"><div id="CONCEPT_MOVEMENT_COMBAT_ATTACK_ORDERS" class="menuitem">Ordinare un attacco</div></a>
+				<a href="CONCEPT_MOVEMENT_COMBAT_ZONES_OF_CONTROL.aspx"><div id="CONCEPT_MOVEMENT_COMBAT_ZONES_OF_CONTROL" class="menuitem">Zone di controllo</div></a>
+				<a href="CONCEPT_MOVEMENT_NAVAL.aspx"><div id="CONCEPT_MOVEMENT_NAVAL" class="menuitem">Movimento navale</div></a>
+				<a href="CONCEPT_MOVEMENT_EMBARKING.aspx"><div id="CONCEPT_MOVEMENT_EMBARKING" class="menuitem">Imbarcare unit&agrave; terrestri</div></a>
+				<a href="CONCEPT_MOVEMENT_HOVER.aspx"><div id="CONCEPT_MOVEMENT_HOVER" class="menuitem">Movimento in sospensione</div></a>
+				<a href="CONCEPT_MOVEMENT_AIR.aspx"><div id="CONCEPT_MOVEMENT_AIR" class="menuitem">Movimento delle unit&agrave; aeree</div></a>
+			</div></div>
+			<div id="GROUP_19" class="menugroupcontainer"><a href="javascript:togglediv('19_CONTENT');"><div id="19" class="menugroup">Regole combattimento aereo</div></a><div id="19_CONTENT">
+				<a href="CONCEPT_AIR_POWER.aspx"><div id="CONCEPT_AIR_POWER" class="menuitem">Superiorit&agrave; aerea</div></a>
+				<a href="CONCEPT_AIR_POWER_AIR_UNITS.aspx"><div id="CONCEPT_AIR_POWER_AIR_UNITS" class="menuitem">Unit&agrave; aeree</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES.aspx"><div id="CONCEPT_AIR_POWER_BASES" class="menuitem">Basi aeree</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_LOCATION.aspx"><div id="CONCEPT_AIR_POWER_BASES_LOCATION" class="menuitem">Posizione basi aeree</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_FIGHTERS.aspx"><div id="CONCEPT_AIR_POWER_BASES_FIGHTERS" class="menuitem">Caccia</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT.aspx"><div id="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT" class="menuitem">Capacit&agrave; delle unit&agrave; navali</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT_CARRIER.aspx"><div id="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT_CARRIER" class="menuitem">Portaerei</div></a>
+				<a href="CONCEPT_AIR_POWER_STACKING.aspx"><div id="CONCEPT_AIR_POWER_STACKING" class="menuitem">Raggruppamento di unit&agrave; aeree</div></a>
+				<a href="CONCEPT_AIR_POWER_RANGE.aspx"><div id="CONCEPT_AIR_POWER_RANGE" class="menuitem">Raggio d'azione delle unit&agrave; aeree</div></a>
+				<a href="CONCEPT_AIR_POWER_MISSIONS.aspx"><div id="CONCEPT_AIR_POWER_MISSIONS" class="menuitem">Missioni</div></a>
+				<a href="CONCEPT_AIR_POWER_REBASE.aspx"><div id="CONCEPT_AIR_POWER_REBASE" class="menuitem">Cambiamento di base</div></a>
+				<a href="CONCEPT_AIR_POWER_AIR_STRIKE.aspx"><div id="CONCEPT_AIR_POWER_AIR_STRIKE" class="menuitem">Attacco aereo</div></a>
+				<a href="CONCEPT_AIR_POWER_AIR_SWEEP.aspx"><div id="CONCEPT_AIR_POWER_AIR_SWEEP" class="menuitem">Distruzione difese antiaeree</div></a>
+				<a href="CONCEPT_AIR_POWER_INTERCEPTION.aspx"><div id="CONCEPT_AIR_POWER_INTERCEPTION" class="menuitem">Intercettazione</div></a>
+			</div></div>
+			<div id="GROUP_20" class="menugroupcontainer"><a href="javascript:togglediv('20_CONTENT');"><div id="20" class="menugroup">Operazioni segrete</div></a><div id="20_CONTENT">
+				<a href="CONCEPT_COVERT.aspx"><div id="CONCEPT_COVERT" class="menuitem">Operazioni segrete</div></a>
+				<a href="CONCEPT_COVERT_AGENTS.aspx"><div id="CONCEPT_COVERT_AGENTS" class="menuitem">Agenti</div></a>
+				<a href="CONCEPT_COVERT_CULPER_LODGE.aspx"><div id="CONCEPT_COVERT_CULPER_LODGE" class="menuitem">La Loggia di Culper</div></a>
+				<a href="CONCEPT_COVERT_RECRUITING.aspx"><div id="CONCEPT_COVERT_RECRUITING" class="menuitem">Reclutare agenti</div></a>
+				<a href="CONCEPT_COVERT_ASSIGNING.aspx"><div id="CONCEPT_COVERT_ASSIGNING" class="menuitem">Assegnare gli agenti</div></a>
+				<a href="CONCEPT_COVERT_COUNTER.aspx"><div id="CONCEPT_COVERT_COUNTER" class="menuitem">Controspionaggio</div></a>
+				<a href="CONCEPT_COVERT_OPERATIONS.aspx"><div id="CONCEPT_COVERT_OPERATIONS" class="menuitem">Operazioni di spionaggio</div></a>
+				<a href="CONCEPT_COVERT_DIFFICULTY.aspx"><div id="CONCEPT_COVERT_DIFFICULTY" class="menuitem">Difficolt&agrave;</div></a>
+				<a href="CONCEPT_COVERT_OUTCOME.aspx"><div id="CONCEPT_COVERT_OUTCOME" class="menuitem">Esito</div></a>
+				<a href="CONCEPT_COVERT_MISSIONS.aspx"><div id="CONCEPT_COVERT_MISSIONS" class="menuitem">Missioni</div></a>
+				<a href="CONCEPT_COVERT_RANK.aspx"><div id="CONCEPT_COVERT_RANK" class="menuitem">Grado degli agenti</div></a>
+				<a href="CONCEPT_COVERT_KILLED.aspx"><div id="CONCEPT_COVERT_KILLED" class="menuitem">Ucciso in azione</div></a>
+				<a href="CONCEPT_COVERT_INTRIGUE.aspx"><div id="CONCEPT_COVERT_INTRIGUE" class="menuitem">Livello d'Intrigo delle citt&agrave;</div></a>
+				<a href="CONCEPT_COVERT_INTRIGUE_ADJUST.aspx"><div id="CONCEPT_COVERT_INTRIGUE_ADJUST" class="menuitem">Regolare i livelli d'Intrigo</div></a>
+				<a href="CONCEPT_COVERT_MONITOR.aspx"><div id="CONCEPT_COVERT_MONITOR" class="menuitem">Monitorare gli agenti</div></a>
+				<a href="CONCEPT_COVERT_REPORT.aspx"><div id="CONCEPT_COVERT_REPORT" class="menuitem">Rapporti di intelligence</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS.aspx"><div id="CONCEPT_COVERT_PROJECTS" class="menuitem">Progetti di sicurezza nazionale</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_HOMELAND_SECURITY.aspx"><div id="CONCEPT_COVERT_PROJECTS_HOMELAND_SECURITY" class="menuitem">Sicurezza interna</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_RESEARCH_DEVELOPMENT.aspx"><div id="CONCEPT_COVERT_PROJECTS_RESEARCH_DEVELOPMENT" class="menuitem">Ricerca e sviluppo</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_PROPAGANDA.aspx"><div id="CONCEPT_COVERT_PROJECTS_PROPAGANDA" class="menuitem">Propaganda</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_SUPPORT.aspx"><div id="CONCEPT_COVERT_PROJECTS_SUPPORT" class="menuitem">Supporto alle operazioni</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_RECON.aspx"><div id="CONCEPT_COVERT_PROJECTS_RECON" class="menuitem">Ricognizione operativa</div></a>
+			</div></div>
+			<div id="GROUP_21" class="menugroupcontainer"><a href="javascript:togglediv('21_CONTENT');"><div id="21" class="menugroup">Commercio</div></a><div id="21_CONTENT">
+				<a href="CONCEPT_TRADE.aspx"><div id="CONCEPT_TRADE" class="menuitem">Commercio</div></a>
+				<a href="CONCEPT_TRADE_ROUTES.aspx"><div id="CONCEPT_TRADE_ROUTES" class="menuitem">Rotte commerciali</div></a>
+				<a href="CONCEPT_TRADE_CARAVAN.aspx"><div id="CONCEPT_TRADE_CARAVAN" class="menuitem">Convogli commerciali e Vascelli commerciali</div></a>
+				<a href="CONCEPT_TRADE_WAR.aspx"><div id="CONCEPT_TRADE_WAR" class="menuitem">Guerra e saccheggiamento</div></a>
+				<a href="CONCEPT_TRADE_INTERNAL.aspx"><div id="CONCEPT_TRADE_INTERNAL" class="menuitem">Rotte commerciali interne</div></a>
+				<a href="CONCEPT_TRADE_DURATION.aspx"><div id="CONCEPT_TRADE_DURATION" class="menuitem">Durata</div></a>
+				<a href="CONCEPT_TRADE_ESTABLISH.aspx"><div id="CONCEPT_TRADE_ESTABLISH" class="menuitem">Stabilire una Rotta commerciale</div></a>
+				<a href="CONCEPT_TRADE_STATIONS.aspx"><div id="CONCEPT_TRADE_STATIONS" class="menuitem">Commercio con le Stazioni</div></a>
+				<a href="CONCEPT_TRADE_OVERVIEW.aspx"><div id="CONCEPT_TRADE_OVERVIEW" class="menuitem">Panoramica commercio</div></a>
+			</div></div>
+			<div id="GROUP_22" class="menugroupcontainer"><a href="javascript:togglediv('22_CONTENT');"><div id="22" class="menugroup">Missioni</div></a><div id="22_CONTENT">
+				<a href="CONCEPT_QUESTS.aspx"><div id="CONCEPT_QUESTS" class="menuitem">Missioni</div></a>
+				<a href="CONCEPT_QUESTS_FUNCTION.aspx"><div id="CONCEPT_QUESTS_FUNCTION" class="menuitem">Funzione</div></a>
+				<a href="CONCEPT_QUESTS_NARRATIVE.aspx"><div id="CONCEPT_QUESTS_NARRATIVE" class="menuitem">Narrazione</div></a>
+				<a href="CONCEPT_QUESTS_CHOICES.aspx"><div id="CONCEPT_QUESTS_CHOICES" class="menuitem">Scelte</div></a>
+				<a href="CONCEPT_QUESTS_CATEGORIES.aspx"><div id="CONCEPT_QUESTS_CATEGORIES" class="menuitem">Categorie delle missioni</div></a>
+				<a href="CONCEPT_QUESTS_SURVIVAL.aspx"><div id="CONCEPT_QUESTS_SURVIVAL" class="menuitem">Sopravvivenza</div></a>
+				<a href="CONCEPT_QUESTS_GROWTH.aspx"><div id="CONCEPT_QUESTS_GROWTH" class="menuitem">Crescita</div></a>
+				<a href="CONCEPT_QUESTS_TRADE.aspx"><div id="CONCEPT_QUESTS_TRADE" class="menuitem">Commerciali</div></a>
+				<a href="CONCEPT_QUESTS_DIPLOMACY.aspx"><div id="CONCEPT_QUESTS_DIPLOMACY" class="menuitem">Diplomatiche</div></a>
+				<a href="CONCEPT_QUESTS_MILITARY.aspx"><div id="CONCEPT_QUESTS_MILITARY" class="menuitem">Militari</div></a>
+				<a href="CONCEPT_QUESTS_COVERT.aspx"><div id="CONCEPT_QUESTS_COVERT" class="menuitem">Operazioni segrete</div></a>
+				<a href="CONCEPT_QUESTS_EXPLORATION.aspx"><div id="CONCEPT_QUESTS_EXPLORATION" class="menuitem">Esplorazione</div></a>
+				<a href="CONCEPT_QUESTS_VICTORY.aspx"><div id="CONCEPT_QUESTS_VICTORY" class="menuitem">Vittoria</div></a>
+				<a href="CONCEPT_QUESTS_CUSTOM.aspx"><div id="CONCEPT_QUESTS_CUSTOM" class="menuitem">Personalizzate</div></a>
+				<a href="CONCEPT_QUESTS_AFFINITY.aspx"><div id="CONCEPT_QUESTS_AFFINITY" class="menuitem">Affinit&agrave;</div></a>
+				<a href="CONCEPT_QUESTS_AFFINITY_INVEST.aspx"><div id="CONCEPT_QUESTS_AFFINITY_INVEST" class="menuitem">Investimento nell'Affinit&agrave;</div></a>
+			</div></div>
+			<div id="GROUP_23" class="menugroupcontainer"><a href="javascript:togglediv('23_CONTENT');"><div id="23" class="menugroup">Stazioni</div></a><div id="23_CONTENT">
+				<a href="CONCEPT_STATIONS.aspx"><div id="CONCEPT_STATIONS" class="menuitem">Stazioni</div></a>
+				<a href="CONCEPT_STATIONS_APPEAR.aspx"><div id="CONCEPT_STATIONS_APPEAR" class="menuitem">Frequenza delle Stazioni</div></a>
+				<a href="CONCEPT_STATIONS_REWARDS.aspx"><div id="CONCEPT_STATIONS_REWARDS" class="menuitem">Ricompense delle Stazioni</div></a>
+				<a href="CONCEPT_STATIONS_TYPES.aspx"><div id="CONCEPT_STATIONS_TYPES" class="menuitem">Tipi di Stazione</div></a>
+				<a href="CONCEPT_STATIONS_TIERS.aspx"><div id="CONCEPT_STATIONS_TIERS" class="menuitem">I livelli delle Stazioni</div></a>
+				<a href="CONCEPT_STATIONS_WITHDRAW.aspx"><div id="CONCEPT_STATIONS_WITHDRAW" class="menuitem">Ritiro delle Stazioni</div></a>
+				<a href="CONCEPT_STATIONS_COMBAT.aspx"><div id="CONCEPT_STATIONS_COMBAT" class="menuitem">Combattimento contro le Stazioni</div></a>
+				<a href="CONCEPT_STATIONS_ATTACK.aspx"><div id="CONCEPT_STATIONS_ATTACK" class="menuitem">Attaccare una Stazione</div></a>
+			</div></div>
+			<div id="GROUP_24" class="menugroupcontainer"><a href="javascript:togglediv('24_CONTENT');"><div id="24" class="menugroup">Unit&agrave; orbitanti</div></a><div id="24_CONTENT">
+				<a href="CONCEPT_ORBITAL.aspx"><div id="CONCEPT_ORBITAL" class="menuitem">Unit&agrave; orbitanti</div></a>
+				<a href="CONCEPT_ORBITAL_LAYER.aspx"><div id="CONCEPT_ORBITAL_LAYER" class="menuitem">Livello orbitale</div></a>
+				<a href="CONCEPT_ORBITAL_UNIT.aspx"><div id="CONCEPT_ORBITAL_UNIT" class="menuitem">Unit&agrave; orbitanti</div></a>
+				<a href="CONCEPT_ORBITAL_CONSTRUCTION.aspx"><div id="CONCEPT_ORBITAL_CONSTRUCTION" class="menuitem">Costruzione</div></a>
+				<a href="CONCEPT_ORBITAL_LAUNCH.aspx"><div id="CONCEPT_ORBITAL_LAUNCH" class="menuitem">Lancio e schieramento</div></a>
+				<a href="CONCEPT_ORBITAL_SKIRT.aspx"><div id="CONCEPT_ORBITAL_SKIRT" class="menuitem">Area d'effetto</div></a>
+				<a href="CONCEPT_ORBITAL_ARRAY.aspx"><div id="CONCEPT_ORBITAL_ARRAY" class="menuitem">Il Vettore di trasmettitori</div></a>
+				<a href="CONCEPT_ORBITAL_MOVEMENT.aspx"><div id="CONCEPT_ORBITAL_MOVEMENT" class="menuitem">Movimento</div></a>
+				<a href="CONCEPT_ORBITAL_COMBAT.aspx"><div id="CONCEPT_ORBITAL_COMBAT" class="menuitem">Combattimento</div></a>
+				<a href="CONCEPT_ORBITAL_DEORBIT.aspx"><div id="CONCEPT_ORBITAL_DEORBIT" class="menuitem">Sganciamento dall'orbita</div></a>
+				<a href="CONCEPT_ORBITAL_CRASH.aspx"><div id="CONCEPT_ORBITAL_CRASH" class="menuitem">Punto d'impatto</div></a>
+			</div></div>
+			<div id="GROUP_25" class="menugroupcontainer"><a href="javascript:togglediv('25_CONTENT');"><div id="25" class="menugroup">Consigliere</div></a><div id="25_CONTENT">
+				<a href="CONCEPT_ADVISORS.aspx"><div id="CONCEPT_ADVISORS" class="menuitem">Consigliere</div></a>
+				<a href="CONCEPT_ADVISORS_TURNINGOFF.aspx"><div id="CONCEPT_ADVISORS_TURNINGOFF" class="menuitem">Disattivare il Consigliere</div></a>
+			</div></div>
+			<div id="GROUP_26" class="menugroupcontainer"><a href="javascript:togglediv('26_CONTENT');"><div id="26" class="menugroup">Specialisti</div></a><div id="26_CONTENT">
+				<a href="CONCEPT_BUILDINGS_SPECIALISTS.aspx"><div id="CONCEPT_BUILDINGS_SPECIALISTS" class="menuitem">Specialisti</div></a>
+			</div></div>
+			<div id="GROUP_27" class="menugroupcontainer"><a href="javascript:togglediv('27_CONTENT');"><div id="27" class="menugroup">Vittoria</div></a><div id="27_CONTENT">
+				<a href="CONCEPT_VICTORY.aspx"><div id="CONCEPT_VICTORY" class="menuitem">Vittoria e sconfitta</div></a>
+				<a href="CONCEPT_VICTORY_DEFEAT.aspx"><div id="CONCEPT_VICTORY_DEFEAT" class="menuitem">Come perdere</div></a>
+				<a href="CONCEPT_VICTORY_DEFEAT_LOSING_LAST_CITY.aspx"><div id="CONCEPT_VICTORY_DEFEAT_LOSING_LAST_CITY" class="menuitem">Perdere l'ultima citt&agrave;</div></a>
+				<a href="CONCEPT_VICTORY_DEFEAT_ANOTHER_WINNER.aspx"><div id="CONCEPT_VICTORY_DEFEAT_ANOTHER_WINNER" class="menuitem">Vittoria di un'altra civilt&agrave;</div></a>
+				<a href="CONCEPT_VICTORY_VICTORY.aspx"><div id="CONCEPT_VICTORY_VICTORY" class="menuitem">Come vincere</div></a>
+				<a href="CONCEPT_VICTORY_VICTORY_DOMINATION.aspx"><div id="CONCEPT_VICTORY_VICTORY_DOMINATION" class="menuitem">Vittoria per dominazione</div></a>
+				<a href="CONCEPT_VICTORY_VICTORY_EMANCIPATION.aspx"><div id="CONCEPT_VICTORY_VICTORY_EMANCIPATION" class="menuitem">Vittoria per Emancipazione</div></a>
+				<a href="CONCEPT_VICTORY_PROMISED_LAND.aspx"><div id="CONCEPT_VICTORY_PROMISED_LAND" class="menuitem">Vittoria Terra Promessa</div></a>
+				<a href="CONCEPT_VICTORY_TRANSCENDENCE.aspx"><div id="CONCEPT_VICTORY_TRANSCENDENCE" class="menuitem">Vittoria per Trascendenza</div></a>
+				<a href="CONCEPT_VICTORY_RAZING_ORIGINAL_CAPITAL.aspx"><div id="CONCEPT_VICTORY_RAZING_ORIGINAL_CAPITAL" class="menuitem">Distruggere una capitale originale</div></a>
+				<a href="CONCEPT_VICTORY_CAPITAL_AND_ORIGINAL_CAPITAL.aspx"><div id="CONCEPT_VICTORY_CAPITAL_AND_ORIGINAL_CAPITAL" class="menuitem">Capitale attuale e capitale originale</div></a>
+				<a href="CONCEPT_VICTORY_END_OF_TIME.aspx"><div id="CONCEPT_VICTORY_END_OF_TIME" class="menuitem">La fine del tempo</div></a>
+				<a href="CONCEPT_VICTORY_POINTS.aspx"><div id="CONCEPT_VICTORY_POINTS" class="menuitem">Determinare il punteggio</div></a>
+				<a href="CONCEPT_SCORE.aspx"><div id="CONCEPT_SCORE" class="menuitem">Punteggio</div></a>
+				<a href="CONCEPT_SCORE_ELIMINATION.aspx"><div id="CONCEPT_SCORE_ELIMINATION" class="menuitem">Eliminazione</div></a>
+				<a href="CONCEPT_SCORE_TIME_TO_VICTORY.aspx"><div id="CONCEPT_SCORE_TIME_TO_VICTORY" class="menuitem">Vittoria prima del tempo</div></a>
+				<a href="CONCEPT_SCORE_VICTORY_POINTS.aspx"><div id="CONCEPT_SCORE_VICTORY_POINTS" class="menuitem">Punti vittoria</div></a>
+				<a href="CONCEPT_SCORE_MAP_SIZE.aspx"><div id="CONCEPT_SCORE_MAP_SIZE" class="menuitem">Dimensioni della mappa e difficolt&agrave; del gioco</div></a>
+				<a href="CONCEPT_SCORE_CURRENT_SCORE.aspx"><div id="CONCEPT_SCORE_CURRENT_SCORE" class="menuitem">Il tuo punteggio attuale</div></a>
+			</div></div>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,165 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it-it">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,wonder,wonders" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('Nozioni di gioco');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('Tecnologie');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('Unit&agrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('Aggiornamenti delle unit&agrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('Edifici');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('Meraviglie');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_on.png" class="tab" id="tab06" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('Virt&ugrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('Operazioni segrete');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('Sponsor e leader');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('Missioni');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('Terreni e caratteristiche');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('Risorse');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('Miglioramenti');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('Affinit&agrave;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('Stazioni');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">Meraviglie
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="WONDER_HOME.aspx"><div id="BUILDING_HOME" class="menuitem">Premessa alle Meraviglie</div></a>
+			<div id="GROUP_WORLD_WONDER" class="menugroupcontainer"><a href="javascript:togglediv('WORLD_WONDER_CONTENT');"><div id="WORLD_WONDER" class="menugroup">Meraviglie</div></a><div id="WORLD_WONDER_CONTENT">
+				<a href="BUILDING_MASS_DRIVER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_MASS_DRIVER.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_MASS_DRIVER" class="menuitem">Acceleratore di massa</div></a>
+				<a href="BUILDING_HUMAN_HIVE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_HUMAN_HIVE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_HUMAN_HIVE" class="menuitem">Alveare umano</div></a>
+				<a href="BUILDING_GENE_VAULT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_GENE_VAULT.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_GENE_VAULT" class="menuitem">Banca dei geni</div></a>
+				<a href="BUILDING_BYTEGEIST.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_BYTEGEIST.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_BYTEGEIST" class="menuitem">Bytegeist</div></a>
+				<a href="BUILDING_HOLON_CHAMBER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_HOLON_CHAMBER.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_HOLON_CHAMBER" class="menuitem">Camera di Holon</div></a>
+				<a href="BUILDING_ECTOGENESIS_POD.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_ECTOGENESIS_POD.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_ECTOGENESIS_POD" class="menuitem">Capsula di ectogenesi</div></a>
+				<a href="BUILDING_QUANTUM_COMPUTER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_QUANTUM_COMPUTER.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_QUANTUM_COMPUTER" class="menuitem">Computer quantistico</div></a>
+				<a href="BUILDING_MASTER_CONTROL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_MASTER_CONTROL.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_MASTER_CONTROL" class="menuitem">Controllo centrale</div></a>
+				<a href="BUILDING_STELLAR_CODEX.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_STELLAR_CODEX.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_STELLAR_CODEX" class="menuitem">Cosmoscopio</div></a>
+				<a href="BUILDING_CYNOSURE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_CYNOSURE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_CYNOSURE" class="menuitem">Cynosure</div></a>
+				<a href="BUILDING_DRONE_SPHERE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_DRONE_SPHERE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_DRONE_SPHERE" class="menuitem">Dronosfera</div></a>
+				<a href="BUILDING_MARKOV_ECLIPSE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_MARKOV_ECLIPSE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_MARKOV_ECLIPSE" class="menuitem">Eclisse di Markov</div></a>
+				<a href="BUILDING_CRAWLER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_CRAWLER.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_CRAWLER" class="menuitem">Forgia colossale</div></a>
+				<a href="BUILDING_TECTONIC_ANVIL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_TECTONIC_ANVIL.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_TECTONIC_ANVIL" class="menuitem">Incudine tettonica</div></a>
+				<a href="BUILDING_ARCHIMEDES_LEVER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_ARCHIMEDES_LEVER.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_ARCHIMEDES_LEVER" class="menuitem">Leva di Archimede</div></a>
+				<a href="BUILDING_MEMETWORK.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_MEMETWORK.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_MEMETWORK" class="menuitem">Memetwork</div></a>
+				<a href="BUILDING_DEEP_MEMORY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_DEEP_MEMORY.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_DEEP_MEMORY" class="menuitem">Memoria Profonda</div></a>
+				<a href="BUILDING_NANOTHERMITE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_NANOTHERMITE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_NANOTHERMITE" class="menuitem">Nanotermite</div></a>
+				<a href="BUILDING_NEW_TERRAN_MYTH.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_NEW_TERRAN_MYTH.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_NEW_TERRAN_MYTH" class="menuitem">Nuovo Mito della Terra</div></a>
+				<a href="BUILDING_PROMETHEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_PROMETHEAN.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_PROMETHEAN" class="menuitem">Nuovo Prometeo</div></a>
+				<a href="BUILDING_PANOPTICON.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_PANOPTICON.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_PANOPTICON" class="menuitem">Panopticon</div></a>
+				<a href="BUILDING_PRECOG_PROJECT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_PRECOG_PROJECT.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_PRECOG_PROJECT" class="menuitem">Progetto Precog</div></a>
+				<a href="BUILDING_RESURRECTION_DEVICE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_RESURRECTION_DEVICE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_RESURRECTION_DEVICE" class="menuitem">Protocollo di resurrezione</div></a>
+				<a href="BUILDING_DAEDALUS_LADDER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_DAEDALUS_LADDER.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_DAEDALUS_LADDER" class="menuitem">Scala di Dedalo</div></a>
+				<a href="BUILDING_ARMASAIL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_ARMASAIL.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_ARMASAIL" class="menuitem">Superkevlar</div></a>
+				<a href="BUILDING_ANSIBLE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_ANSIBLE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_ANSIBLE" class="menuitem">Trasmettitore quantico</div></a>
+				<a href="BUILDING_XENODROME.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_XENODROME.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_XENODROME" class="menuitem">Xenodromo</div></a>
+				<a href="BUILDING_XENOMALLEUM.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_XENOMALLEUM.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_XENOMALLEUM" class="menuitem">Xenomalleum</div></a>
+				<a href="BUILDING_XENONOVA.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_XENONOVA.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_XENONOVA" class="menuitem">Xenonova</div></a>
+			</div></div>
+			<div id="GROUP_NATIONAL_WONDER" class="menugroupcontainer"><a href="javascript:togglediv('NATIONAL_WONDER_CONTENT');"><div id="NATIONAL_WONDER" class="menugroup">Meraviglie Nazionali</div></a><div id="NATIONAL_WONDER_CONTENT">
+				<a href="BUILDING_SPY_AGENCY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_SPY_AGENCY.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_SPY_AGENCY" class="menuitem">Agenzia di intelligence</div></a>
+				<a href="BUILDING_CULPER_LODGE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_CULPER_LODGE.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_CULPER_LODGE" class="menuitem">Loggia di Culper</div></a>
+				<a href="BUILDING_HEADQUARTERS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/BUILDING_HEADQUARTERS.png\' />', true);" onmouseout="return hideTip();"><div id="BUILDING_HEADQUARTERS" class="menuitem">Quartier generale</div></a>
+			</div></div>
+			<div id="GROUP_PROJECT_WONDER" class="menugroupcontainer"><a href="javascript:togglediv('PROJECT_WONDER_CONTENT');"><div id="PROJECT_WONDER" class="menugroup">Progetti</div></a><div id="PROJECT_WONDER_CONTENT">
+				<a href="PROJECT_DECODE_SIGNAL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/PROJECT_DECODE_SIGNAL.png\' />', true);" onmouseout="return hideTip();"><div id="PROJECT_DECODE_SIGNAL" class="menuitem">Decodifica il Segnale</div></a>
+				<a href="PROJECT_DISCOVER_SIGNAL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/PROJECT_DISCOVER_SIGNAL.png\' />', true);" onmouseout="return hideTip();"><div id="PROJECT_DISCOVER_SIGNAL" class="menuitem">Equazione trascendentale</div></a>
+				<a href="PROJECT_MIND_FLOWER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/PROJECT_MIND_FLOWER.png\' />', true);" onmouseout="return hideTip();"><div id="PROJECT_MIND_FLOWER" class="menuitem">Fiore mentale</div></a>
+				<a href="PROJECT_BEACON.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/PROJECT_BEACON.png\' />', true);" onmouseout="return hideTip();"><div id="PROJECT_BEACON" class="menuitem">Grande Faro</div></a>
+				<a href="PROJECT_SUPREMACY_GATE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/PROJECT_SUPREMACY_GATE.png\' />', true);" onmouseout="return hideTip();"><div id="PROJECT_SUPREMACY_GATE" class="menuitem">Porta dell'Emancipazione</div></a>
+				<a href="PROJECT_PURITY_GATE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/PROJECT_PURITY_GATE.png\' />', true);" onmouseout="return hideTip();"><div id="PROJECT_PURITY_GATE" class="menuitem">Porta dell'Esodo</div></a>
+			</div></div>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

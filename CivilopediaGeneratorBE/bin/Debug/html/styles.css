@@ -1,0 +1,343 @@
+*
+{
+	margin: 0px;
+	padding: 0px;
+}
+body
+{
+	background-color: #1C202A;
+	color: #7996B6;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: normal;
+}
+a
+{
+	color: #7996B6;
+	text-decoration: underline;
+}
+a:hover
+{
+	text-decoration: none;
+}
+img
+{
+	border: none;
+	vertical-align: bottom;
+}
+h2
+{
+	font-size: 16px;
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+select
+{
+	background: url(/civilopediabe/images/selectbackground.png);
+	background-color: #041313;
+	border: 0px;
+	width: 100px;
+	height: 16px;
+	color: #ffffff;
+	vertical-align: center;
+	font-size: 11px;
+	line-height: 16px;
+}
+select option
+{
+	background: url(/civilopediabe/images/selectbackground.png);
+	height: 16px;
+	text-indent: 5px;
+}
+
+/* Info Box */
+.infobox {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 22px;
+	background-color: #161922;
+	border-top: solid 1px #4E6584;
+	border-bottom: solid 1px #4E6584;
+	margin-bottom: 10px;
+}
+
+/* search box */
+.searchbox
+{
+	width: 90px;
+	float: left;
+	margin-top: 19px;
+	margin-left: 10px;
+	border: solid 1px #ffffff;
+	border-radius: 5px;
+	background-color: #1C202A;
+	color: #ffffff;
+}
+
+/* Styles to replace special tags in XML */
+.color_positive_text
+{
+	color: #7FFF19;
+}
+.color_warning_text
+{
+	color: #FF4C4C;
+}
+.color_cyan_text
+{
+	color: #00FFFF;
+}
+
+.color_highlight_text
+{
+	color: #00FFFF;
+}
+
+.color_highlight_improvement
+{
+	color: #DFF2A5;
+}
+
+.color_highlight_unit
+{
+	color: #EC95A1;
+}
+
+.color_highlight_building
+{
+	color: #A3D6F0;
+}
+
+.color_highlight_wonder
+{
+	color: #FFB8FF;
+}
+
+.color_highlight_action
+{
+	color: #FCFCBD;
+}
+
+.color_highlight_resource
+{
+	color: #EFCAA3;
+}
+
+.header
+{
+	float: left;
+	width: 1024px;
+	height: 37px;
+	background-color: #1C202A;
+	background-image: url('/civilopediabe/images/civilopedia.png');
+	background-repeat: no-repeat;
+	text-align: center;
+	font-size: 20px;
+	padding-top: 5px;
+}
+
+.tabrow
+{
+	float: left;
+	width: 1024px;
+	margin-left: 50px;
+	height: 50px;
+	background-color: #1C202A;
+}
+.tab
+{
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+
+.bordertop
+{
+	font-size: 16px;
+	text-align: center;
+	width: 100%;
+	float: left;
+	line-height: 41px;
+	height: 41px;
+	text-align: center;
+	background-image: url('/civilopediabe/images/border_top.png');
+	background-repeat: no-repeat;
+	vertical-align: bottom;
+	margin-left: 5px;
+}
+.borderbottom
+{
+	font-size: 17px;
+	width: 100%;
+	float: left;
+	text-align: center;
+	background-image: url('/civilopediabe/images/border_bottom.png');
+	background-repeat: no-repeat;
+	margin-left: 5px;
+}
+
+.container
+{
+	float: left;
+	width: 1024px;
+}
+
+.content
+{
+	margin-left: 5px;
+	float: left;
+	width: 1022px;
+	background-image: url('/civilopediabe/images/background.png');
+	background-repeat: repeat-y;
+}
+
+.footer
+{
+	float: left;
+	width: 1024px;
+	text-align: center;
+	font-size: 10px;
+}
+
+/* Menu */
+.menu
+{
+	float: left;
+	width: 272px;
+	margin-right: 13px;
+}
+.menu a
+{
+	text-decoration: none;
+}
+.menugroupcontainer
+{
+	float: left;
+	width: 272px;
+}
+.menugroup
+{
+	text-indent: 10px;
+	float: left;
+	width: 272px;
+	height: 27px;
+	line-height: 25px;
+	vertical-align: middle;
+	background-image: url('/civilopediabe/images/menugroup.png');
+	background-repeat: no-repeat;
+}
+.menugroup:hover;
+{
+	background-image: url('/civilopediabe/images/menugrouphover.png');
+	background-repeat: no-repeat;
+}
+.menuitem
+{
+	float: left;
+	text-indent: 10px;
+	width: 272px;
+	height: 21px;
+	line-height: 19px;
+	vertical-align: middle;
+	background-image: url('/civilopediabe/images/menuitem.png');
+	background-repeat: no-repeat;
+	text-decoration: none;
+}
+.menuitem:hover
+{
+	background-image: url('/civilopediabe/images/menuitemhover.png');
+	background-repeat: no-repeat;
+	text-decoration: none;
+}
+
+.contentimage
+{
+	position: absolute;
+	left: 354px;
+	top: 186px;
+}
+
+/* Large block of content */
+.contentwidehome
+{
+	float: right;
+	width: 677px;
+	margin-top: 50px;
+	margin-right: 42px;
+}
+
+/* Large block of content */
+.contentwide
+{
+	float: right;
+	width: 677px;
+	margin-top: 50px;
+	margin-right: 42px;
+}
+
+/* Left side of content */
+.contentleft
+{
+	float: left;
+	width: 220px;
+	margin-top: 256px;
+	margin-right: 18px;
+	margin-left: 10px;
+}
+
+/* Right side of content */
+.contentright
+{
+	margin-top: 15px;
+	float: right;
+	width: 439px;
+	margin-right: 42px;
+}
+
+.title
+{
+	width: 735px;
+	height: 36px;
+	float: left;
+	background-image: url('/civilopediabe/images/titlebackground.png');
+	background-repeat: repeat;
+	font-size: 17px;
+	text-align: center;
+	padding-top: 7px;
+}
+.titlelink
+{
+    text-decoration: none;
+}
+
+.color_purity_affinity
+{
+	color: #F21654;
+}
+.affinity_type_purity
+{
+	color: #F21654;
+	text-decoration: none;
+}
+
+.color_harmony_affinity
+{
+	color: #2DEDD1;
+}
+.affinity_type_harmony
+{
+	color: #2DEDD1;
+	text-decoration: none;
+}
+
+.color_supremacy_affinity
+{
+	color: #EFA54F;
+}
+.affinity_type_supremacy
+{
+	color: #EFA54F;
+	text-decoration: none;
+}

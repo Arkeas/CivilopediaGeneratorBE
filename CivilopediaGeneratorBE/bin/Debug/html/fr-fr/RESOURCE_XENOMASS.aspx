@@ -1,0 +1,25 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="Resources.master" %>
+
+<script runat="server">
+
+</script>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+	<title>CIVILOPEDIA Online: X&eacute;nomasse</title>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+	<div class="title">X&eacute;nomasse</div>
+	<img src="/civilopediabe/images/large/RESOURCE_XENOMASS.png" alt="X&eacute;nomasse" class="contentimage" />
+	<div class="contentleft">
+		<h2>Produit :</h2><div class="infobox">Pas de production</div>
+		
+		<h2>Trouv&eacute; sur :</h2><div class="infobox"><a href="FEATURE_MARSH.aspx" onmouseover="return tooltip('Marais');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/FEATURE_MARSH.png" /></a><a href="TERRAIN_HILL.aspx" onmouseover="return tooltip('Colline');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/TERRAIN_HILL.png" /></a><a href="TERRAIN_GRASS.aspx" onmouseover="return tooltip('Prairie');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/TERRAIN_GRASS.png" /></a><a href="TERRAIN_PLAINS.aspx" onmouseover="return tooltip('Plaine');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/TERRAIN_PLAINS.png" /></a><a href="TERRAIN_GRASS.aspx" onmouseover="return tooltip('Prairie');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/TERRAIN_GRASS.png" /></a><a href="TERRAIN_PLAINS.aspx" onmouseover="return tooltip('Plaine');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/TERRAIN_PLAINS.png" /></a></div>
+		<h2>Am&eacute;nag&eacute; par :</h2><div class="infobox"><a href="IMPROVEMENT_XENOMASS_WELL.aspx" onmouseover="return tooltip('Puits de x&eacute;nomasse');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/IMPROVEMENT_XENOMASS_WELL.png" /></a><a href="IMPROVEMENT_ALIEN_NEST.aspx" onmouseover="return tooltip('Nid extraterrestre');" onmouseout="return hideTip();"><img src="/civilopediabe/images/small/IMPROVEMENT_ALIEN_NEST.png" /></a></div>
+	</div>
+	<div class="contentright">
+		
+<h2>Informations de jeu :</h2><div class="infobox">Sert aux unit&eacute;s et aux b&acirc;timents les plus puissants de fin de partie.</div>
+		<h2>Histoire</h2><div class="infobox">Commun&eacute;ment appel&eacute; "jus", "slime" ou "x&eacute;nomasse", ce biofilm se compose de myxomyc&egrave;tes eucaryotes indiff&eacute;renci&eacute;s (appartenant aux Myc&eacute;tozoaires), ancr&eacute;s dans une matrice autog&eacute;n&eacute;r&eacute;e de substances polym&eacute;riques extracellulaires, dont la composition d&eacute;pend du terrain et des conditions atmosph&eacute;riques. Les substances polym&eacute;riques (exopolysaccharides) assurent la circulation des nutriments et des mol&eacute;cules catalytiques &agrave; travers la masse, ce qui la rend ainsi hautement adaptable. La x&eacute;nomasse joue de nombreux r&ocirc;les dans l'&eacute;cologie de la plan&egrave;te, depuis celui de nourriture jusqu'&agrave; celui de d&eacute;clencheur &eacute;volutif, m&ecirc;me si tous ne sont pas encore enti&egrave;rement compris. Comme elle produit des nucl&eacute;ases naturelles, elle peut provoquer la recombinaison de g&egrave;nes homologues afin de modifier des g&egrave;nes endog&egrave;nes, de supprimer des exons ou de r&eacute;arranger des s&eacute;quences, provoquant ainsi des mutations ponctuelles sur une seule g&eacute;n&eacute;ration. Ce proc&eacute;d&eacute; s'exprime gr&acirc;ce &agrave; des changements physiologiques stables aux niveaux micro et macroscopiques, qui se produisent en tr&egrave;s peu de temps, et s'est av&eacute;r&eacute; un r&eacute;el avantage pour les colonies en qu&ecirc;te d'harmonie et cherchant donc &agrave; s'adapter biologiquement &agrave; leur environnement au moyen de mutations tr&egrave;s pr&eacute;cises. Il semble que la flore et la faune locales pullulent aux alentours des amas de x&eacute;nomasse, et soient insensibles aux "miasmes" qui lui sont associ&eacute;s : des myxomyc&egrave;tes se reproduisent via des spores r&eacute;ticulaires et haplo&iuml;des, qui sont ensuite expuls&eacute;s sous forme d'imposants nuages dans l'atmosph&egrave;re. Ces spores issues de la x&eacute;nomasse se sont av&eacute;r&eacute;es dans leur deuxi&egrave;me phase trophique aussi bien toxiques pour les formes de vie terriennes que corrosives pour les plastiques et la plupart des compos&eacute;s m&eacute;talliques. Des projets de recherches visant &agrave; trouver un moyen de nettoyer ces miasmes re&ccedil;oivent d'importants financements de la part des administrations coloniales, et ce alors m&ecirc;me que d'autres &eacute;tudes pour utiliser la x&eacute;nomasse comme carburant industriel ou dans le domaine biologique connaissent &eacute;galement des avanc&eacute;es. Malgr&eacute; les d&eacute;fis que repr&eacute;sentent la culture et le travail de la x&eacute;nomasse, cette derni&egrave;re pourrait offrir &agrave; l'humanit&eacute; de nombreuses opportunit&eacute;s de d&eacute;veloppement sur cette plan&egrave;te... et au-del&agrave;.</div>
+	</div>
+</asp:Content>
+

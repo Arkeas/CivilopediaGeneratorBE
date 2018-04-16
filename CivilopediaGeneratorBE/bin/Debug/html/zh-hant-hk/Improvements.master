@@ -1,0 +1,156 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-hant-hk">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,improvement,improvements" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('遊戲概念');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('科技');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('單位');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('單位晉升');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('建築物');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('奇跡');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('社會優勢');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('「隱秘行動」');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('贊助者和領袖');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('任務');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('地形和地貌');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('資源');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('改良設施');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_on.png" class="tab" id="tab13" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('傾向性');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('駐守站');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">改良設施
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="IMPROVEMENT_HOME.aspx"><div id="IMPROVEMENT_HOME" class="menuitem">改良設施首頁</div></a>
+				<a href="IMPROVEMENT_BEACON.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_BEACON.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_BEACON" class="menuitem">信標</div></a>
+				<a href="IMPROVEMENT_PURITY_GATE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_PURITY_GATE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_PURITY_GATE" class="menuitem">出谷門</div></a>
+				<a href="IMPROVEMENT_OUTPOST.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_OUTPOST.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_OUTPOST" class="menuitem">前哨站</div></a>
+				<a href="IMPROVEMENT_WRITTEN_IN_STONE_QUEST_TOMB.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_WRITTEN_IN_STONE_QUEST_TOMB.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_WRITTEN_IN_STONE_QUEST_TOMB" class="menuitem">古代墳墓</div></a>
+				<a href="IMPROVEMENT_GEOTHERMAL_WELL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_GEOTHERMAL_WELL.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_GEOTHERMAL_WELL" class="menuitem">地熱井</div></a>
+				<a href="IMPROVEMENT_EARTHLING_SETTLEMENT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_EARTHLING_SETTLEMENT.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_EARTHLING_SETTLEMENT" class="menuitem">地球人定居點</div></a>
+				<a href="IMPROVEMENT_TERRASCAPE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_TERRASCAPE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_TERRASCAPE" class="menuitem">地球景觀</div></a>
+				<a href="IMPROVEMENT_CITY_RUINS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_CITY_RUINS.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_CITY_RUINS" class="menuitem">城市廢墟</div></a>
+				<a href="IMPROVEMENT_CULTURAL_BURDEN_QUEST_CRASH_SITE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_CULTURAL_BURDEN_QUEST_CRASH_SITE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_CULTURAL_BURDEN_QUEST_CRASH_SITE" class="menuitem">墜落現場</div></a>
+				<a href="IMPROVEMENT_ACADEMY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_ACADEMY.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_ACADEMY" class="menuitem">學院</div></a>
+				<a href="IMPROVEMENT_WORK_BARGE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_WORK_BARGE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_WORK_BARGE" class="menuitem">工作船</div></a>
+				<a href="IMPROVEMENT_MIND_FLOWER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_MIND_FLOWER.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_MIND_FLOWER" class="menuitem">心靈之花</div></a>
+				<a href="IMPROVEMENT_DOME.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_DOME.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_DOME" class="menuitem">拱頂</div></a>
+				<a href="IMPROVEMENT_QUARRY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_QUARRY.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_QUARRY" class="menuitem">採石場</div></a>
+				<a href="IMPROVEMENT_PETROL_WELL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_PETROL_WELL.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_PETROL_WELL" class="menuitem">油井</div></a>
+				<a href="IMPROVEMENT_AN_ELEMENTAL_FATE_CAVE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_AN_ELEMENTAL_FATE_CAVE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_AN_ELEMENTAL_FATE_CAVE" class="menuitem">洞穴</div></a>
+				<a href="IMPROVEMENT_FLOAT_STONE_QUARRY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_FLOAT_STONE_QUARRY.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_FLOAT_STONE_QUARRY" class="menuitem">浮石採石場</div></a>
+				<a href="IMPROVEMENT_FIRAXITE_MINE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_FIRAXITE_MINE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_FIRAXITE_MINE" class="menuitem">火山輝晶礦場</div></a>
+				<a href="IMPROVEMENT_PADDOCK.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_PADDOCK.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_PADDOCK" class="menuitem">牧場</div></a>
+				<a href="IMPROVEMENT_BIOWELL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_BIOWELL.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_BIOWELL" class="menuitem">生化井</div></a>
+				<a href="IMPROVEMENT_ALIEN_NEST.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_ALIEN_NEST.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_ALIEN_NEST" class="menuitem">異族巢穴</div></a>
+				<a href="IMPROVEMENT_XENOMASS_WELL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_XENOMASS_WELL.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_XENOMASS_WELL" class="menuitem">異種物質井</div></a>
+				<a href="IMPROVEMENT_GENERATOR.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_GENERATOR.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_GENERATOR" class="menuitem">發電機</div></a>
+				<a href="ROUTE_MAGRAIL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/ROUTE_MAGRAIL.png\' />', true);" onmouseout="return hideTip();"><div id="ROUTE_MAGRAIL" class="menuitem">磁浮軌道</div></a>
+				<a href="IMPROVEMENT_MINE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_MINE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_MINE" class="menuitem">礦場</div></a>
+				<a href="IMPROVEMENT_NODE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_NODE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_NODE" class="menuitem">節點</div></a>
+				<a href="IMPROVEMENT_EXPEDITION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_EXPEDITION.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_EXPEDITION" class="menuitem">考察現場</div></a>
+				<a href="IMPROVEMENT_PLANTATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_PLANTATION.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_PLANTATION" class="menuitem">莊園</div></a>
+				<a href="IMPROVEMENT_MANUFACTORY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_MANUFACTORY.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_MANUFACTORY" class="menuitem">製造工廠</div></a>
+				<a href="IMPROVEMENT_SUPREMACY_GATE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_SUPREMACY_GATE.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_SUPREMACY_GATE" class="menuitem">解放門</div></a>
+				<a href="IMPROVEMENT_GOODY_HUT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_GOODY_HUT.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_GOODY_HUT" class="menuitem">資源艙</div></a>
+				<a href="IMPROVEMENT_FARM.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_FARM.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_FARM" class="menuitem">農場</div></a>
+				<a href="ROUTE_ROAD.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/ROUTE_ROAD.png\' />', true);" onmouseout="return hideTip();"><div id="ROUTE_ROAD" class="menuitem">道路</div></a>
+				<a href="IMPROVEMENT_ARRAY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_ARRAY.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_ARRAY" class="menuitem">陣列</div></a>
+				<a href="IMPROVEMENT_STATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/IMPROVEMENT_STATION.png\' />', true);" onmouseout="return hideTip();"><div id="IMPROVEMENT_STATION" class="menuitem">駐守站</div></a>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

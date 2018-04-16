@@ -1,0 +1,604 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-jp">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,concept,concepts" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('ゲームコンセプト');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_on.png" class="tab" id="tab01" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('テクノロジー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('ユニット');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('ユニットアップグレード');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('建造物');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('遺産');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('美徳');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('諜報活動');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('スポンサーとリーダー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('クエスト');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('地形と地物');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('資源');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('資源活用施設');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('アフィニティー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('ステーション');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">ゲームコンセプト
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="CONCEPT_HOME.aspx"><div id="CONCEPT_HOME" class="menuitem">ゲームコンセプト・ホームページ</div></a>
+			<div id="GROUP_1" class="menugroupcontainer"><a href="javascript:togglediv('1_CONTENT');"><div id="1" class="menugroup">アフィニティー</div></a><div id="1_CONTENT">
+				<a href="CONCEPT_AFFINITY.aspx"><div id="CONCEPT_AFFINITY" class="menuitem">アフィニティー</div></a>
+				<a href="CONCEPT_AFFINITY_HARMONY.aspx"><div id="CONCEPT_AFFINITY_HARMONY" class="menuitem">調和</div></a>
+				<a href="CONCEPT_AFFINITY_SUPREMACY.aspx"><div id="CONCEPT_AFFINITY_SUPREMACY" class="menuitem">至高</div></a>
+				<a href="CONCEPT_AFFINITY_PURITY.aspx"><div id="CONCEPT_AFFINITY_PURITY" class="menuitem">純血</div></a>
+				<a href="CONCEPT_AFFINITY_PROGRESS.aspx"><div id="CONCEPT_AFFINITY_PROGRESS" class="menuitem">アフィニティー発展</div></a>
+				<a href="CONCEPT_AFFINITY_STYLE.aspx"><div id="CONCEPT_AFFINITY_STYLE" class="menuitem">プレイスタイル</div></a>
+				<a href="CONCEPT_AFFINITY_ACQUIRE.aspx"><div id="CONCEPT_AFFINITY_ACQUIRE" class="menuitem">アフィニティー獲得</div></a>
+				<a href="CONCEPT_AFFINITY_UPGRADES.aspx"><div id="CONCEPT_AFFINITY_UPGRADES" class="menuitem">ユニットのアップグレード</div></a>
+				<a href="CONCEPT_AFFINITY_UNITS.aspx"><div id="CONCEPT_AFFINITY_UNITS" class="menuitem">アフィニティー固有ユニット</div></a>
+			</div></div>
+			<div id="GROUP_2" class="menugroupcontainer"><a href="javascript:togglediv('2_CONTENT');"><div id="2" class="menugroup">都市</div></a><div id="2_CONTENT">
+				<a href="CONCEPT_CITIES.aspx"><div id="CONCEPT_CITIES" class="menuitem">都市</div></a>
+				<a href="CONCEPT_OUTPOSTS.aspx"><div id="CONCEPT_OUTPOSTS" class="menuitem">前哨地</div></a>
+				<a href="CONCEPT_FOUNDING_CITIES.aspx"><div id="CONCEPT_FOUNDING_CITIES" class="menuitem">都市の増設方法</div></a>
+				<a href="CONCEPT_WHERE_TO_FOUND_CITIES.aspx"><div id="CONCEPT_WHERE_TO_FOUND_CITIES" class="menuitem">どこに前哨地を創設するか</div></a>
+				<a href="CONCEPT_CITY_BANNER.aspx"><div id="CONCEPT_CITY_BANNER" class="menuitem">都市のバナー</div></a>
+				<a href="CONCEPT_CITY_SCREEN.aspx"><div id="CONCEPT_CITY_SCREEN" class="menuitem">都市画面</div></a>
+				<a href="CONCEPT_CITY_COMBATUNITS.aspx"><div id="CONCEPT_CITY_COMBATUNITS" class="menuitem">戦闘ユニット</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTION.aspx"><div id="CONCEPT_CITY_CONSTRUCTION" class="menuitem">都市における建設</div></a>
+				<a href="CONCEPT_CITY_BUILD.aspx"><div id="CONCEPT_CITY_BUILD" class="menuitem">都市建設メニュー</div></a>
+				<a href="CONCEPT_CITY_CHANGE_BUILD.aspx"><div id="CONCEPT_CITY_CHANGE_BUILD" class="menuitem">建造物の変更</div></a>
+				<a href="CONCEPT_CITY_PURCHASEITEM.aspx"><div id="CONCEPT_CITY_PURCHASEITEM" class="menuitem">アイテムの購入</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTING_UNITS.aspx"><div id="CONCEPT_CITY_CONSTRUCTING_UNITS" class="menuitem">ユニットの生産</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTING_BUILDINGS.aspx"><div id="CONCEPT_CITY_CONSTRUCTING_BUILDINGS" class="menuitem">建造物の建設</div></a>
+				<a href="CONCEPT_CITY_CONSTRUCTING_WONDERS.aspx"><div id="CONCEPT_CITY_CONSTRUCTING_WONDERS" class="menuitem">遺産の建設</div></a>
+				<a href="CONCEPT_CITY_WORKINGLAND.aspx"><div id="CONCEPT_CITY_WORKINGLAND" class="menuitem">タイルを開墾</div></a>
+				<a href="CONCEPT_CITY_ASSIGNINGCITIZENS.aspx"><div id="CONCEPT_CITY_ASSIGNINGCITIZENS" class="menuitem">市民に開墾する土地を割り当てる</div></a>
+				<a href="CONCEPT_CITY_IMPROVINGLAND.aspx"><div id="CONCEPT_CITY_IMPROVINGLAND" class="menuitem">土地の改良</div></a>
+				<a href="CONCEPT_CITY_UNEMPLOYED_CITIZENS.aspx"><div id="CONCEPT_CITY_UNEMPLOYED_CITIZENS" class="menuitem">失業者</div></a>
+				<a href="CONCEPT_CITY_COMBAT.aspx"><div id="CONCEPT_CITY_COMBAT" class="menuitem">都市の攻防</div></a>
+				<a href="CONCEPT_CITY_ATTACKING_MELEE.aspx"><div id="CONCEPT_CITY_ATTACKING_MELEE" class="menuitem">都市を攻撃する</div></a>
+				<a href="CONCEPT_CITY_ATTACKING_RANGED.aspx"><div id="CONCEPT_CITY_ATTACKING_RANGED" class="menuitem">遠隔攻撃ユニットでの攻撃</div></a>
+				<a href="CONCEPT_CITY_DEFENDING.aspx"><div id="CONCEPT_CITY_DEFENDING" class="menuitem">都市を防衛する</div></a>
+				<a href="CONCEPT_CITY_CONQUERING.aspx"><div id="CONCEPT_CITY_CONQUERING" class="menuitem">都市の征服</div></a>
+				<a href="CONCEPT_CITY_DESTROY.aspx"><div id="CONCEPT_CITY_DESTROY" class="menuitem">都市の焼き討ち</div></a>
+				<a href="CONCEPT_CITY_INDESTRUCTABLE.aspx"><div id="CONCEPT_CITY_INDESTRUCTABLE" class="menuitem">破壊が不可能な都市</div></a>
+				<a href="CONCEPT_CITY_ANNEX.aspx"><div id="CONCEPT_CITY_ANNEX" class="menuitem">都市の併合</div></a>
+				<a href="CONCEPT_CITY_PUPPET.aspx"><div id="CONCEPT_CITY_PUPPET" class="menuitem">都市を傀儡にする</div></a>
+				<a href="CONCEPT_CITY_MARTIAL_LAW.aspx"><div id="CONCEPT_CITY_MARTIAL_LAW" class="menuitem">戒厳令</div></a>
+				<a href="CONCEPT_CITY_RESISTANCE.aspx"><div id="CONCEPT_CITY_RESISTANCE" class="menuitem">反乱</div></a>
+				<a href="CONCEPT_BUILDINGS_SPECIALISTS.aspx"><div id="CONCEPT_BUILDINGS_SPECIALISTS" class="menuitem">専門家</div></a>
+				<a href="CONCEPT_BUILDINGS.aspx"><div id="CONCEPT_BUILDINGS" class="menuitem">建造物</div></a>
+				<a href="CONCEPT_BUILDINGS_CONSTRUCTION.aspx"><div id="CONCEPT_BUILDINGS_CONSTRUCTION" class="menuitem">建造物の建設方法</div></a>
+				<a href="CONCEPT_BUILDINGS_PURCHASING.aspx"><div id="CONCEPT_BUILDINGS_PURCHASING" class="menuitem">建造物の変更、または購入</div></a>
+				<a href="CONCEPT_BUILDINGS_PREREQUISITES.aspx"><div id="CONCEPT_BUILDINGS_PREREQUISITES" class="menuitem">建造物の建設条件</div></a>
+				<a href="CONCEPT_BUILDINGS_MAINTENANCE.aspx"><div id="CONCEPT_BUILDINGS_MAINTENANCE" class="menuitem">建造物の維持費</div></a>
+				<a href="CONCEPT_BUILDINGS_PALACE.aspx"><div id="CONCEPT_BUILDINGS_PALACE" class="menuitem">本部</div></a>
+			</div></div>
+			<div id="GROUP_3" class="menugroupcontainer"><a href="javascript:togglediv('3_CONTENT');"><div id="3" class="menugroup">戦闘のルール</div></a><div id="3_CONTENT">
+				<a href="CONCEPT_COMBAT.aspx"><div id="CONCEPT_COMBAT" class="menuitem">戦闘</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR" class="menuitem">宣戦布告</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_DIPLOMATICALLY.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_DIPLOMATICALLY" class="menuitem">外交的宣戦布告</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_ATTACK_UNIT.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_ATTACK_UNIT" class="menuitem">他国のユニットへの攻撃</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_ENTER_TERRITORY.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_ENTER_TERRITORY" class="menuitem">コロニー領土への侵入</div></a>
+				<a href="CONCEPT_COMBAT_DECLARE_WAR_RECEIVED.aspx"><div id="CONCEPT_COMBAT_DECLARE_WAR_RECEIVED" class="menuitem">敵からの宣戦布告</div></a>
+				<a href="CONCEPT_COMBAT_END_WAR.aspx"><div id="CONCEPT_COMBAT_END_WAR" class="menuitem">終戦</div></a>
+				<a href="CONCEPT_COMBAT_WHICH_UNITS_CAN_FIGHT.aspx"><div id="CONCEPT_COMBAT_WHICH_UNITS_CAN_FIGHT" class="menuitem">戦闘可能なユニット</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS" class="menuitem">ユニットの戦闘ステータス</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_RANGED_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_RANGED_COMBAT_STRENGTH" class="menuitem">遠隔戦闘力</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_RANGE.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_RANGE" class="menuitem">射程範囲</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_COMBAT_STRENGTH" class="menuitem">戦闘力</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_STATS_HIT_POINTS.aspx"><div id="CONCEPT_COMBAT_UNIT_STATS_HIT_POINTS" class="menuitem">ヒットポイント</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_COMBAT.aspx"><div id="CONCEPT_COMBAT_MELEE_COMBAT" class="menuitem">近接攻撃</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_COMBAT_RESOLVE.aspx"><div id="CONCEPT_COMBAT_MELEE_COMBAT_RESOLVE" class="menuitem">近接戦闘の勝敗</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_MULTIPLE_UNITS.aspx"><div id="CONCEPT_COMBAT_MELEE_MULTIPLE_UNITS" class="menuitem">複数のユニットによる戦闘</div></a>
+				<a href="CONCEPT_COMBAT_COMBAT_INFORMATION_TABLE.aspx"><div id="CONCEPT_COMBAT_COMBAT_INFORMATION_TABLE" class="menuitem">戦闘情報画面</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_INITIATING_COMBAT.aspx"><div id="CONCEPT_COMBAT_MELEE_INITIATING_COMBAT" class="menuitem">近接戦闘の実行</div></a>
+				<a href="CONCEPT_COMBAT_MELEE_RESULTS.aspx"><div id="CONCEPT_COMBAT_MELEE_RESULTS" class="menuitem">近接戦闘の結果</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_COMBAT.aspx"><div id="CONCEPT_COMBAT_RANGED_COMBAT" class="menuitem">遠隔戦闘</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_RANGED_COMBAT_STRENGTH" class="menuitem">遠隔戦闘力</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_COMBAT_RANGE.aspx"><div id="CONCEPT_COMBAT_RANGED_COMBAT_RANGE" class="menuitem">射程範囲</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_LINE_OF_SIGHT.aspx"><div id="CONCEPT_COMBAT_RANGED_LINE_OF_SIGHT" class="menuitem">視界</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_INITIATING_COMBAT.aspx"><div id="CONCEPT_COMBAT_RANGED_INITIATING_COMBAT" class="menuitem">遠隔攻撃の実行</div></a>
+				<a href="CONCEPT_COMBAT_RANGED_RESULTS.aspx"><div id="CONCEPT_COMBAT_RANGED_RESULTS" class="menuitem">遠隔攻撃の結果</div></a>
+				<a href="CONCEPT_COMBAT_BONUSES.aspx"><div id="CONCEPT_COMBAT_BONUSES" class="menuitem">戦闘ボーナス</div></a>
+				<a href="CONCEPT_COMBAT_BONUSES_TERRAIN.aspx"><div id="CONCEPT_COMBAT_BONUSES_TERRAIN" class="menuitem">地形ボーナス</div></a>
+				<a href="CONCEPT_COMBAT_FORTIFICATION_EXPLANATION.aspx"><div id="CONCEPT_COMBAT_FORTIFICATION_EXPLANATION" class="menuitem">守りを固める</div></a>
+				<a href="CONCEPT_COMBAT_FORTIFICATION_WHICH_UNITS_CAN_FORTIFY.aspx"><div id="CONCEPT_COMBAT_FORTIFICATION_WHICH_UNITS_CAN_FORTIFY" class="menuitem">守りを固める事のできるユニット</div></a>
+				<a href="CONCEPT_COMBAT_BONUSES_FORTIFICATION.aspx"><div id="CONCEPT_COMBAT_BONUSES_FORTIFICATION" class="menuitem">守りを固める事によるボーナス</div></a>
+				<a href="CONCEPT_COMBAT_ALERT.aspx"><div id="CONCEPT_COMBAT_ALERT" class="menuitem">「警戒」命令</div></a>
+				<a href="CONCEPT_COMBAT_NAVAL.aspx"><div id="CONCEPT_COMBAT_NAVAL" class="menuitem">海戦</div></a>
+				<a href="CONCEPT_COMBAT_CITY_COMBAT_STRENGTH.aspx"><div id="CONCEPT_COMBAT_CITY_COMBAT_STRENGTH" class="menuitem">都市の攻防</div></a>
+				<a href="CONCEPT_COMBAT_CITY_HIT_POINTS.aspx"><div id="CONCEPT_COMBAT_CITY_HIT_POINTS" class="menuitem">都市のヒットポイント</div></a>
+				<a href="CONCEPT_COMBAT_CITY_ATTACKING_WITH_RANGED_UNITS.aspx"><div id="CONCEPT_COMBAT_CITY_ATTACKING_WITH_RANGED_UNITS" class="menuitem">遠隔攻撃ユニットによる都市攻撃</div></a>
+				<a href="CONCEPT_COMBAT_CITY_ATTACKING_WITH_MELEE_UNITS.aspx"><div id="CONCEPT_COMBAT_CITY_ATTACKING_WITH_MELEE_UNITS" class="menuitem">近接戦闘による都市攻撃</div></a>
+				<a href="CONCEPT_COMBAT_CITY_GARRISON.aspx"><div id="CONCEPT_COMBAT_CITY_GARRISON" class="menuitem">都市へのユニット駐留</div></a>
+				<a href="CONCEPT_COMBAT_CITY_BOMBARD.aspx"><div id="CONCEPT_COMBAT_CITY_BOMBARD" class="menuitem">都市による攻撃者への砲撃</div></a>
+				<a href="CONCEPT_COMBAT_CITY_CAPTURE.aspx"><div id="CONCEPT_COMBAT_CITY_CAPTURE" class="menuitem">都市の占領</div></a>
+				<a href="CONCEPT_COMBAT_SIEGE.aspx"><div id="CONCEPT_COMBAT_SIEGE" class="menuitem">包囲攻撃ユニット</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_COMBAT_DAMAGE.aspx"><div id="CONCEPT_COMBAT_UNIT_COMBAT_DAMAGE" class="menuitem">戦闘によるダメージ</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_GROUND_HEALING_DAMAGE.aspx"><div id="CONCEPT_COMBAT_UNIT_GROUND_HEALING_DAMAGE" class="menuitem">都市のダメージ回復</div></a>
+				<a href="CONCEPT_COMBAT_UNIT_NAVAL_HEALING_DAMAGE.aspx"><div id="CONCEPT_COMBAT_UNIT_NAVAL_HEALING_DAMAGE" class="menuitem">海上ユニットのダメージ回復</div></a>
+				<a href="CONCEPT_COMBAT_FORTIFY_UNTIL_HEALED.aspx"><div id="CONCEPT_COMBAT_FORTIFY_UNTIL_HEALED" class="menuitem">「回復するまで防御」ボタン</div></a>
+				<a href="CONCEPT_COMBAT_EXPERIENCE_AND_PROMOTIONS.aspx"><div id="CONCEPT_COMBAT_EXPERIENCE_AND_PROMOTIONS" class="menuitem">経験値(XP)とレベルアップ</div></a>
+				<a href="CONCEPT_COMBAT_EXPERIENCE_ACCUMULATING_COMBAT.aspx"><div id="CONCEPT_COMBAT_EXPERIENCE_ACCUMULATING_COMBAT" class="menuitem">戦闘による経験値の獲得</div></a>
+				<a href="CONCEPT_COMBAT_EXPERIENCE_SPENDING.aspx"><div id="CONCEPT_COMBAT_EXPERIENCE_SPENDING" class="menuitem">経験値の使い方</div></a>
+				<a href="CONCEPT_COMBAT_PROMOTIONS.aspx"><div id="CONCEPT_COMBAT_PROMOTIONS" class="menuitem">アップグレード</div></a>
+			</div></div>
+			<div id="GROUP_4" class="menugroupcontainer"><a href="javascript:togglediv('4_CONTENT');"><div id="4" class="menugroup">地形と地物</div></a><div id="4_CONTENT">
+				<a href="CONCEPT_TERRAIN.aspx"><div id="CONCEPT_TERRAIN" class="menuitem">地形</div></a>
+				<a href="CONCEPT_TERRAIN_RESOURCES.aspx"><div id="CONCEPT_TERRAIN_RESOURCES" class="menuitem">資源</div></a>
+				<a href="CONCEPT_TERRAIN_TABLES.aspx"><div id="CONCEPT_TERRAIN_TABLES" class="menuitem">地形一覧</div></a>
+				<a href="CONCEPT_TERRAIN_TYPES.aspx"><div id="CONCEPT_TERRAIN_TYPES" class="menuitem">地形の種類</div></a>
+				<a href="CONCEPT_TERRAIN_VALUES.aspx"><div id="CONCEPT_TERRAIN_VALUES" class="menuitem">地形効果の説明</div></a>
+				<a href="CONCEPT_TERRAIN_COAST.aspx"><div id="CONCEPT_TERRAIN_COAST" class="menuitem">近海</div></a>
+				<a href="CONCEPT_TERRAIN_DESERT.aspx"><div id="CONCEPT_TERRAIN_DESERT" class="menuitem">砂漠</div></a>
+				<a href="CONCEPT_TERRAIN_GRASSLAND.aspx"><div id="CONCEPT_TERRAIN_GRASSLAND" class="menuitem">草原</div></a>
+				<a href="CONCEPT_TERRAIN_HILLS.aspx"><div id="CONCEPT_TERRAIN_HILLS" class="menuitem">丘陵</div></a>
+				<a href="CONCEPT_TERRAIN_MOUNTAINS.aspx"><div id="CONCEPT_TERRAIN_MOUNTAINS" class="menuitem">山岳とクレーター</div></a>
+				<a href="CONCEPT_TERRAIN_OCEANS.aspx"><div id="CONCEPT_TERRAIN_OCEANS" class="menuitem">外洋</div></a>
+				<a href="CONCEPT_TERRAIN_PLAINS.aspx"><div id="CONCEPT_TERRAIN_PLAINS" class="menuitem">平原</div></a>
+				<a href="CONCEPT_TERRAIN_SNOW.aspx"><div id="CONCEPT_TERRAIN_SNOW" class="menuitem">氷土</div></a>
+				<a href="CONCEPT_TERRAIN_TUNDRA.aspx"><div id="CONCEPT_TERRAIN_TUNDRA" class="menuitem">ツンドラ</div></a>
+				<a href="CONCEPT_TERRAIN_CANYONS.aspx"><div id="CONCEPT_TERRAIN_CANYONS" class="menuitem">峡谷</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURES.aspx"><div id="CONCEPT_TERRAIN_FEATURES" class="menuitem">地物</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_VALUES.aspx"><div id="CONCEPT_TERRAIN_FEATURE_VALUES" class="menuitem">地物効果</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_FLOOD_PLAINS.aspx"><div id="CONCEPT_TERRAIN_FEATURE_FLOOD_PLAINS" class="menuitem">氾濫原</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_FORESTS.aspx"><div id="CONCEPT_TERRAIN_FEATURE_FORESTS" class="menuitem">森林</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_ICE.aspx"><div id="CONCEPT_TERRAIN_FEATURE_ICE" class="menuitem">氷河</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_MARSH.aspx"><div id="CONCEPT_TERRAIN_FEATURE_MARSH" class="menuitem">湿原</div></a>
+				<a href="CONCEPT_TERRAIN_FEATURE_MIASMA.aspx"><div id="CONCEPT_TERRAIN_FEATURE_MIASMA" class="menuitem">瘴気</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS.aspx"><div id="CONCEPT_TERRAIN_RIVERS" class="menuitem">河川</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_TILES.aspx"><div id="CONCEPT_TERRAIN_RIVERS_TILES" class="menuitem">河川の位置</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_YIELD.aspx"><div id="CONCEPT_TERRAIN_RIVERS_YIELD" class="menuitem">都市の生産量補正</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_COMBAT.aspx"><div id="CONCEPT_TERRAIN_RIVERS_COMBAT" class="menuitem">攻撃ペナルティ</div></a>
+				<a href="CONCEPT_TERRAIN_RIVERS_MOVEMENT.aspx"><div id="CONCEPT_TERRAIN_RIVERS_MOVEMENT" class="menuitem">移動効果</div></a>
+				<a href="CONCEPT_MIASMA.aspx"><div id="CONCEPT_MIASMA" class="menuitem">瘴気</div></a>
+			</div></div>
+			<div id="GROUP_5" class="menugroupcontainer"><a href="javascript:togglediv('5_CONTENT');"><div id="5" class="menugroup">資源</div></a><div id="5_CONTENT">
+				<a href="CONCEPT_RESOURCES.aspx"><div id="CONCEPT_RESOURCES" class="menuitem">資源</div></a>
+				<a href="CONCEPT_RESOURCES_BONUS.aspx"><div id="CONCEPT_RESOURCES_BONUS" class="menuitem">基本資源</div></a>
+				<a href="CONCEPT_RESOURCES_STRATEGIC.aspx"><div id="CONCEPT_RESOURCES_STRATEGIC" class="menuitem">戦略資源</div></a>
+				<a href="CONCEPT_RESOURCES_OWNING.aspx"><div id="CONCEPT_RESOURCES_OWNING" class="menuitem">資源の所有</div></a>
+				<a href="CONCEPT_RESOURCES_IMPROVING.aspx"><div id="CONCEPT_RESOURCES_IMPROVING" class="menuitem">資源の改良</div></a>
+				<a href="CONCEPT_RESOURCES_TRADING.aspx"><div id="CONCEPT_RESOURCES_TRADING" class="menuitem">資源の交換</div></a>
+			</div></div>
+			<div id="GROUP_6" class="menugroupcontainer"><a href="javascript:togglediv('6_CONTENT');"><div id="6" class="menugroup">資源活用施設の建設</div></a><div id="6_CONTENT">
+				<a href="CONCEPT_WORKERS.aspx"><div id="CONCEPT_WORKERS" class="menuitem">ワーカーと資源活用施設</div></a>
+				<a href="CONCEPT_WORKERS_CREATING.aspx"><div id="CONCEPT_WORKERS_CREATING" class="menuitem">ワーカーの作成</div></a>
+				<a href="CONCEPT_WORKERS_COMBAT.aspx"><div id="CONCEPT_WORKERS_COMBAT" class="menuitem">ワーカーと戦闘</div></a>
+				<a href="CONCEPT_WORKERS_ACTION_PANEL.aspx"><div id="CONCEPT_WORKERS_ACTION_PANEL" class="menuitem">ワーカーのアクションパネル</div></a>
+				<a href="CONCEPT_WORKERS_CLEARINGLAND.aspx"><div id="CONCEPT_WORKERS_CLEARINGLAND" class="menuitem">整地</div></a>
+				<a href="CONCEPT_WORKERS_ROADS.aspx"><div id="CONCEPT_WORKERS_ROADS" class="menuitem">道路とマグレールの建設</div></a>
+				<a href="CONCEPT_WORKERS_ROADS_TIME.aspx"><div id="CONCEPT_WORKERS_ROADS_TIME" class="menuitem">道路やマグレールの敷設時間</div></a>
+				<a href="CONCEPT_WORKERS_ROADS_TRADE_ROUTES.aspx"><div id="CONCEPT_WORKERS_ROADS_TRADE_ROUTES" class="menuitem">道路、マグレールと都市接続</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS" class="menuitem">資源活用施設の建設</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_WHERE.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_WHERE" class="menuitem">資源活用施設の建設場所</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_TIME.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_TIME" class="menuitem">建設時間</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_LEAVING.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_LEAVING" class="menuitem">資源活用施設の建設停止と再開</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_FARM.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_FARM" class="menuitem">農場による土地改善</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_MINE.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_MINE" class="menuitem">鉱山による土地改善</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_GENERATOR.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_GENERATOR" class="menuitem">発電機資源活用施設</div></a>
+				<a href="CONCEPT_WORKERS_WORKBOATS.aspx"><div id="CONCEPT_WORKERS_WORKBOATS" class="menuitem">資源活用施設「作業用はしけ」</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_OTHER.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_OTHER" class="menuitem">その他の資源活用施設</div></a>
+				<a href="CONCEPT_WORKERS_IMPROVEMENTS_ADVANCED.aspx"><div id="CONCEPT_WORKERS_IMPROVEMENTS_ADVANCED" class="menuitem">上級資源活用施設</div></a>
+				<a href="CONCEPT_WORKERS_PILLAGE.aspx"><div id="CONCEPT_WORKERS_PILLAGE" class="menuitem">道路と資源活用施設の略奪</div></a>
+				<a href="CONCEPT_WORKERS_REPAIR.aspx"><div id="CONCEPT_WORKERS_REPAIR" class="menuitem">道路と資源活用施設の修復</div></a>
+				<a href="CONCEPT_WORKERS_REMOVE.aspx"><div id="CONCEPT_WORKERS_REMOVE" class="menuitem">瘴気の排除</div></a>
+				<a href="CONCEPT_WORKERS_PLACE.aspx"><div id="CONCEPT_WORKERS_PLACE" class="menuitem">瘴気の配置</div></a>
+			</div></div>
+			<div id="GROUP_7" class="menugroupcontainer"><a href="javascript:togglediv('7_CONTENT');"><div id="7" class="menugroup">食料と都市の成長</div></a><div id="7_CONTENT">
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH" class="menuitem">食料と都市の成長</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_MECHANICS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_MECHANICS" class="menuitem">都市と食料</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GETTING_MORE_FOOD.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GETTING_MORE_FOOD" class="menuitem">より多くの食料を産出する</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_BEST_FOOD_TILES.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_BEST_FOOD_TILES" class="menuitem">食料の産出に最も優れたタイル</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_BONUS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_BONUS" class="menuitem">基本資源</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_FLOOD_PLAINS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_FLOOD_PLAINS" class="menuitem">氾濫原</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GRASSLAND.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GRASSLAND" class="menuitem">草原</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_IMPROVEMENTS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_IMPROVEMENTS" class="menuitem">資源活用施設</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_BUILDINGS_WONDERS_SOCIAL_POLICIES.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_BUILDINGS_WONDERS_SOCIAL_POLICIES" class="menuitem">建造物、遺産、美徳</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_UNHEALTH.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_UNHEALTH" class="menuitem">都市の健康度</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH" class="menuitem">都市の成長</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH_BUCKET.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_GROWTH_BUCKET" class="menuitem">都市成長バケツ</div></a>
+				<a href="CONCEPT_FOOD_AND_CITY_GROWTH_SETTLERS.aspx"><div id="CONCEPT_FOOD_AND_CITY_GROWTH_SETTLERS" class="menuitem">コロニストと食料産出量</div></a>
+			</div></div>
+			<div id="GROUP_8" class="menugroupcontainer"><a href="javascript:togglediv('8_CONTENT');"><div id="8" class="menugroup">テクノロジー</div></a><div id="8_CONTENT">
+				<a href="CONCEPT_TECHNOLOGY.aspx"><div id="CONCEPT_TECHNOLOGY" class="menuitem">テクノロジー</div></a>
+				<a href="CONCEPT_TECHNOLOGY_TECH_AND_BEAKERS.aspx"><div id="CONCEPT_TECHNOLOGY_TECH_AND_BEAKERS" class="menuitem">テクノロジーとビーカー</div></a>
+				<a href="CONCEPT_TECHNOLOGY_BEAKERS.aspx"><div id="CONCEPT_TECHNOLOGY_BEAKERS" class="menuitem">ビーカーの獲得方法は？</div></a>
+				<a href="CONCEPT_TECHNOLOGY_SPEEDING_UP_RESEARCH.aspx"><div id="CONCEPT_TECHNOLOGY_SPEEDING_UP_RESEARCH" class="menuitem">ビーカーを増加させる</div></a>
+				<a href="CONCEPT_TECHNOLOGY_ANCIENT_RUINS.aspx"><div id="CONCEPT_TECHNOLOGY_ANCIENT_RUINS" class="menuitem">資源ポッド</div></a>
+				<a href="CONCEPT_TECHNOLOGY_BUILDINGS.aspx"><div id="CONCEPT_TECHNOLOGY_BUILDINGS" class="menuitem">建造物</div></a>
+				<a href="CONCEPT_TECHNOLOGY_VIRTUES.aspx"><div id="CONCEPT_TECHNOLOGY_VIRTUES" class="menuitem">美徳</div></a>
+				<a href="CONCEPT_TECHNOLOGY_WONDERS.aspx"><div id="CONCEPT_TECHNOLOGY_WONDERS" class="menuitem">遺産</div></a>
+				<a href="CONCEPT_TECHNOLOGY_EXPEDITIONS.aspx"><div id="CONCEPT_TECHNOLOGY_EXPEDITIONS" class="menuitem">発掘</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSING_TECH.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSING_TECH" class="menuitem">研究するテクノロジーの選択</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_MENU.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_MENU" class="menuitem">テクノロジーウェブ</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_BRANCHES.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_BRANCHES" class="menuitem">枝テクノロジー</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_LEAVES.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_LEAVES" class="menuitem">葉テクノロジー</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_THREADS.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_THREADS" class="menuitem">スレッド</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_AFFINITY.aspx"><div id="CONCEPT_TECHNOLOGY_CHOOSE_RESEARCH_AFFINITY" class="menuitem">アフィニティー発展</div></a>
+				<a href="CONCEPT_TECHNOLOGY_CHANGE_RESEARCH.aspx"><div id="CONCEPT_TECHNOLOGY_CHANGE_RESEARCH" class="menuitem">研究するテクノロジーの変更</div></a>
+				<a href="CONCEPT_TECHNOLOGY_AVAILABLE.aspx"><div id="CONCEPT_TECHNOLOGY_AVAILABLE" class="menuitem">研究可能なテクノロジーは？</div></a>
+				<a href="CONCEPT_TECHNOLOGY_TECH_TREE.aspx"><div id="CONCEPT_TECHNOLOGY_TECH_TREE" class="menuitem">壮大なるテクノロジーウェブ</div></a>
+				<a href="CONCEPT_CONTACT_VICTORY.aspx"><div id="CONCEPT_CONTACT_VICTORY" class="menuitem">未知との接触による勝利</div></a>
+			</div></div>
+			<div id="GROUP_9" class="menugroupcontainer"><a href="javascript:togglediv('9_CONTENT');"><div id="9" class="menugroup">文化</div></a><div id="9_CONTENT">
+				<a href="CONCEPT_CULTURE.aspx"><div id="CONCEPT_CULTURE" class="menuitem">文化</div></a>
+				<a href="CONCEPT_CULTURE_GAINING.aspx"><div id="CONCEPT_CULTURE_GAINING" class="menuitem">文化力の獲得</div></a>
+				<a href="CONCEPT_CULTURE_EXPANDING_TERRITORY.aspx"><div id="CONCEPT_CULTURE_EXPANDING_TERRITORY" class="menuitem">領土の獲得</div></a>
+				<a href="CONCEPT_CULTURE_ACQUIRING_SOCIAL_POLICY.aspx"><div id="CONCEPT_CULTURE_ACQUIRING_SOCIAL_POLICY" class="menuitem">美徳の獲得</div></a>
+			</div></div>
+			<div id="GROUP_10" class="menugroupcontainer"><a href="javascript:togglediv('10_CONTENT');"><div id="10" class="menugroup">外交</div></a><div id="10_CONTENT">
+				<a href="CONCEPT_DIPLOMACY.aspx"><div id="CONCEPT_DIPLOMACY" class="menuitem">外交</div></a>
+				<a href="CONCEPT_DIPLOMACY_WHO_CAN_CONDUCT.aspx"><div id="CONCEPT_DIPLOMACY_WHO_CAN_CONDUCT" class="menuitem">外交の相手</div></a>
+				<a href="CONCEPT_DIPLOMACY_INITIATING.aspx"><div id="CONCEPT_DIPLOMACY_INITIATING" class="menuitem">外交の開始</div></a>
+				<a href="CONCEPT_DIPLOMACY_WITH_CIVS.aspx"><div id="CONCEPT_DIPLOMACY_WITH_CIVS" class="menuitem">外交の種類</div></a>
+				<a href="CONCEPT_DIPLOMACY_TRADE.aspx"><div id="CONCEPT_DIPLOMACY_TRADE" class="menuitem">取引</div></a>
+				<a href="CONCEPT_DIPLOMACY_DEMAND.aspx"><div id="CONCEPT_DIPLOMACY_DEMAND" class="menuitem">要求</div></a>
+				<a href="CONCEPT_DIPLOMACY_DISCUSS.aspx"><div id="CONCEPT_DIPLOMACY_DISCUSS" class="menuitem">会談</div></a>
+				<a href="CONCEPT_DIPLOMACY_DENOUNCE.aspx"><div id="CONCEPT_DIPLOMACY_DENOUNCE" class="menuitem">非難声明</div></a>
+				<a href="CONCEPT_DIPLOMACY_EXIT.aspx"><div id="CONCEPT_DIPLOMACY_EXIT" class="menuitem">また後ほど</div></a>
+				<a href="CONCEPT_DIPLOMACY_TRADE_SCREEN.aspx"><div id="CONCEPT_DIPLOMACY_TRADE_SCREEN" class="menuitem">取引画面</div></a>
+				<a href="CONCEPT_DIPLOMACY_FAVORS.aspx"><div id="CONCEPT_DIPLOMACY_FAVORS" class="menuitem">恩義</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPEN_BORDERS.aspx"><div id="CONCEPT_DIPLOMACY_OPEN_BORDERS" class="menuitem">国境開放条約</div></a>
+				<a href="CONCEPT_DIPLOMACY_STATES.aspx"><div id="CONCEPT_DIPLOMACY_STATES" class="menuitem">外交関係</div></a>
+				<a href="CONCEPT_DIPLOMACY_FRIENDSHIP.aspx"><div id="CONCEPT_DIPLOMACY_FRIENDSHIP" class="menuitem">提携協定</div></a>
+				<a href="CONCEPT_DIPLOMACY_ALLIANCE.aspx"><div id="CONCEPT_DIPLOMACY_ALLIANCE" class="menuitem">同盟</div></a>
+				<a href="CONCEPT_DIPLOMACY_STATES-OTHER.aspx"><div id="CONCEPT_DIPLOMACY_STATES-OTHER" class="menuitem">非排他的外交関係</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION.aspx"><div id="CONCEPT_DIPLOMACY_OPINION" class="menuitem">意見</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_AFFINITY.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_AFFINITY" class="menuitem">アフィニティー連帯</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_GIFT.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_GIFT" class="menuitem">贈り物を渡す</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_PROMISE.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_PROMISE" class="menuitem">約束をする</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_ALIENS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_ALIENS" class="menuitem">エイリアンへの一般的なアプローチ</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_LIBERATE.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_LIBERATE" class="menuitem">解放</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_RELATIONS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_RELATIONS" class="menuitem">関係の改善または悪化</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_DEMANDS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_DEMANDS" class="menuitem">要求また要求を拒否する</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_EXPEDITIONS.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_EXPEDITIONS" class="menuitem">発掘行動</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_AGGRESSIVE.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_AGGRESSIVE" class="menuitem">敵対的行動</div></a>
+				<a href="CONCEPT_DIPLOMACY_OPINION_WARMONGER.aspx"><div id="CONCEPT_DIPLOMACY_OPINION_WARMONGER" class="menuitem">戦争挑発行為</div></a>
+				<a href="CONCEPT_DIPLOMACY_TRADE_CITIES.aspx"><div id="CONCEPT_DIPLOMACY_TRADE_CITIES" class="menuitem">都市の取引</div></a>
+				<a href="CONCEPT_DIPLOMACY_OTHER_PLAYERS.aspx"><div id="CONCEPT_DIPLOMACY_OTHER_PLAYERS" class="menuitem">他プレイヤー</div></a>
+				<a href="CONCEPT_DIPLOMACY_RESOURCES.aspx"><div id="CONCEPT_DIPLOMACY_RESOURCES" class="menuitem">資源と外交</div></a>
+				<a href="CONCEPT_DIPLOMACY_DECLARING_WAR.aspx"><div id="CONCEPT_DIPLOMACY_DECLARING_WAR" class="menuitem">宣戦布告</div></a>
+				<a href="CONCEPT_DIPLOMACY_NEGOTIATE_PEACE.aspx"><div id="CONCEPT_DIPLOMACY_NEGOTIATE_PEACE" class="menuitem">和平交渉を行う</div></a>
+			</div></div>
+			<div id="GROUP_11" class="menugroupcontainer"><a href="javascript:togglediv('11_CONTENT');"><div id="11" class="menugroup">健康</div></a><div id="11_CONTENT">
+				<a href="CONCEPT_HEALTH.aspx"><div id="CONCEPT_HEALTH" class="menuitem">健康</div></a>
+				<a href="CONCEPT_HEALTH_STARTING.aspx"><div id="CONCEPT_HEALTH_STARTING" class="menuitem">初期健康度</div></a>
+				<a href="CONCEPT_HEALTH_CAUSES_UNHEALTH.aspx"><div id="CONCEPT_HEALTH_CAUSES_UNHEALTH" class="menuitem">不健康度を高めるもの</div></a>
+				<a href="CONCEPT_HEALTH_CAUSES_HEALTH.aspx"><div id="CONCEPT_HEALTH_CAUSES_HEALTH" class="menuitem">健康度を改善するもの</div></a>
+				<a href="CONCEPT_HEALTH_HEALTH_LEVELS.aspx"><div id="CONCEPT_HEALTH_HEALTH_LEVELS" class="menuitem">健康度のレベル</div></a>
+				<a href="CONCEPT_HEALTH_UNHAHPPY.aspx"><div id="CONCEPT_HEALTH_UNHAHPPY" class="menuitem">不健康度</div></a>
+				<a href="CONCEPT_HEALTH_VERY_UNHEALTHY.aspx"><div id="CONCEPT_HEALTH_VERY_UNHEALTHY" class="menuitem">極めて不健康</div></a>
+				<a href="CONCEPT_HEALTH_REVOLT.aspx"><div id="CONCEPT_HEALTH_REVOLT" class="menuitem">反乱及び健康</div></a>
+			</div></div>
+			<div id="GROUP_12" class="menugroupcontainer"><a href="javascript:togglediv('12_CONTENT');"><div id="12" class="menugroup">戦場の霧</div></a><div id="12_CONTENT">
+				<a href="CONCEPT_FOG_OF_WAR.aspx"><div id="CONCEPT_FOG_OF_WAR" class="menuitem">戦場の霧</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_THREE_STATES.aspx"><div id="CONCEPT_FOG_OF_WAR_THREE_STATES" class="menuitem">視界の3つの状態</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_STATE_VISIBLE.aspx"><div id="CONCEPT_FOG_OF_WAR_STATE_VISIBLE" class="menuitem">可視</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_STATE_REVEALED.aspx"><div id="CONCEPT_FOG_OF_WAR_STATE_REVEALED" class="menuitem">探索済み</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_STATE_FOG_OF_WAR.aspx"><div id="CONCEPT_FOG_OF_WAR_STATE_FOG_OF_WAR" class="menuitem">戦場の霧に隠れたタイル</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_SEEN.aspx"><div id="CONCEPT_FOG_OF_WAR_SEEN" class="menuitem">視界について</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_OBSCURING_TERRAIN.aspx"><div id="CONCEPT_FOG_OF_WAR_OBSCURING_TERRAIN" class="menuitem">遮断地形</div></a>
+				<a href="CONCEPT_FOG_OF_WAR_INDIRECT_FIRE.aspx"><div id="CONCEPT_FOG_OF_WAR_INDIRECT_FIRE" class="menuitem">間接射撃</div></a>
+			</div></div>
+			<div id="GROUP_13" class="menugroupcontainer"><a href="javascript:togglediv('13_CONTENT');"><div id="13" class="menugroup">美徳</div></a><div id="13_CONTENT">
+				<a href="CONCEPT_SOCIAL_POLICY.aspx"><div id="CONCEPT_SOCIAL_POLICY" class="menuitem">美徳</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_GAINING.aspx"><div id="CONCEPT_SOCIAL_POLICY_GAINING" class="menuitem">美徳の獲得</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_UNLOCKING.aspx"><div id="CONCEPT_SOCIAL_POLICY_UNLOCKING" class="menuitem">美徳の選択</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_INCREASE.aspx"><div id="CONCEPT_SOCIAL_POLICY_INCREASE" class="menuitem">コストの上昇</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_KICKERS.aspx"><div id="CONCEPT_SOCIAL_POLICY_KICKERS" class="menuitem">相乗ボーナス</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCHES.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCHES" class="menuitem">美徳カテゴリー</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_MIGHT.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_MIGHT" class="menuitem">力</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_PROSPERITY.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_PROSPERITY" class="menuitem">繁栄</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_KNOWLEDGE.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_KNOWLEDGE" class="menuitem">知識</div></a>
+				<a href="CONCEPT_SOCIAL_POLICY_BRANCH_INDUSTRY.aspx"><div id="CONCEPT_SOCIAL_POLICY_BRANCH_INDUSTRY" class="menuitem">産業</div></a>
+			</div></div>
+			<div id="GROUP_14" class="menugroupcontainer"><a href="javascript:togglediv('14_CONTENT');"><div id="14" class="menugroup">エネルギーと経済</div></a><div id="14_CONTENT">
+				<a href="CONCEPT_ENERGY.aspx"><div id="CONCEPT_ENERGY" class="menuitem">エネルギー</div></a>
+				<a href="CONCEPT_ENERGY_WHERE_TO_GET.aspx"><div id="CONCEPT_ENERGY_WHERE_TO_GET" class="menuitem">エネルギー産出</div></a>
+				<a href="CONCEPT_ENERGY_TERRAIN.aspx"><div id="CONCEPT_ENERGY_TERRAIN" class="menuitem">地形とエネルギー</div></a>
+				<a href="CONCEPT_ENERGY_RESOURCES.aspx"><div id="CONCEPT_ENERGY_RESOURCES" class="menuitem">資源</div></a>
+				<a href="CONCEPT_ENERGY_GENERATOR.aspx"><div id="CONCEPT_ENERGY_GENERATOR" class="menuitem">発電機</div></a>
+				<a href="CONCEPT_ENERGY_IMPROVEMENTS.aspx"><div id="CONCEPT_ENERGY_IMPROVEMENTS" class="menuitem">資源活用施設</div></a>
+				<a href="CONCEPT_ENERGY_BUILDINGS.aspx"><div id="CONCEPT_ENERGY_BUILDINGS" class="menuitem">建造物</div></a>
+				<a href="CONCEPT_ENERGY_WONDERS.aspx"><div id="CONCEPT_ENERGY_WONDERS" class="menuitem">遺産</div></a>
+				<a href="CONCEPT_ENERGY_TRADE_ROUTES.aspx"><div id="CONCEPT_ENERGY_TRADE_ROUTES" class="menuitem">都市接続</div></a>
+				<a href="CONCEPT_ENERGY_TRADE_ROUTES_BLOCKADE.aspx"><div id="CONCEPT_ENERGY_TRADE_ROUTES_BLOCKADE" class="menuitem">封鎖</div></a>
+				<a href="CONCEPT_ENERGY_BARBARIAN_CAMPS.aspx"><div id="CONCEPT_ENERGY_BARBARIAN_CAMPS" class="menuitem">エイリアンの巣の除去</div></a>
+				<a href="CONCEPT_ENERGY_ANCIENT_RUINS.aspx"><div id="CONCEPT_ENERGY_ANCIENT_RUINS" class="menuitem">アーティファクトと資源ポッド</div></a>
+				<a href="CONCEPT_ENERGY_PILLAGE_IMPROVEMENTS.aspx"><div id="CONCEPT_ENERGY_PILLAGE_IMPROVEMENTS" class="menuitem">敵の資源活用施設を略奪</div></a>
+				<a href="CONCEPT_ENERGY_CITY_CAPTURE.aspx"><div id="CONCEPT_ENERGY_CITY_CAPTURE" class="menuitem">都市、前哨地、ステーションの占領</div></a>
+				<a href="CONCEPT_ENERGY_DIPLOMACY.aspx"><div id="CONCEPT_ENERGY_DIPLOMACY" class="menuitem">エネルギー取引</div></a>
+				<a href="CONCEPT_ENERGY_SPENDING.aspx"><div id="CONCEPT_ENERGY_SPENDING" class="menuitem">エネルギーを使う</div></a>
+				<a href="CONCEPT_ENERGY_UNIT_BUILDING_MAINTENANCE.aspx"><div id="CONCEPT_ENERGY_UNIT_BUILDING_MAINTENANCE" class="menuitem">ユニットと建造物の維持費</div></a>
+				<a href="CONCEPT_ENERGY_ROAD_MAINTENANCE.aspx"><div id="CONCEPT_ENERGY_ROAD_MAINTENANCE" class="menuitem">道路とマグレールの維持費</div></a>
+				<a href="CONCEPT_ENERGY_STATION.aspx"><div id="CONCEPT_ENERGY_STATION" class="menuitem">ステーション費用</div></a>
+				<a href="CONCEPT_ENERGY_BEACON.aspx"><div id="CONCEPT_ENERGY_BEACON" class="menuitem">「シグナル」ビーコンの起動</div></a>
+				<a href="CONCEPT_ENERGY_PURCHASE_TILES.aspx"><div id="CONCEPT_ENERGY_PURCHASE_TILES" class="menuitem">タイル購入</div></a>
+				<a href="CONCEPT_ENERGY_PURCHASE_UNITS_BUILDINGS_WONDERS.aspx"><div id="CONCEPT_ENERGY_PURCHASE_UNITS_BUILDINGS_WONDERS" class="menuitem">ユニットや建造物の購入</div></a>
+				<a href="CONCEPT_ENERGY_SPENDING_ON_DIPLOMACY.aspx"><div id="CONCEPT_ENERGY_SPENDING_ON_DIPLOMACY" class="menuitem">外交とエネルギー</div></a>
+				<a href="CONCEPT_ENERGY_CITY_CAPTURED_BY_CIV.aspx"><div id="CONCEPT_ENERGY_CITY_CAPTURED_BY_CIV" class="menuitem">都市を失う</div></a>
+				<a href="CONCEPT_ENERGY_RUNNING_DEFICIT.aspx"><div id="CONCEPT_ENERGY_RUNNING_DEFICIT" class="menuitem">エネルギーの枯渇</div></a>
+			</div></div>
+			<div id="GROUP_15" class="menugroupcontainer"><a href="javascript:togglediv('15_CONTENT');"><div id="15" class="menugroup">エクスプローラーとアーティファクト</div></a><div id="15_CONTENT">
+				<a href="CONCEPT_EXPLORERS.aspx"><div id="CONCEPT_EXPLORERS" class="menuitem">エクスプローラーとアーティファクト</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_ARTIFACTS.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_ARTIFACTS" class="menuitem">アーティファクトの種類</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_SKELETON.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_SKELETON" class="menuitem">エイリアンの骸骨</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_RUINS.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_RUINS" class="menuitem">先人の遺跡</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_SAT.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_SAT" class="menuitem">墜落した衛星</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_DERELICT.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_DERELICT" class="menuitem">放棄された入植地</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_EXPEDITION.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_EXPEDITION" class="menuitem">発掘</div></a>
+				<a href="CONCEPT_CULTURE_EXPLORERS_EXPEDITION_OPINION.aspx"><div id="CONCEPT_CULTURE_EXPLORERS_EXPEDITION_OPINION" class="menuitem">発掘行動</div></a>
+			</div></div>
+			<div id="GROUP_16" class="menugroupcontainer"><a href="javascript:togglediv('16_CONTENT');"><div id="16" class="menugroup">資源ポッドとエイリアン</div></a><div id="16_CONTENT">
+				<a href="CONCEPT_BARBARIANS_AND_ANCIENT_RUINS.aspx"><div id="CONCEPT_BARBARIANS_AND_ANCIENT_RUINS" class="menuitem">資源ポッドとエイリアン</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS.aspx"><div id="CONCEPT_ANCIENT_RUINS" class="menuitem">資源ポッド</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS" class="menuitem">資源ポッドの恩恵</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS_FREE_TECHNOLOGY.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS_FREE_TECHNOLOGY" class="menuitem">研究</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS_TREASURE.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS_TREASURE" class="menuitem">エネルギー</div></a>
+				<a href="CONCEPT_ANCIENT_RUINS_BENEFITS_CULTURE.aspx"><div id="CONCEPT_ANCIENT_RUINS_BENEFITS_CULTURE" class="menuitem">資源ポッドがもたらす文化力</div></a>
+				<a href="CONCEPT_BARBARIANS.aspx"><div id="CONCEPT_BARBARIANS" class="menuitem">エイリアン</div></a>
+				<a href="CONCEPT_BARBARIANS_ENCAMPMENTS.aspx"><div id="CONCEPT_BARBARIANS_ENCAMPMENTS" class="menuitem">エイリアンの巣</div></a>
+				<a href="CONCEPT_BARBARIANS_ENCAMPMENTS_DESTROYING.aspx"><div id="CONCEPT_BARBARIANS_ENCAMPMENTS_DESTROYING" class="menuitem">巣を破壊する</div></a>
+				<a href="CONCEPT_BARBARIANS_ENCAMPMENTS_NEW.aspx"><div id="CONCEPT_BARBARIANS_ENCAMPMENTS_NEW" class="menuitem">新たなエイリアンの巣</div></a>
+				<a href="CONCEPT_BARBARIANS_UNITS.aspx"><div id="CONCEPT_BARBARIANS_UNITS" class="menuitem">エイリアンユニット</div></a>
+				<a href="CONCEPT_BARBARIANS_UNITS_NAVAL.aspx"><div id="CONCEPT_BARBARIANS_UNITS_NAVAL" class="menuitem">エイリアンの海軍ユニット</div></a>
+				<a href="CONCEPT_BARBARIANS_EXPERIENCE_POINT_LIMITS.aspx"><div id="CONCEPT_BARBARIANS_EXPERIENCE_POINT_LIMITS" class="menuitem">経験値の制限</div></a>
+			</div></div>
+			<div id="GROUP_17" class="menugroupcontainer"><a href="javascript:togglediv('17_CONTENT');"><div id="17" class="menugroup">ユニット</div></a><div id="17_CONTENT">
+				<a href="CONCEPT_UNITS.aspx"><div id="CONCEPT_UNITS" class="menuitem">ユニット</div></a>
+				<a href="CONCEPT_UNITS_CONSTRUCTING.aspx"><div id="CONCEPT_UNITS_CONSTRUCTING" class="menuitem">ユニットの生産</div></a>
+				<a href="CONCEPT_UNITS_SUPPLY.aspx"><div id="CONCEPT_UNITS_SUPPLY" class="menuitem">ユニット供給量</div></a>
+				<a href="CONCEPT_UNITS_CHARACTERISTICS.aspx"><div id="CONCEPT_UNITS_CHARACTERISTICS" class="menuitem">ユニット特性</div></a>
+				<a href="CONCEPT_UNITS_MOVEMENT_SPEED.aspx"><div id="CONCEPT_UNITS_MOVEMENT_SPEED" class="menuitem">移動速度</div></a>
+				<a href="CONCEPT_UNITS_COMBAT_STRENGTH.aspx"><div id="CONCEPT_UNITS_COMBAT_STRENGTH" class="menuitem">戦闘力</div></a>
+				<a href="CONCEPT_UNITS_SPECIAL_ABILITIES.aspx"><div id="CONCEPT_UNITS_SPECIAL_ABILITIES" class="menuitem">ユニットの特殊能力</div></a>
+				<a href="CONCEPT_UNITS_MOVEMENT.aspx"><div id="CONCEPT_UNITS_MOVEMENT" class="menuitem">ユニットの移動</div></a>
+				<a href="CONCEPT_UNITS_COMBAT.aspx"><div id="CONCEPT_UNITS_COMBAT" class="menuitem">ユニットの戦闘</div></a>
+				<a href="CONCEPT_UNITS_NON_COMBAT_UNITS.aspx"><div id="CONCEPT_UNITS_NON_COMBAT_UNITS" class="menuitem">非戦闘ユニット</div></a>
+				<a href="CONCEPT_UNITS_COMBAT_UNITS.aspx"><div id="CONCEPT_UNITS_COMBAT_UNITS" class="menuitem">戦闘ユニット</div></a>
+				<a href="CONCEPT_UNITS_MELEE_UNITS.aspx"><div id="CONCEPT_UNITS_MELEE_UNITS" class="menuitem">近接攻撃ユニット</div></a>
+				<a href="CONCEPT_UNITS_RANGED_UNITS.aspx"><div id="CONCEPT_UNITS_RANGED_UNITS" class="menuitem">遠隔攻撃ユニット</div></a>
+				<a href="CONCEPT_UNITS_NAVAL_UNITS.aspx"><div id="CONCEPT_UNITS_NAVAL_UNITS" class="menuitem">海上ユニット</div></a>
+				<a href="CONCEPT_UNITS_HOVER_UNITS.aspx"><div id="CONCEPT_UNITS_HOVER_UNITS" class="menuitem">ホバーユニット</div></a>
+				<a href="CONCEPT_UNITS_AIR_UNITS.aspx"><div id="CONCEPT_UNITS_AIR_UNITS" class="menuitem">航空ユニット</div></a>
+				<a href="CONCEPT_UNIT_UPGRADE.aspx"><div id="CONCEPT_UNIT_UPGRADE" class="menuitem">ユニットアップグレード</div></a>
+				<a href="CONCEPT_UNIT_VETERANCY.aspx"><div id="CONCEPT_UNIT_VETERANCY" class="menuitem">レベルアップ</div></a>
+				<a href="CONCEPT_UNIT_TECHNOLOGY.aspx"><div id="CONCEPT_UNIT_TECHNOLOGY" class="menuitem">ユニットとテクノロジー</div></a>
+			</div></div>
+			<div id="GROUP_18" class="menugroupcontainer"><a href="javascript:togglediv('18_CONTENT');"><div id="18" class="menugroup">ユニット移動</div></a><div id="18_CONTENT">
+				<a href="CONCEPT_MOVEMENT.aspx"><div id="CONCEPT_MOVEMENT" class="menuitem">移動</div></a>
+				<a href="CONCEPT_MOVEMENT_HOW_TO_ORDER.aspx"><div id="CONCEPT_MOVEMENT_HOW_TO_ORDER" class="menuitem">移動命令の出し方</div></a>
+				<a href="CONCEPT_MOVEMENT_RIGHT_CLICK.aspx"><div id="CONCEPT_MOVEMENT_RIGHT_CLICK" class="menuitem">右クリック</div></a>
+				<a href="CONCEPT_MOVEMENT_MOVE_MODE.aspx"><div id="CONCEPT_MOVEMENT_MOVE_MODE" class="menuitem">移動モード</div></a>
+				<a href="CONCEPT_MOVEMENT_LEGAL_MOVES.aspx"><div id="CONCEPT_MOVEMENT_LEGAL_MOVES" class="menuitem">可能な移動と不可能な移動</div></a>
+				<a href="CONCEPT_MOVEMENT_ILLEGAL_MOVES.aspx"><div id="CONCEPT_MOVEMENT_ILLEGAL_MOVES" class="menuitem">実行できない移動</div></a>
+				<a href="CONCEPT_MOVEMENT_MULTIPLE_TURN_MOVES.aspx"><div id="CONCEPT_MOVEMENT_MULTIPLE_TURN_MOVES" class="menuitem">複数ターンに跨る移動</div></a>
+				<a href="CONCEPT_MOVEMENT_MOVEMENT_POINTS.aspx"><div id="CONCEPT_MOVEMENT_MOVEMENT_POINTS" class="menuitem">移動ポイント</div></a>
+				<a href="CONCEPT_MOVEMENT_EXPENDING_MOVEMENT_POINTS.aspx"><div id="CONCEPT_MOVEMENT_EXPENDING_MOVEMENT_POINTS" class="menuitem">移動ポイントの消費</div></a>
+				<a href="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS.aspx"><div id="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS" class="menuitem">道路とマグレール</div></a>
+				<a href="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS_AND_RIVERS.aspx"><div id="CONCEPT_MOVEMENT_ROADS_AND_MAGRAILS_AND_RIVERS" class="menuitem">河川と道路/マグレール</div></a>
+				<a href="CONCEPT_MOVEMENT_STACKING_LIMITS.aspx"><div id="CONCEPT_MOVEMENT_STACKING_LIMITS" class="menuitem">スタック制限</div></a>
+				<a href="CONCEPT_MOVEMENT_COMBAT.aspx"><div id="CONCEPT_MOVEMENT_COMBAT" class="menuitem">移動中の戦闘</div></a>
+				<a href="CONCEPT_MOVEMENT_COMBAT_ATTACK_ORDERS.aspx"><div id="CONCEPT_MOVEMENT_COMBAT_ATTACK_ORDERS" class="menuitem">攻撃命令</div></a>
+				<a href="CONCEPT_MOVEMENT_COMBAT_ZONES_OF_CONTROL.aspx"><div id="CONCEPT_MOVEMENT_COMBAT_ZONES_OF_CONTROL" class="menuitem">支配領域</div></a>
+				<a href="CONCEPT_MOVEMENT_NAVAL.aspx"><div id="CONCEPT_MOVEMENT_NAVAL" class="menuitem">外洋上の移動</div></a>
+				<a href="CONCEPT_MOVEMENT_EMBARKING.aspx"><div id="CONCEPT_MOVEMENT_EMBARKING" class="menuitem">陸上ユニットの出航</div></a>
+				<a href="CONCEPT_MOVEMENT_HOVER.aspx"><div id="CONCEPT_MOVEMENT_HOVER" class="menuitem">ホバー移動</div></a>
+				<a href="CONCEPT_MOVEMENT_AIR.aspx"><div id="CONCEPT_MOVEMENT_AIR" class="menuitem">航空ユニットの移動</div></a>
+			</div></div>
+			<div id="GROUP_19" class="menugroupcontainer"><a href="javascript:togglediv('19_CONTENT');"><div id="19" class="menugroup">空中戦闘のルール</div></a><div id="19_CONTENT">
+				<a href="CONCEPT_AIR_POWER.aspx"><div id="CONCEPT_AIR_POWER" class="menuitem">空軍力</div></a>
+				<a href="CONCEPT_AIR_POWER_AIR_UNITS.aspx"><div id="CONCEPT_AIR_POWER_AIR_UNITS" class="menuitem">航空ユニット</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES.aspx"><div id="CONCEPT_AIR_POWER_BASES" class="menuitem">空軍基地</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_LOCATION.aspx"><div id="CONCEPT_AIR_POWER_BASES_LOCATION" class="menuitem">基地の場所</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_FIGHTERS.aspx"><div id="CONCEPT_AIR_POWER_BASES_FIGHTERS" class="menuitem">戦闘機</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT.aspx"><div id="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT" class="menuitem">海上ユニット積載量</div></a>
+				<a href="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT_CARRIER.aspx"><div id="CONCEPT_AIR_POWER_BASES_NAVAL_UNIT_CARRIER" class="menuitem">航空母艦</div></a>
+				<a href="CONCEPT_AIR_POWER_STACKING.aspx"><div id="CONCEPT_AIR_POWER_STACKING" class="menuitem">航空ユニットのスタック</div></a>
+				<a href="CONCEPT_AIR_POWER_RANGE.aspx"><div id="CONCEPT_AIR_POWER_RANGE" class="menuitem">航空ユニットの行動範囲</div></a>
+				<a href="CONCEPT_AIR_POWER_MISSIONS.aspx"><div id="CONCEPT_AIR_POWER_MISSIONS" class="menuitem">ミッション</div></a>
+				<a href="CONCEPT_AIR_POWER_REBASE.aspx"><div id="CONCEPT_AIR_POWER_REBASE" class="menuitem">基地変更</div></a>
+				<a href="CONCEPT_AIR_POWER_AIR_STRIKE.aspx"><div id="CONCEPT_AIR_POWER_AIR_STRIKE" class="menuitem">空爆</div></a>
+				<a href="CONCEPT_AIR_POWER_AIR_SWEEP.aspx"><div id="CONCEPT_AIR_POWER_AIR_SWEEP" class="menuitem">掃射</div></a>
+				<a href="CONCEPT_AIR_POWER_INTERCEPTION.aspx"><div id="CONCEPT_AIR_POWER_INTERCEPTION" class="menuitem">迎撃</div></a>
+			</div></div>
+			<div id="GROUP_20" class="menugroupcontainer"><a href="javascript:togglediv('20_CONTENT');"><div id="20" class="menugroup">諜報活動</div></a><div id="20_CONTENT">
+				<a href="CONCEPT_COVERT.aspx"><div id="CONCEPT_COVERT" class="menuitem">諜報活動</div></a>
+				<a href="CONCEPT_COVERT_AGENTS.aspx"><div id="CONCEPT_COVERT_AGENTS" class="menuitem">諜報員</div></a>
+				<a href="CONCEPT_COVERT_CULPER_LODGE.aspx"><div id="CONCEPT_COVERT_CULPER_LODGE" class="menuitem">カルパーロッジ</div></a>
+				<a href="CONCEPT_COVERT_RECRUITING.aspx"><div id="CONCEPT_COVERT_RECRUITING" class="menuitem">諜報員の採用</div></a>
+				<a href="CONCEPT_COVERT_ASSIGNING.aspx"><div id="CONCEPT_COVERT_ASSIGNING" class="menuitem">諜報員の配属</div></a>
+				<a href="CONCEPT_COVERT_COUNTER.aspx"><div id="CONCEPT_COVERT_COUNTER" class="menuitem">防諜活動</div></a>
+				<a href="CONCEPT_COVERT_OPERATIONS.aspx"><div id="CONCEPT_COVERT_OPERATIONS" class="menuitem">諜報活動</div></a>
+				<a href="CONCEPT_COVERT_DIFFICULTY.aspx"><div id="CONCEPT_COVERT_DIFFICULTY" class="menuitem">難易度</div></a>
+				<a href="CONCEPT_COVERT_OUTCOME.aspx"><div id="CONCEPT_COVERT_OUTCOME" class="menuitem">成果</div></a>
+				<a href="CONCEPT_COVERT_MISSIONS.aspx"><div id="CONCEPT_COVERT_MISSIONS" class="menuitem">ミッション</div></a>
+				<a href="CONCEPT_COVERT_RANK.aspx"><div id="CONCEPT_COVERT_RANK" class="menuitem">諜報員ランク</div></a>
+				<a href="CONCEPT_COVERT_KILLED.aspx"><div id="CONCEPT_COVERT_KILLED" class="menuitem">作戦中の死亡</div></a>
+				<a href="CONCEPT_COVERT_INTRIGUE.aspx"><div id="CONCEPT_COVERT_INTRIGUE" class="menuitem">都市陰謀レベル</div></a>
+				<a href="CONCEPT_COVERT_INTRIGUE_ADJUST.aspx"><div id="CONCEPT_COVERT_INTRIGUE_ADJUST" class="menuitem">陰謀レベルの調整</div></a>
+				<a href="CONCEPT_COVERT_MONITOR.aspx"><div id="CONCEPT_COVERT_MONITOR" class="menuitem">諜報員の確認</div></a>
+				<a href="CONCEPT_COVERT_REPORT.aspx"><div id="CONCEPT_COVERT_REPORT" class="menuitem">諜報レポート</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS.aspx"><div id="CONCEPT_COVERT_PROJECTS" class="menuitem">国家安全保障プロジェクト</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_HOMELAND_SECURITY.aspx"><div id="CONCEPT_COVERT_PROJECTS_HOMELAND_SECURITY" class="menuitem">自国防衛</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_RESEARCH_DEVELOPMENT.aspx"><div id="CONCEPT_COVERT_PROJECTS_RESEARCH_DEVELOPMENT" class="menuitem">研究開発</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_PROPAGANDA.aspx"><div id="CONCEPT_COVERT_PROJECTS_PROPAGANDA" class="menuitem">プロパガンダ</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_SUPPORT.aspx"><div id="CONCEPT_COVERT_PROJECTS_SUPPORT" class="menuitem">支援作戦</div></a>
+				<a href="CONCEPT_COVERT_PROJECTS_RECON.aspx"><div id="CONCEPT_COVERT_PROJECTS_RECON" class="menuitem">偵察作戦</div></a>
+			</div></div>
+			<div id="GROUP_21" class="menugroupcontainer"><a href="javascript:togglediv('21_CONTENT');"><div id="21" class="menugroup">交易</div></a><div id="21_CONTENT">
+				<a href="CONCEPT_TRADE.aspx"><div id="CONCEPT_TRADE" class="menuitem">交易</div></a>
+				<a href="CONCEPT_TRADE_ROUTES.aspx"><div id="CONCEPT_TRADE_ROUTES" class="menuitem">交易路</div></a>
+				<a href="CONCEPT_TRADE_CARAVAN.aspx"><div id="CONCEPT_TRADE_CARAVAN" class="menuitem">交易団および交易船</div></a>
+				<a href="CONCEPT_TRADE_WAR.aspx"><div id="CONCEPT_TRADE_WAR" class="menuitem">戦争と略奪</div></a>
+				<a href="CONCEPT_TRADE_INTERNAL.aspx"><div id="CONCEPT_TRADE_INTERNAL" class="menuitem">コロニー内交易路</div></a>
+				<a href="CONCEPT_TRADE_DURATION.aspx"><div id="CONCEPT_TRADE_DURATION" class="menuitem">存続時間</div></a>
+				<a href="CONCEPT_TRADE_ESTABLISH.aspx"><div id="CONCEPT_TRADE_ESTABLISH" class="menuitem">交易路の設立</div></a>
+				<a href="CONCEPT_TRADE_STATIONS.aspx"><div id="CONCEPT_TRADE_STATIONS" class="menuitem">ステーションとの交易</div></a>
+				<a href="CONCEPT_TRADE_OVERVIEW.aspx"><div id="CONCEPT_TRADE_OVERVIEW" class="menuitem">交易概要</div></a>
+			</div></div>
+			<div id="GROUP_22" class="menugroupcontainer"><a href="javascript:togglediv('22_CONTENT');"><div id="22" class="menugroup">クエスト</div></a><div id="22_CONTENT">
+				<a href="CONCEPT_QUESTS.aspx"><div id="CONCEPT_QUESTS" class="menuitem">クエスト</div></a>
+				<a href="CONCEPT_QUESTS_FUNCTION.aspx"><div id="CONCEPT_QUESTS_FUNCTION" class="menuitem">役割</div></a>
+				<a href="CONCEPT_QUESTS_NARRATIVE.aspx"><div id="CONCEPT_QUESTS_NARRATIVE" class="menuitem">ストーリー</div></a>
+				<a href="CONCEPT_QUESTS_CHOICES.aspx"><div id="CONCEPT_QUESTS_CHOICES" class="menuitem">選択</div></a>
+				<a href="CONCEPT_QUESTS_CATEGORIES.aspx"><div id="CONCEPT_QUESTS_CATEGORIES" class="menuitem">クエストカテゴリー</div></a>
+				<a href="CONCEPT_QUESTS_SURVIVAL.aspx"><div id="CONCEPT_QUESTS_SURVIVAL" class="menuitem">生存</div></a>
+				<a href="CONCEPT_QUESTS_GROWTH.aspx"><div id="CONCEPT_QUESTS_GROWTH" class="menuitem">発展</div></a>
+				<a href="CONCEPT_QUESTS_TRADE.aspx"><div id="CONCEPT_QUESTS_TRADE" class="menuitem">交易</div></a>
+				<a href="CONCEPT_QUESTS_DIPLOMACY.aspx"><div id="CONCEPT_QUESTS_DIPLOMACY" class="menuitem">外交</div></a>
+				<a href="CONCEPT_QUESTS_MILITARY.aspx"><div id="CONCEPT_QUESTS_MILITARY" class="menuitem">軍事</div></a>
+				<a href="CONCEPT_QUESTS_COVERT.aspx"><div id="CONCEPT_QUESTS_COVERT" class="menuitem">諜報活動</div></a>
+				<a href="CONCEPT_QUESTS_EXPLORATION.aspx"><div id="CONCEPT_QUESTS_EXPLORATION" class="menuitem">探索</div></a>
+				<a href="CONCEPT_QUESTS_VICTORY.aspx"><div id="CONCEPT_QUESTS_VICTORY" class="menuitem">勝利</div></a>
+				<a href="CONCEPT_QUESTS_CUSTOM.aspx"><div id="CONCEPT_QUESTS_CUSTOM" class="menuitem">カスタム</div></a>
+				<a href="CONCEPT_QUESTS_AFFINITY.aspx"><div id="CONCEPT_QUESTS_AFFINITY" class="menuitem">アフィニティー</div></a>
+				<a href="CONCEPT_QUESTS_AFFINITY_INVEST.aspx"><div id="CONCEPT_QUESTS_AFFINITY_INVEST" class="menuitem">アフィニティー注力</div></a>
+			</div></div>
+			<div id="GROUP_23" class="menugroupcontainer"><a href="javascript:togglediv('23_CONTENT');"><div id="23" class="menugroup">ステーション</div></a><div id="23_CONTENT">
+				<a href="CONCEPT_STATIONS.aspx"><div id="CONCEPT_STATIONS" class="menuitem">ステーション</div></a>
+				<a href="CONCEPT_STATIONS_APPEAR.aspx"><div id="CONCEPT_STATIONS_APPEAR" class="menuitem">ステーションの発生</div></a>
+				<a href="CONCEPT_STATIONS_REWARDS.aspx"><div id="CONCEPT_STATIONS_REWARDS" class="menuitem">ステーション報酬</div></a>
+				<a href="CONCEPT_STATIONS_TYPES.aspx"><div id="CONCEPT_STATIONS_TYPES" class="menuitem">ステーションの種類</div></a>
+				<a href="CONCEPT_STATIONS_TIERS.aspx"><div id="CONCEPT_STATIONS_TIERS" class="menuitem">ステーションのティア</div></a>
+				<a href="CONCEPT_STATIONS_WITHDRAW.aspx"><div id="CONCEPT_STATIONS_WITHDRAW" class="menuitem">ステーション撤退</div></a>
+				<a href="CONCEPT_STATIONS_COMBAT.aspx"><div id="CONCEPT_STATIONS_COMBAT" class="menuitem">ステーション戦闘</div></a>
+				<a href="CONCEPT_STATIONS_ATTACK.aspx"><div id="CONCEPT_STATIONS_ATTACK" class="menuitem">ステーションの攻撃</div></a>
+			</div></div>
+			<div id="GROUP_24" class="menugroupcontainer"><a href="javascript:togglediv('24_CONTENT');"><div id="24" class="menugroup">軌道</div></a><div id="24_CONTENT">
+				<a href="CONCEPT_ORBITAL.aspx"><div id="CONCEPT_ORBITAL" class="menuitem">軌道</div></a>
+				<a href="CONCEPT_ORBITAL_LAYER.aspx"><div id="CONCEPT_ORBITAL_LAYER" class="menuitem">軌道レイヤー</div></a>
+				<a href="CONCEPT_ORBITAL_UNIT.aspx"><div id="CONCEPT_ORBITAL_UNIT" class="menuitem">軌道ユニット</div></a>
+				<a href="CONCEPT_ORBITAL_CONSTRUCTION.aspx"><div id="CONCEPT_ORBITAL_CONSTRUCTION" class="menuitem">建造</div></a>
+				<a href="CONCEPT_ORBITAL_LAUNCH.aspx"><div id="CONCEPT_ORBITAL_LAUNCH" class="menuitem">打ち上げと配置</div></a>
+				<a href="CONCEPT_ORBITAL_SKIRT.aspx"><div id="CONCEPT_ORBITAL_SKIRT" class="menuitem">効果範囲</div></a>
+				<a href="CONCEPT_ORBITAL_ARRAY.aspx"><div id="CONCEPT_ORBITAL_ARRAY" class="menuitem">アレイ資源活用施設</div></a>
+				<a href="CONCEPT_ORBITAL_MOVEMENT.aspx"><div id="CONCEPT_ORBITAL_MOVEMENT" class="menuitem">移動</div></a>
+				<a href="CONCEPT_ORBITAL_COMBAT.aspx"><div id="CONCEPT_ORBITAL_COMBAT" class="menuitem">戦闘</div></a>
+				<a href="CONCEPT_ORBITAL_DEORBIT.aspx"><div id="CONCEPT_ORBITAL_DEORBIT" class="menuitem">脱軌道</div></a>
+				<a href="CONCEPT_ORBITAL_CRASH.aspx"><div id="CONCEPT_ORBITAL_CRASH" class="menuitem">墜落現場</div></a>
+			</div></div>
+			<div id="GROUP_25" class="menugroupcontainer"><a href="javascript:togglediv('25_CONTENT');"><div id="25" class="menugroup">アドバイザー</div></a><div id="25_CONTENT">
+				<a href="CONCEPT_ADVISORS.aspx"><div id="CONCEPT_ADVISORS" class="menuitem">アドバイザー</div></a>
+				<a href="CONCEPT_ADVISORS_TURNINGOFF.aspx"><div id="CONCEPT_ADVISORS_TURNINGOFF" class="menuitem">アドバイザーをオフにする</div></a>
+			</div></div>
+			<div id="GROUP_26" class="menugroupcontainer"><a href="javascript:togglediv('26_CONTENT');"><div id="26" class="menugroup">専門家</div></a><div id="26_CONTENT">
+				<a href="CONCEPT_BUILDINGS_SPECIALISTS.aspx"><div id="CONCEPT_BUILDINGS_SPECIALISTS" class="menuitem">専門家</div></a>
+			</div></div>
+			<div id="GROUP_27" class="menugroupcontainer"><a href="javascript:togglediv('27_CONTENT');"><div id="27" class="menugroup">勝利</div></a><div id="27_CONTENT">
+				<a href="CONCEPT_VICTORY.aspx"><div id="CONCEPT_VICTORY" class="menuitem">勝利と敗北</div></a>
+				<a href="CONCEPT_VICTORY_DEFEAT.aspx"><div id="CONCEPT_VICTORY_DEFEAT" class="menuitem">敗北の条件</div></a>
+				<a href="CONCEPT_VICTORY_DEFEAT_LOSING_LAST_CITY.aspx"><div id="CONCEPT_VICTORY_DEFEAT_LOSING_LAST_CITY" class="menuitem">最後の都市の逸失</div></a>
+				<a href="CONCEPT_VICTORY_DEFEAT_ANOTHER_WINNER.aspx"><div id="CONCEPT_VICTORY_DEFEAT_ANOTHER_WINNER" class="menuitem">他文明の勝利</div></a>
+				<a href="CONCEPT_VICTORY_VICTORY.aspx"><div id="CONCEPT_VICTORY_VICTORY" class="menuitem">勝利の条件</div></a>
+				<a href="CONCEPT_VICTORY_VICTORY_DOMINATION.aspx"><div id="CONCEPT_VICTORY_VICTORY_DOMINATION" class="menuitem">制圧による勝利</div></a>
+				<a href="CONCEPT_VICTORY_VICTORY_EMANCIPATION.aspx"><div id="CONCEPT_VICTORY_VICTORY_EMANCIPATION" class="menuitem">解放による勝利</div></a>
+				<a href="CONCEPT_VICTORY_PROMISED_LAND.aspx"><div id="CONCEPT_VICTORY_PROMISED_LAND" class="menuitem">約束の地での勝利</div></a>
+				<a href="CONCEPT_VICTORY_TRANSCENDENCE.aspx"><div id="CONCEPT_VICTORY_TRANSCENDENCE" class="menuitem">超越による勝利</div></a>
+				<a href="CONCEPT_VICTORY_RAZING_ORIGINAL_CAPITAL.aspx"><div id="CONCEPT_VICTORY_RAZING_ORIGINAL_CAPITAL" class="menuitem">最初の首都の破壊</div></a>
+				<a href="CONCEPT_VICTORY_CAPITAL_AND_ORIGINAL_CAPITAL.aspx"><div id="CONCEPT_VICTORY_CAPITAL_AND_ORIGINAL_CAPITAL" class="menuitem">新首都と旧首都</div></a>
+				<a href="CONCEPT_VICTORY_END_OF_TIME.aspx"><div id="CONCEPT_VICTORY_END_OF_TIME" class="menuitem">時間切れ</div></a>
+				<a href="CONCEPT_VICTORY_POINTS.aspx"><div id="CONCEPT_VICTORY_POINTS" class="menuitem">スコアの決定</div></a>
+				<a href="CONCEPT_SCORE.aspx"><div id="CONCEPT_SCORE" class="menuitem">ゲームスコア</div></a>
+				<a href="CONCEPT_SCORE_ELIMINATION.aspx"><div id="CONCEPT_SCORE_ELIMINATION" class="menuitem">文明の滅亡</div></a>
+				<a href="CONCEPT_SCORE_TIME_TO_VICTORY.aspx"><div id="CONCEPT_SCORE_TIME_TO_VICTORY" class="menuitem">勝利までの時間</div></a>
+				<a href="CONCEPT_SCORE_VICTORY_POINTS.aspx"><div id="CONCEPT_SCORE_VICTORY_POINTS" class="menuitem">勝利ポイント</div></a>
+				<a href="CONCEPT_SCORE_MAP_SIZE.aspx"><div id="CONCEPT_SCORE_MAP_SIZE" class="menuitem">マップサイズとゲームの難易度</div></a>
+				<a href="CONCEPT_SCORE_CURRENT_SCORE.aspx"><div id="CONCEPT_SCORE_CURRENT_SCORE" class="menuitem">あなたの現在スコア</div></a>
+			</div></div>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

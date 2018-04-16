@@ -1,0 +1,206 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-jp">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,technology,technologies" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('ゲームコンセプト');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('テクノロジー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_on.png" class="tab" id="tab02" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('ユニット');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('ユニットアップグレード');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('建造物');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('遺産');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('美徳');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('諜報活動');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('スポンサーとリーダー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('クエスト');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('地形と地物');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('資源');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('資源活用施設');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('アフィニティー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('ステーション');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">テクノロジー
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="TECH_HOME.aspx"><div id="TECH_HOME" class="menuitem">テクノロジー・ホームページ</div></a>
+				<a href="TECH_ALIEN_DOMESTICATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_DOMESTICATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_DOMESTICATION" class="menuitem">エイリアンの家畜化</div></a>
+				<a href="TECH_ALIEN_EVOLUTION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_EVOLUTION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_EVOLUTION" class="menuitem">エイリアンの進化</div></a>
+				<a href="TECH_ALIEN_ADAPTATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_ADAPTATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_ADAPTATION" class="menuitem">エイリアンの順応</div></a>
+				<a href="TECH_ALIEN_HYBRIDIZATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_HYBRIDIZATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_HYBRIDIZATION" class="menuitem">エイリアン交配</div></a>
+				<a href="TECH_ALIEN_ETHICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_ETHICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_ETHICS" class="menuitem">エイリアン倫理</div></a>
+				<a href="TECH_ALIEN_ECOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_ECOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_ECOLOGY" class="menuitem">エイリアン生態学</div></a>
+				<a href="TECH_ALIEN_BIOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_BIOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_BIOLOGY" class="menuitem">エイリアン生物学</div></a>
+				<a href="TECH_ALIEN_LIFEFORMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_LIFEFORMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_LIFEFORMS" class="menuitem">エイリアン生物形態</div></a>
+				<a href="TECH_ALIEN_SCIENCES.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_SCIENCES.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_SCIENCES" class="menuitem">エイリアン科学</div></a>
+				<a href="TECH_ALIEN_MATERIALS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_MATERIALS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_MATERIALS" class="menuitem">エイリアン素材</div></a>
+				<a href="TECH_ALIEN_GENETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_GENETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_GENETICS" class="menuitem">エイリアン遺伝学</div></a>
+				<a href="TECH_EXOTIC_MATTER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_EXOTIC_MATTER.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_EXOTIC_MATTER" class="menuitem">エキゾチック物質</div></a>
+				<a href="TECH_AUGMENTATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_AUGMENTATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_AUGMENTATION" class="menuitem">オーグメンテーション </div></a>
+				<a href="TECH_AUTOGYROS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_AUTOGYROS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_AUTOGYROS" class="menuitem">オートジャイロ</div></a>
+				<a href="TECH_COMPUTING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COMPUTING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COMPUTING" class="menuitem">コンピューティング</div></a>
+				<a href="TECH_SERVOMACHINERY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SERVOMACHINERY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SERVOMACHINERY" class="menuitem">サーボ機構</div></a>
+				<a href="TECH_CYBERNETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CYBERNETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CYBERNETICS" class="menuitem">サイバネティクス </div></a>
+				<a href="TECH_GEOSCAPING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GEOSCAPING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GEOSCAPING" class="menuitem">ジオスケーピング</div></a>
+				<a href="TECH_SYNERGETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SYNERGETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SYNERGETICS" class="menuitem">シナジェティクス</div></a>
+				<a href="TECH_DARK_NETWORKS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_DARK_NETWORKS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_DARK_NETWORKS" class="menuitem">ダークネットワーク</div></a>
+				<a href="TECH_DESIGNER_LIFEFORMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_DESIGNER_LIFEFORMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_DESIGNER_LIFEFORMS" class="menuitem">デザイナー生物形態</div></a>
+				<a href="TECH_TERRAFORMING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TERRAFORMING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TERRAFORMING" class="menuitem">テラフォーミング</div></a>
+				<a href="TECH_NANOTECHNOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_NANOTECHNOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_NANOTECHNOLOGY" class="menuitem">ナノテクノロジー</div></a>
+				<a href="TECH_NANOROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_NANOROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_NANOROBOTICS" class="menuitem">ナノロボット工学</div></a>
+				<a href="TECH_BIOENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOENGINEERING" class="menuitem">バイオエンジニアリング</div></a>
+				<a href="TECH_BIONICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIONICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIONICS" class="menuitem">バイオニクス</div></a>
+				<a href="TECH_BIOMETALLURGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOMETALLURGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOMETALLURGY" class="menuitem">バイオ冶金学</div></a>
+				<a href="TECH_HYPERCONDUCTORS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HYPERCONDUCTORS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HYPERCONDUCTORS" class="menuitem">ハイパーコンダクター</div></a>
+				<a href="TECH_HYPERCOMPUTING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HYPERCOMPUTING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HYPERCOMPUTING" class="menuitem">ハイパーコンピューティング</div></a>
+				<a href="TECH_METAMATERIALS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_METAMATERIALS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_METAMATERIALS" class="menuitem">メタマテリアル</div></a>
+				<a href="TECH_MOBILE_LEV.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_MOBILE_LEV.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_MOBILE_LEV" class="menuitem">モバイルLEV</div></a>
+				<a href="TECH_ROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ROBOTICS" class="menuitem">ロボット工学</div></a>
+				<a href="TECH_SYNTHETIC_THOUGHT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SYNTHETIC_THOUGHT.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SYNTHETIC_THOUGHT" class="menuitem">人工思考</div></a>
+				<a href="TECH_ARTIFICIAL_INTELLIGENCE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ARTIFICIAL_INTELLIGENCE.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ARTIFICIAL_INTELLIGENCE" class="menuitem">人工知能</div></a>
+				<a href="TECH_ARTIFICIAL_EVOLUTION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ARTIFICIAL_EVOLUTION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ARTIFICIAL_EVOLUTION" class="menuitem">人工進化</div></a>
+				<a href="TECH_HUMAN_CONSERVATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HUMAN_CONSERVATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HUMAN_CONSERVATION" class="menuitem">人類保全</div></a>
+				<a href="TECH_HUMAN_IDEALISM.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HUMAN_IDEALISM.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HUMAN_IDEALISM" class="menuitem">人類理想主義</div></a>
+				<a href="TECH_SURROGACY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SURROGACY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SURROGACY" class="menuitem">代理化</div></a>
+				<a href="TECH_EUTHENICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_EUTHENICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_EUTHENICS" class="menuitem">優境学</div></a>
+				<a href="TECH_PIONEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PIONEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PIONEERING" class="menuitem">先駆者</div></a>
+				<a href="TECH_PHOTOSYSTEMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PHOTOSYSTEMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PHOTOSYSTEMS" class="menuitem">光化学系</div></a>
+				<a href="TECH_CHEMISTRY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CHEMISTRY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CHEMISTRY" class="menuitem">化学</div></a>
+				<a href="TECH_COLLABORATIVE_THOUGHT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COLLABORATIVE_THOUGHT.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COLLABORATIVE_THOUGHT" class="menuitem">協調的思考</div></a>
+				<a href="TECH_PROTOGENETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PROTOGENETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PROTOGENETICS" class="menuitem">原始遺伝学</div></a>
+				<a href="TECH_GEOPHYSICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GEOPHYSICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GEOPHYSICS" class="menuitem">地質物理学</div></a>
+				<a href="TECH_SEISMIC_INDUCTION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SEISMIC_INDUCTION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SEISMIC_INDUCTION" class="menuitem">地震誘発</div></a>
+				<a href="TECH_VERTICAL_FARMING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_VERTICAL_FARMING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_VERTICAL_FARMING" class="menuitem">垂直農法</div></a>
+				<a href="TECH_FIELD_THEORY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_FIELD_THEORY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_FIELD_THEORY" class="menuitem">場の理論</div></a>
+				<a href="TECH_ASTRODYNAMICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ASTRODYNAMICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ASTRODYNAMICS" class="menuitem">宇宙力学</div></a>
+				<a href="TECH_HABITATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HABITATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HABITATION" class="menuitem">居住区</div></a>
+				<a href="TECH_ENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ENGINEERING" class="menuitem">工学</div></a>
+				<a href="TECH_BALLISTIC_LEV.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BALLISTIC_LEV.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BALLISTIC_LEV" class="menuitem">弾道LEV</div></a>
+				<a href="TECH_BALLISTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BALLISTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BALLISTICS" class="menuitem">弾道学</div></a>
+				<a href="TECH_PLANETARY_ENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PLANETARY_ENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PLANETARY_ENGINEERING" class="menuitem">惑星工学</div></a>
+				<a href="TECH_PLANETARY_SURVEY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PLANETARY_SURVEY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PLANETARY_SURVEY" class="menuitem">惑星調査</div></a>
+				<a href="TECH_TACTICAL_LEV.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TACTICAL_LEV.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TACTICAL_LEV" class="menuitem">戦術LEV</div></a>
+				<a href="TECH_TACTICAL_ROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TACTICAL_ROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TACTICAL_ROBOTICS" class="menuitem">戦術ロボット工学</div></a>
+				<a href="TECH_ORGANICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ORGANICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ORGANICS" class="menuitem">有機体</div></a>
+				<a href="TECH_CIVIL_SUPPORT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CIVIL_SUPPORT.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CIVIL_SUPPORT" class="menuitem">民間サポート</div></a>
+				<a href="TECH_CLIMATE_CONTROL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CLIMATE_CONTROL.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CLIMATE_CONTROL" class="menuitem">気候制御</div></a>
+				<a href="TECH_PHYSICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PHYSICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PHYSICS" class="menuitem">物理学</div></a>
+				<a href="TECH_BIOCHEMISTRY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOCHEMISTRY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOCHEMISTRY" class="menuitem">生化学</div></a>
+				<a href="TECH_ECOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ECOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ECOLOGY" class="menuitem">生態学</div></a>
+				<a href="TECH_BIOSPHERES.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOSPHERES.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOSPHERES" class="menuitem">生物圏</div></a>
+				<a href="TECH_BIOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOLOGY" class="menuitem">生物学</div></a>
+				<a href="TECH_INDUSTRIAL_ECOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_INDUSTRIAL_ECOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_INDUSTRIAL_ECOLOGY" class="menuitem">産業生態学</div></a>
+				<a href="TECH_SOCIAL_DYNAMICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SOCIAL_DYNAMICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SOCIAL_DYNAMICS" class="menuitem">社会力学</div></a>
+				<a href="TECH_NEURAL_UPLOADING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_NEURAL_UPLOADING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_NEURAL_UPLOADING" class="menuitem">神経アップロード</div></a>
+				<a href="TECH_TISSUE_ENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TISSUE_ENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TISSUE_ENGINEERING" class="menuitem">組織工学</div></a>
+				<a href="TECH_SWARM_ROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SWARM_ROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SWARM_ROBOTICS" class="menuitem">群ロボット工学</div></a>
+				<a href="TECH_SWARM_INTELLIGENCE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SWARM_INTELLIGENCE.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SWARM_INTELLIGENCE" class="menuitem">群知能</div></a>
+				<a href="TECH_AUTONOMOUS_SYSTEMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_AUTONOMOUS_SYSTEMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_AUTONOMOUS_SYSTEMS" class="menuitem">自律システム</div></a>
+				<a href="TECH_FABRICATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_FABRICATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_FABRICATION" class="menuitem">製造</div></a>
+				<a href="TECH_COGNITION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COGNITION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COGNITION" class="menuitem">認知</div></a>
+				<a href="TECH_TRANSCENDENTAL_MATH.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TRANSCENDENTAL_MATH.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TRANSCENDENTAL_MATH" class="menuitem">超越数学</div></a>
+				<a href="TECH_ORBITAL_AUTOMATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ORBITAL_AUTOMATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ORBITAL_AUTOMATION" class="menuitem">軌道オートメーション</div></a>
+				<a href="TECH_ORBITAL_NETWORKS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ORBITAL_NETWORKS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ORBITAL_NETWORKS" class="menuitem">軌道ネットワーク</div></a>
+				<a href="TECH_COMMUNICATIONS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COMMUNICATIONS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COMMUNICATIONS" class="menuitem">通信</div></a>
+				<a href="TECH_GENETIC_MAPPING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GENETIC_MAPPING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GENETIC_MAPPING" class="menuitem">遺伝子マッピング</div></a>
+				<a href="TECH_GENETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GENETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GENETICS" class="menuitem">遺伝子学</div></a>
+				<a href="TECH_TRANSGENICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TRANSGENICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TRANSGENICS" class="menuitem">遺伝子組み換え</div></a>
+				<a href="TECH_GENETIC_DESIGN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GENETIC_DESIGN.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GENETIC_DESIGN" class="menuitem">遺伝子設計</div></a>
+				<a href="TECH_DEFENSE_GRID.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_DEFENSE_GRID.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_DEFENSE_GRID" class="menuitem">防衛グリッド</div></a>
+				<a href="TECH_POWER_SYSTEMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_POWER_SYSTEMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_POWER_SYSTEMS" class="menuitem">電力システム</div></a>
+				<a href="TECH_MECHATRONICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_MECHATRONICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_MECHATRONICS" class="menuitem">電子機械工学</div></a>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

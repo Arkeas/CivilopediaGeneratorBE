@@ -1,0 +1,16 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="Concepts.master" %>
+
+<script runat="server">
+
+</script>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+	<title>CIVILOPEDIA Online: Limites de gains d'EXP</title>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+	<div class="title">Limites de gains d'EXP</div>
+	<div class="contentwide">
+		<h2>R&eacute;sum&eacute; :</h2><div class="infobox">Une unit&eacute; gagne des points d'exp&eacute;rience (EXP) chaque fois qu'elle survit &agrave; un tour de combat. Elle n'a pas besoin de le remporter pour acqu&eacute;rir de l'exp&eacute;rience : cette derni&egrave;re augmente &agrave; chaque nouveau tour, tant que l'unit&eacute; est en vie. <br /><br />La quantit&eacute; d'EXP que l'unit&eacute; acquiert d&eacute;pend des circonstances du combat. G&eacute;n&eacute;ralement, les unit&eacute;s gagnent davantage d'EXP en attaquant qu'en se d&eacute;fendant, et davantage en combat rapproch&eacute; que dans les autres formes de combats. Voici quelques exemples : <br />- Attaquer en combat rapproch&eacute; : 5 EXP <br />- Se d&eacute;fendre en combat rapproch&eacute; : 4 EXP <br />- Attaquer &agrave; distance : 2 EXP <br />- Se d&eacute;fendre contre une attaque &agrave; distance : 2 EXP <br />- Restrictions concernant les extraterrestres : une fois qu'une unit&eacute; a acquis 30 EXP, elle ne gagne plus d'EXP en affrontant des formes de vie extraterrestres.</div>
+	</div>
+</asp:Content>
+

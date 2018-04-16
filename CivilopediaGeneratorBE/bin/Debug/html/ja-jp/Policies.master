@@ -1,0 +1,189 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-jp">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,social policy,social policies,policy,policies," />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('ゲームコンセプト');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('テクノロジー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('ユニット');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('ユニットアップグレード');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('建造物');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('遺産');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('美徳');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_on.png" class="tab" id="tab07" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('諜報活動');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('スポンサーとリーダー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('クエスト');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('地形と地物');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('資源');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('資源活用施設');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('アフィニティー');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('ステーション');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">美徳
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="POLICY_HOME.aspx"><div id="POLICY_HOME" class="menuitem">美徳ホームページ</div></a>
+			<div id="GROUP_POLICY_BRANCH_MIGHT" class="menugroupcontainer"><a href="javascript:togglediv('POLICY_BRANCH_MIGHT_CONTENT');"><div id="POLICY_BRANCH_MIGHT" class="menugroup">力</div></a><div id="POLICY_BRANCH_MIGHT_CONTENT">
+				<a href="POLICY_MIGHT_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_1.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_1" class="menuitem">サバイバル術</div></a>
+				<a href="POLICY_MIGHT_2.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_2.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_2" class="menuitem">スカベンジャー</div></a>
+				<a href="POLICY_MIGHT_14.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_14.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_14" class="menuitem">住宅宿舎統合</div></a>
+				<a href="POLICY_MIGHT_6.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_6.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_6" class="menuitem">公共の安全</div></a>
+				<a href="POLICY_MIGHT_10.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_10.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_10" class="menuitem">好戦的瞑想</div></a>
+				<a href="POLICY_MIGHT_12.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_12.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_12" class="menuitem">残忍な効率性</div></a>
+				<a href="POLICY_MIGHT_9.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_9.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_9" class="menuitem">特殊任務</div></a>
+				<a href="POLICY_MIGHT_13.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_13.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_13" class="menuitem">統合作戦</div></a>
+				<a href="POLICY_MIGHT_11.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_11.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_11" class="menuitem">統合兵器</div></a>
+				<a href="POLICY_MIGHT_5.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_5.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_5" class="menuitem">解放軍</div></a>
+				<a href="POLICY_MIGHT_15.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_15.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_15" class="menuitem">訓練された怒り</div></a>
+				<a href="POLICY_MIGHT_7.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_7.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_7" class="menuitem">軍事工業団</div></a>
+				<a href="POLICY_MIGHT_4.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_4.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_4" class="menuitem">軍産複合体</div></a>
+				<a href="POLICY_MIGHT_3.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_3.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_3" class="menuitem">適応戦術</div></a>
+				<a href="POLICY_MIGHT_8.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_MIGHT_8.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_MIGHT_8" class="menuitem">適応科学</div></a>
+			</div></div>
+			<div id="GROUP_POLICY_BRANCH_PROSPERITY" class="menugroupcontainer"><a href="javascript:togglediv('POLICY_BRANCH_PROSPERITY_CONTENT');"><div id="POLICY_BRANCH_PROSPERITY" class="menugroup">繁栄</div></a><div id="POLICY_BRANCH_PROSPERITY_CONTENT">
+				<a href="POLICY_PROSPERITY_15.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_15.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_15" class="menuitem">エウダイモニア</div></a>
+				<a href="POLICY_PROSPERITY_14.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_14.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_14" class="menuitem">エコスケーピング</div></a>
+				<a href="POLICY_PROSPERITY_5.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_5.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_5" class="menuitem">コロニー・イニシアティブ</div></a>
+				<a href="POLICY_PROSPERITY_7.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_7.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_7" class="menuitem">パスファインダー</div></a>
+				<a href="POLICY_PROSPERITY_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_1.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_1" class="menuitem">倹約家</div></a>
+				<a href="POLICY_PROSPERITY_6.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_6.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_6" class="menuitem">先駆者精神</div></a>
+				<a href="POLICY_PROSPERITY_9.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_9.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_9" class="menuitem">入植者一族</div></a>
+				<a href="POLICY_PROSPERITY_2.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_2.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_2" class="menuitem">労働力イニシアティブ</div></a>
+				<a href="POLICY_PROSPERITY_13.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_13.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_13" class="menuitem">手を休めるべからず</div></a>
+				<a href="POLICY_PROSPERITY_4.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_4.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_4" class="menuitem">支援の手</div></a>
+				<a href="POLICY_PROSPERITY_10.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_10.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_10" class="menuitem">病は気から</div></a>
+				<a href="POLICY_PROSPERITY_3.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_3.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_3" class="menuitem">自作農場</div></a>
+				<a href="POLICY_PROSPERITY_11.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_11.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_11" class="menuitem">自然の恵み</div></a>
+				<a href="POLICY_PROSPERITY_8.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_8.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_8" class="menuitem">贈物経済</div></a>
+				<a href="POLICY_PROSPERITY_12.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_PROSPERITY_12.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_PROSPERITY_12" class="menuitem">選択の喜び</div></a>
+			</div></div>
+			<div id="GROUP_POLICY_BRANCH_KNOWLEDGE" class="menugroupcontainer"><a href="javascript:togglediv('POLICY_BRANCH_KNOWLEDGE_CONTENT');"><div id="POLICY_BRANCH_KNOWLEDGE" class="menugroup">知識</div></a><div id="POLICY_BRANCH_KNOWLEDGE_CONTENT">
+				<a href="POLICY_KNOWLEDGE_8.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_8.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_8" class="menuitem">コミュニティ医療</div></a>
+				<a href="POLICY_KNOWLEDGE_14.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_14.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_14" class="menuitem">テクノロジー工匠</div></a>
+				<a href="POLICY_KNOWLEDGE_9.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_9.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_9" class="menuitem">ネットワーク・データリンク</div></a>
+				<a href="POLICY_KNOWLEDGE_10.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_10.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_10" class="menuitem">ミームウェブ</div></a>
+				<a href="POLICY_KNOWLEDGE_12.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_12.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_12" class="menuitem">メタ研究手法</div></a>
+				<a href="POLICY_KNOWLEDGE_15.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_15.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_15" class="menuitem">モノ神話</div></a>
+				<a href="POLICY_KNOWLEDGE_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_1.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_1" class="menuitem">先見の明</div></a>
+				<a href="POLICY_KNOWLEDGE_5.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_5.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_5" class="menuitem">創造階級</div></a>
+				<a href="POLICY_KNOWLEDGE_11.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_11.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_11" class="menuitem">学習センター</div></a>
+				<a href="POLICY_KNOWLEDGE_2.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_2.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_2" class="menuitem">実地調査</div></a>
+				<a href="POLICY_KNOWLEDGE_6.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_6.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_6" class="menuitem">密接した価値観</div></a>
+				<a href="POLICY_KNOWLEDGE_7.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_7.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_7" class="menuitem">応用元社会学</div></a>
+				<a href="POLICY_KNOWLEDGE_13.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_13.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_13" class="menuitem">情報戦線</div></a>
+				<a href="POLICY_KNOWLEDGE_4.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_4.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_4" class="menuitem">研究所徒弟</div></a>
+				<a href="POLICY_KNOWLEDGE_3.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_KNOWLEDGE_3.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_KNOWLEDGE_3" class="menuitem">社会的習律</div></a>
+			</div></div>
+			<div id="GROUP_POLICY_BRANCH_INDUSTRY" class="menugroupcontainer"><a href="javascript:togglediv('POLICY_BRANCH_INDUSTRY_CONTENT');"><div id="POLICY_BRANCH_INDUSTRY" class="menugroup">産業</div></a><div id="POLICY_BRANCH_INDUSTRY_CONTENT">
+				<a href="POLICY_INDUSTRY_2.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_2.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_2" class="menuitem">コモディティ化</div></a>
+				<a href="POLICY_INDUSTRY_15.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_15.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_15" class="menuitem">マグナサンチ</div></a>
+				<a href="POLICY_INDUSTRY_12.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_12.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_12" class="menuitem">上級エンジニアリング</div></a>
+				<a href="POLICY_INDUSTRY_8.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_8.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_8" class="menuitem">不当利得</div></a>
+				<a href="POLICY_INDUSTRY_4.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_4.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_4" class="menuitem">中央計画</div></a>
+				<a href="POLICY_INDUSTRY_11.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_11.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_11" class="menuitem">公共投資</div></a>
+				<a href="POLICY_INDUSTRY_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_1.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_1" class="menuitem">労働ロジスティクス</div></a>
+				<a href="POLICY_INDUSTRY_9.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_9.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_9" class="menuitem">宇宙飛行起業</div></a>
+				<a href="POLICY_INDUSTRY_10.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_10.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_10" class="menuitem">市場開拓</div></a>
+				<a href="POLICY_INDUSTRY_14.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_14.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_14" class="menuitem">市民の責務</div></a>
+				<a href="POLICY_INDUSTRY_5.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_5.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_5" class="menuitem">建築基準</div></a>
+				<a href="POLICY_INDUSTRY_6.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_6.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_6" class="menuitem">投資</div></a>
+				<a href="POLICY_INDUSTRY_3.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_3.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_3" class="menuitem">拡張性のあるインフラ</div></a>
+				<a href="POLICY_INDUSTRY_13.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_13.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_13" class="menuitem">流動性</div></a>
+				<a href="POLICY_INDUSTRY_7.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/POLICY_INDUSTRY_7.png\' />', true);" onmouseout="return hideTip();"><div id="POLICY_INDUSTRY_7" class="menuitem">相互依存ネットワーク</div></a>
+			</div></div>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

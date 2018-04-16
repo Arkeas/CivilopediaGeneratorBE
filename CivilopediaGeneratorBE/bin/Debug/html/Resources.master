@@ -1,0 +1,166 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,resource,resources" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('Game Concepts');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('Technologies');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('Units');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('Unit Upgrades');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('Buildings');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('Wonders');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('Virtues');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('Covert Ops');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('Sponsors and Leaders');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('Quests');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('Planets, Terrain and Features');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('Resources');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_on.png" class="tab" id="tab12" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('Improvements');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('Affinity');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('Stations');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<a href="DIPLOMACY_HOME.aspx" onmouseover="return tooltip('Diplomacy');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_diplomacy_off.png" class="tab" id="tab16" onmouseover="this.src='/civilopediabe/images/tab_diplomacy_on.png';" onmouseout="this.src='/civilopediabe/images/tab_diplomacy_off.png';" /></a>
+			<a href="ARTIFACTS_HOME.aspx" onmouseover="return tooltip('Artifacts');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_artifacts_off.png" class="tab" id="tab17" onmouseover="this.src='/civilopediabe/images/tab_artifacts_on.png';" onmouseout="this.src='/civilopediabe/images/tab_artifacts_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">Resources
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="RESOURCE_HOME.aspx"><div id="TERRAIN_HOME" class="menuitem">Resources Home Page</div></a>
+			<div id="GROUP_RESOURCECLASS_BASIC" class="menugroupcontainer"><a href="javascript:togglediv('RESOURCECLASS_BASIC_CONTENT');"><div id="RESOURCECLASS_BASIC" class="menugroup">Basic Resources</div></a><div id="RESOURCECLASS_BASIC_CONTENT">
+				<a href="RESOURCE_ALGAE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_ALGAE.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_ALGAE" class="menuitem">Algae</div></a>
+				<a href="RESOURCE_BASALT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_BASALT.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_BASALT" class="menuitem">Basalt</div></a>
+				<a href="RESOURCE_CHELONIA.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_CHELONIA.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_CHELONIA" class="menuitem">Chelonia</div></a>
+				<a href="RESOURCE_CHITIN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_CHITIN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_CHITIN" class="menuitem">Chitin</div></a>
+				<a href="RESOURCE_COPPER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_COPPER.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_COPPER" class="menuitem">Copper</div></a>
+				<a href="RESOURCE_CORAL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_CORAL.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_CORAL" class="menuitem">Coral</div></a>
+				<a href="RESOURCE_EGGS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_EGGS.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_EGGS" class="menuitem">Eggs</div></a>
+				<a href="RESOURCE_FIBER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_FIBER.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_FIBER" class="menuitem">Fiber</div></a>
+				<a href="RESOURCE_FRUIT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_FRUIT.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_FRUIT" class="menuitem">Fruit</div></a>
+				<a href="RESOURCE_FUNGUS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_FUNGUS.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_FUNGUS" class="menuitem">Fungus</div></a>
+				<a href="RESOURCE_GOLD.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_GOLD.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_GOLD" class="menuitem">Gold</div></a>
+				<a href="RESOURCE_MINERALS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_MINERALS.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_MINERALS" class="menuitem">Minerals</div></a>
+				<a href="RESOURCE_PLANKTON.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_PLANKTON.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_PLANKTON" class="menuitem">Plankton</div></a>
+				<a href="RESOURCE_RESILIN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_RESILIN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_RESILIN" class="menuitem">Resilin</div></a>
+				<a href="RESOURCE_SHELL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_SHELL.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_SHELL" class="menuitem">Shell</div></a>
+				<a href="RESOURCE_SILICA.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_SILICA.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_SILICA" class="menuitem">Silica</div></a>
+				<a href="RESOURCE_TUBERS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_TUBERS.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_TUBERS" class="menuitem">Tubers</div></a>
+				<a href="RESOURCE_VENTS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_VENTS.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_VENTS" class="menuitem">Vents</div></a>
+			</div></div>
+			<div id="GROUP_RESOURCECLASS_STRATEGIC" class="menugroupcontainer"><a href="javascript:togglediv('RESOURCECLASS_STRATEGIC_CONTENT');"><div id="RESOURCECLASS_STRATEGIC" class="menugroup">Strategic Resources</div></a><div id="RESOURCECLASS_STRATEGIC_CONTENT">
+				<a href="RESOURCE_FIRAXITE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_FIRAXITE.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_FIRAXITE" class="menuitem">Firaxite</div></a>
+				<a href="RESOURCE_FLOAT_STONE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_FLOAT_STONE.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_FLOAT_STONE" class="menuitem">Floatstone</div></a>
+				<a href="RESOURCE_GEOTHERMAL_ENERGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_GEOTHERMAL_ENERGY.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_GEOTHERMAL_ENERGY" class="menuitem">Geothermal</div></a>
+				<a href="RESOURCE_PETROLEUM.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_PETROLEUM.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_PETROLEUM" class="menuitem">Petroleum</div></a>
+				<a href="RESOURCE_TITANIUM.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_TITANIUM.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_TITANIUM" class="menuitem">Titanium</div></a>
+				<a href="RESOURCE_XENOMASS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_XENOMASS.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_XENOMASS" class="menuitem">Xenomass</div></a>
+			</div></div>
+			<div id="GROUP_RESOURCECLASS_ARTIFACT" class="menugroupcontainer"><a href="javascript:togglediv('RESOURCECLASS_ARTIFACT_CONTENT');"><div id="RESOURCECLASS_ARTIFACT" class="menugroup">Expedition Sites</div></a><div id="RESOURCECLASS_ARTIFACT_CONTENT">
+				<a href="RESOURCE_ALIEN_SKELETON.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_ALIEN_SKELETON.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_ALIEN_SKELETON" class="menuitem">Alien Skeleton</div></a>
+				<a href="RESOURCE_ALIEN_SKELETON_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_ALIEN_SKELETON_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_ALIEN_SKELETON_OCEAN" class="menuitem">Alien Skeleton</div></a>
+				<a href="RESOURCE_CRASHED_SATELLITE_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_CRASHED_SATELLITE_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_CRASHED_SATELLITE_OCEAN" class="menuitem">Crashed Satellite</div></a>
+				<a href="RESOURCE_CRASHED_SATELLITE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_CRASHED_SATELLITE.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_CRASHED_SATELLITE" class="menuitem">Crashed Satellite</div></a>
+				<a href="RESOURCE_DERELICT_SETTLEMENT_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_DERELICT_SETTLEMENT_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_DERELICT_SETTLEMENT_OCEAN" class="menuitem">Derelict Settlement</div></a>
+				<a href="RESOURCE_DERELICT_SETTLEMENT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_DERELICT_SETTLEMENT.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_DERELICT_SETTLEMENT" class="menuitem">Derelict Settlement</div></a>
+				<a href="RESOURCE_KRAKEN_NEST_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_KRAKEN_NEST_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_KRAKEN_NEST_OCEAN" class="menuitem">Kraken Nest</div></a>
+				<a href="RESOURCE_SOUNDING_BELL_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_SOUNDING_BELL_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_SOUNDING_BELL_OCEAN" class="menuitem">Progenitor Device</div></a>
+				<a href="RESOURCE_ALIEN_RUIN_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_ALIEN_RUIN_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_ALIEN_RUIN_OCEAN" class="menuitem">Progenitor Ruin</div></a>
+				<a href="RESOURCE_ALIEN_RUIN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_ALIEN_RUIN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_ALIEN_RUIN" class="menuitem">Progenitor Ruin</div></a>
+				<a href="RESOURCE_SUNKEN_SPACECRAFT_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_SUNKEN_SPACECRAFT_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_SUNKEN_SPACECRAFT_OCEAN" class="menuitem">Sunken Spacecraft</div></a>
+				<a href="RESOURCE_SUNKEN_VEHICLE_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_SUNKEN_VEHICLE_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_SUNKEN_VEHICLE_OCEAN" class="menuitem">Sunken Vehicle</div></a>
+				<a href="RESOURCE_WRECKED_COLONY_LANDER_OCEAN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/RESOURCE_WRECKED_COLONY_LANDER_OCEAN.png\' />', true);" onmouseout="return hideTip();"><div id="RESOURCE_WRECKED_COLONY_LANDER_OCEAN" class="menuitem">Wrecked Colony Lander</div></a>
+			</div></div>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

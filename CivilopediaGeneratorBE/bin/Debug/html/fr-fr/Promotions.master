@@ -1,0 +1,240 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr-fr">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,promotion,promotions" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('Concepts de jeu');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('Technologies');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('Unit&eacute;s');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('Am&eacute;liorations d'unit&eacute;s');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_on.png" class="tab" id="tab04" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('B&acirc;timents');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('Merveilles');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('Valeurs');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('Op&eacute;rations secr&egrave;tes');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('Sponsors et dirigeants');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('Qu&ecirc;tes');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('Terrains et caract&eacute;ristiques');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('Ressources');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('Am&eacute;nagements');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('Affinit&eacute;');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('Stations');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">Am&eacute;liorations d'unit&eacute;s
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="PROMOTION_HOME.aspx"><div id="PROMOTION_HOME" class="menuitem">Accueil - Promotions</div></a>
+			<div id="GROUP_UNIT_MARINE" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_MARINE_CONTENT');"><div id="UNIT_MARINE" class="menugroup">Soldat</div></a><div id="UNIT_MARINE_CONTENT">
+				<a href="UNITUPGRADE_MARINE_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_3S" class="menuitem">Ap&ocirc;tre</div></a>
+				<a href="UNITUPGRADE_MARINE_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_3P" class="menuitem">Centurion</div></a>
+				<a href="UNITUPGRADE_MARINE_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_2S" class="menuitem">Disciple</div></a>
+				<a href="UNITUPGRADE_MARINE_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_2H" class="menuitem">Lutteur</div></a>
+				<a href="UNITUPGRADE_MARINE_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_3H" class="menuitem">Maraudeur</div></a>
+				<a href="UNITUPGRADE_MARINE_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_1" class="menuitem">Marine</div></a>
+				<a href="UNITUPGRADE_MARINE_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_2P" class="menuitem">Sentinelle</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_RANGED_MARINE" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_RANGED_MARINE_CONTENT');"><div id="UNIT_RANGED_MARINE" class="menugroup">Ranger</div></a><div id="UNIT_RANGED_MARINE_CONTENT">
+				<a href="UNITUPGRADE_RANGED_MARINE_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_3H" class="menuitem">Broyeur</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_1" class="menuitem">Canonnier</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_2H" class="menuitem">Cogneur</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_3S" class="menuitem">Ex&eacute;cuteur</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_2P" class="menuitem">Gardien</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_3P" class="menuitem">Ge&ocirc;lier</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_2S" class="menuitem">Superviseur</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_CAVALRY" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_CAVALRY_CONTENT');"><div id="UNIT_CAVALRY" class="menugroup">Rover de combat</div></a><div id="UNIT_CAVALRY_CONTENT">
+				<a href="UNITUPGRADE_CAVALRY_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_2H" class="menuitem">Aspic</div></a>
+				<a href="UNITUPGRADE_CAVALRY_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_1" class="menuitem">Blind&eacute;</div></a>
+				<a href="UNITUPGRADE_CAVALRY_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_3H" class="menuitem">Cobra</div></a>
+				<a href="UNITUPGRADE_CAVALRY_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_3P" class="menuitem">Dragon</div></a>
+				<a href="UNITUPGRADE_CAVALRY_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_2P" class="menuitem">Lancier</div></a>
+				<a href="UNITUPGRADE_CAVALRY_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_2S" class="menuitem">Proph&egrave;te</div></a>
+				<a href="UNITUPGRADE_CAVALRY_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_3S" class="menuitem">R&eacute;dempteur</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_SIEGE" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_SIEGE_CONTENT');"><div id="UNIT_SIEGE" class="menugroup">Missile nomade</div></a><div id="UNIT_SIEGE_CONTENT">
+				<a href="UNITUPGRADE_SIEGE_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_3S" class="menuitem">Ambassadeur</div></a>
+				<a href="UNITUPGRADE_SIEGE_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_1" class="menuitem">Artilleur</div></a>
+				<a href="UNITUPGRADE_SIEGE_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_2H" class="menuitem">Centaure</div></a>
+				<a href="UNITUPGRADE_SIEGE_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_3P" class="menuitem">Exterminateur</div></a>
+				<a href="UNITUPGRADE_SIEGE_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_3H" class="menuitem">Minotaure</div></a>
+				<a href="UNITUPGRADE_SIEGE_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_2S" class="menuitem">Pr&eacute;cepteur</div></a>
+				<a href="UNITUPGRADE_SIEGE_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_2P" class="menuitem">Vengeur</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_NAVAL_FIGHTER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_NAVAL_FIGHTER_CONTENT');"><div id="UNIT_NAVAL_FIGHTER" class="menugroup">Navire arm&eacute;</div></a><div id="UNIT_NAVAL_FIGHTER_CONTENT">
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_1" class="menuitem">Croiseur</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_3P" class="menuitem">Cuirass&eacute;</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_3S" class="menuitem">Justicier</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_2S" class="menuitem">M&eacute;diateur</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_3H" class="menuitem">Pos&eacute;idon</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_2P" class="menuitem">Torpilleur</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_2H" class="menuitem">Triton</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_AIR_FIGHTER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_AIR_FIGHTER_CONTENT');"><div id="UNIT_AIR_FIGHTER" class="menugroup">Chasseur tactique</div></a><div id="UNIT_AIR_FIGHTER_CONTENT">
+				<a href="UNITUPGRADE_AIR_FIGHTER_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_1" class="menuitem">Dard</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_2H" class="menuitem">Locuste</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_2S" class="menuitem">Messager</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_3H" class="menuitem">Passereau</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_2P" class="menuitem">Pilleur</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_3P" class="menuitem">Pr&eacute;dateur</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_3S" class="menuitem">S&eacute;raphin</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_NAVAL_CARRIER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_NAVAL_CARRIER_CONTENT');"><div id="UNIT_NAVAL_CARRIER" class="menugroup">Porte-a&eacute;ronefs</div></a><div id="UNIT_NAVAL_CARRIER_CONTENT">
+				<a href="UNITUPGRADE_NAVAL_CARRIER_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_CARRIER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_CARRIER_1P" class="menuitem">Bastion</div></a>
+				<a href="UNITUPGRADE_NAVAL_CARRIER_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_CARRIER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_CARRIER_1S" class="menuitem">Berger</div></a>
+				<a href="UNITUPGRADE_NAVAL_CARRIER_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_CARRIER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_CARRIER_1H" class="menuitem">Hydre</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_XENO_SWARM" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_XENO_SWARM_CONTENT');"><div id="UNIT_XENO_SWARM" class="menugroup">X&eacute;no-essaim</div></a><div id="UNIT_XENO_SWARM_CONTENT">
+				<a href="UNITUPGRADE_XENO_SWARM_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_SWARM.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_SWARM_1S" class="menuitem">X&eacute;no-essaim d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_XENO_SWARM_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_SWARM.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_SWARM_1H" class="menuitem">X&eacute;no-essaim sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_XENO_SWARM_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_SWARM.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_SWARM_1P" class="menuitem">X&eacute;no-essaim v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_XENO_CAVALRY" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_XENO_CAVALRY_CONTENT');"><div id="UNIT_XENO_CAVALRY" class="menugroup">X&eacute;nocavalerie</div></a><div id="UNIT_XENO_CAVALRY_CONTENT">
+				<a href="UNITUPGRADE_XENO_CAVALRY_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_CAVALRY_1S" class="menuitem">X&eacute;nocavalerie d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_XENO_CAVALRY_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_CAVALRY_1H" class="menuitem">X&eacute;nocavalerie sup&eacute;rieure</div></a>
+				<a href="UNITUPGRADE_XENO_CAVALRY_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_CAVALRY_1P" class="menuitem">X&eacute;nocavalerie v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_ROCKTOPUS" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_ROCKTOPUS_CONTENT');"><div id="UNIT_ROCKTOPUS" class="menugroup">Tentaroche</div></a><div id="UNIT_ROCKTOPUS_CONTENT">
+				<a href="UNITUPGRADE_ROCKTOPUS_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ROCKTOPUS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ROCKTOPUS_1S" class="menuitem">Tentaroche d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_ROCKTOPUS_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ROCKTOPUS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ROCKTOPUS_1H" class="menuitem">Tentaroche sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_ROCKTOPUS_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ROCKTOPUS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ROCKTOPUS_1P" class="menuitem">Tentaroche v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_XENO_TITAN" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_XENO_TITAN_CONTENT');"><div id="UNIT_XENO_TITAN" class="menugroup">X&eacute;notitan</div></a><div id="UNIT_XENO_TITAN_CONTENT">
+				<a href="UNITUPGRADE_XENO_TITAN_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_TITAN.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_TITAN_1S" class="menuitem">X&eacute;notitan d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_XENO_TITAN_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_TITAN.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_TITAN_1H" class="menuitem">X&eacute;notitan sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_XENO_TITAN_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_TITAN.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_TITAN_1P" class="menuitem">X&eacute;notitan v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_BATTLESUIT" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_BATTLESUIT_CONTENT');"><div id="UNIT_BATTLESUIT" class="menugroup">Combinaison de combat</div></a><div id="UNIT_BATTLESUIT_CONTENT">
+				<a href="UNITUPGRADE_BATTLESUIT_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_BATTLESUIT.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_BATTLESUIT_1S" class="menuitem">Combinaison de combat d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_BATTLESUIT_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_BATTLESUIT.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_BATTLESUIT_1H" class="menuitem">Combinaison de combat sup&eacute;rieure</div></a>
+				<a href="UNITUPGRADE_BATTLESUIT_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_BATTLESUIT.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_BATTLESUIT_1P" class="menuitem">Combinaison de combat v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_AEGIS" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_AEGIS_CONTENT');"><div id="UNIT_AEGIS" class="menugroup">Aegis</div></a><div id="UNIT_AEGIS_CONTENT">
+				<a href="UNITUPGRADE_AEGIS_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AEGIS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AEGIS_1S" class="menuitem">Aegis d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_AEGIS_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AEGIS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AEGIS_1H" class="menuitem">Aegis sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_AEGIS_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AEGIS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AEGIS_1P" class="menuitem">Aegis v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_LEV_TANK" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_LEV_TANK_CONTENT');"><div id="UNIT_LEV_TANK" class="menugroup">Char LEV</div></a><div id="UNIT_LEV_TANK_CONTENT">
+				<a href="UNITUPGRADE_LEV_TANK_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_TANK.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_TANK_1S" class="menuitem">Char LEV d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_LEV_TANK_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_TANK.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_TANK_1H" class="menuitem">Char LEV sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_LEV_TANK_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_TANK.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_TANK_1P" class="menuitem">Char LEV v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_LEV_DESTROYER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_LEV_DESTROYER_CONTENT');"><div id="UNIT_LEV_DESTROYER" class="menugroup">Destroyer LEV</div></a><div id="UNIT_LEV_DESTROYER_CONTENT">
+				<a href="UNITUPGRADE_LEV_DESTROYER_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_DESTROYER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_DESTROYER_1S" class="menuitem">Destroyer LEV d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_LEV_DESTROYER_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_DESTROYER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_DESTROYER_1H" class="menuitem">Destroyer LEV sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_LEV_DESTROYER_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_DESTROYER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_DESTROYER_1P" class="menuitem">Destroyer LEV v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_CNDR" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_CNDR_CONTENT');"><div id="UNIT_CNDR" class="menugroup">RDNC</div></a><div id="UNIT_CNDR_CONTENT">
+				<a href="UNITUPGRADE_CNDR_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CNDR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CNDR_1S" class="menuitem">RDNC d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_CNDR_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CNDR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CNDR_1H" class="menuitem">RDNC sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_CNDR_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CNDR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CNDR_1P" class="menuitem">RDNC v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_CARVR" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_CARVR_CONTENT');"><div id="UNIT_CARVR" class="menugroup">RACR</div></a><div id="UNIT_CARVR_CONTENT">
+				<a href="UNITUPGRADE_CARVR_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CARVR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CARVR_1S" class="menuitem">RACR d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_CARVR_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CARVR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CARVR_1H" class="menuitem">RACR sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_CARVR_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CARVR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CARVR_1P" class="menuitem">RACR v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_SABR" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_SABR_CONTENT');"><div id="UNIT_SABR" class="menugroup">RAS</div></a><div id="UNIT_SABR_CONTENT">
+				<a href="UNITUPGRADE_SABR_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SABR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SABR_1S" class="menuitem">RAS d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_SABR_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SABR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SABR_1H" class="menuitem">RAS sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_SABR_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SABR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SABR_1P" class="menuitem">RAS v&eacute;ritable</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_ANGEL" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_ANGEL_CONTENT');"><div id="UNIT_ANGEL" class="menugroup">ANGE</div></a><div id="UNIT_ANGEL_CONTENT">
+				<a href="UNITUPGRADE_ANGEL_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ANGEL.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ANGEL_1S" class="menuitem">ANGE d'&eacute;lite</div></a>
+				<a href="UNITUPGRADE_ANGEL_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ANGEL.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ANGEL_1H" class="menuitem">ANGE sup&eacute;rieur</div></a>
+				<a href="UNITUPGRADE_ANGEL_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ANGEL.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ANGEL_1P" class="menuitem">ANGE v&eacute;ritable</div></a>
+			</div></div>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

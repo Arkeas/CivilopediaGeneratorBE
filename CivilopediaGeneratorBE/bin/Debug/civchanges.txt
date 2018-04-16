@@ -1,0 +1,3 @@
+October 9, 2015 - updated for Rising Tide expansion<br />
+March 11, 2015 - added support for Simplified Chinese, all languages updated for version 1.0.2.658<br />
+December 31, 2014 - Initial release for version 1.0.1.607<br />

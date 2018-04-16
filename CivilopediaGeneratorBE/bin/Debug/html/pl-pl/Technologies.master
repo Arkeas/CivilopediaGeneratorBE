@@ -1,0 +1,206 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl-pl">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,technology,technologies" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('Za&#322;o&#380;enia gry');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('Technologie');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_on.png" class="tab" id="tab02" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('Jednostki');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('Ulepszenia jednostki');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_off.png" class="tab" id="tab04" onmouseover="this.src='/civilopediabe/images/tab_promotion_on.png';" onmouseout="this.src='/civilopediabe/images/tab_promotion_off.png';" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('Budowle');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('Cuda &#347;wiata');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('Cnoty');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('S&#322;u&#380;by specjalne');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('Sponsorzy i przyw&oacute;dcy');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('Zadania');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('Teren i jego cechy');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('Zasoby');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('Ulepszenia');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('Doktryna');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('Stacje');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">Technologie
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="TECH_HOME.aspx"><div id="TECH_HOME" class="menuitem">Strona g&#322;&oacute;wna technologii</div></a>
+				<a href="TECH_AUTOGYROS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_AUTOGYROS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_AUTOGYROS" class="menuitem">&#379;yrokopter</div></a>
+				<a href="TECH_ALIEN_ADAPTATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_ADAPTATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_ADAPTATION" class="menuitem">Adaptacja obcych</div></a>
+				<a href="TECH_GEOSCAPING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GEOSCAPING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GEOSCAPING" class="menuitem">Architektura terenu</div></a>
+				<a href="TECH_ASTRODYNAMICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ASTRODYNAMICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ASTRODYNAMICS" class="menuitem">Astrodynamika</div></a>
+				<a href="TECH_ORBITAL_AUTOMATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ORBITAL_AUTOMATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ORBITAL_AUTOMATION" class="menuitem">Automatyka orbitalna</div></a>
+				<a href="TECH_BALLISTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BALLISTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BALLISTICS" class="menuitem">Balistyka</div></a>
+				<a href="TECH_BIOCHEMISTRY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOCHEMISTRY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOCHEMISTRY" class="menuitem">Biochemia</div></a>
+				<a href="TECH_BIOENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOENGINEERING" class="menuitem">Bioin&#380;ynieria</div></a>
+				<a href="TECH_BIOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOLOGY" class="menuitem">Biologia</div></a>
+				<a href="TECH_ALIEN_BIOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_BIOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_BIOLOGY" class="menuitem">Biologia obcych</div></a>
+				<a href="TECH_BIOMETALLURGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOMETALLURGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOMETALLURGY" class="menuitem">Biometalurgia</div></a>
+				<a href="TECH_BIONICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIONICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIONICS" class="menuitem">Bionika</div></a>
+				<a href="TECH_BIOSPHERES.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BIOSPHERES.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BIOSPHERES" class="menuitem">Biosfer</div></a>
+				<a href="TECH_CHEMISTRY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CHEMISTRY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CHEMISTRY" class="menuitem">Chemia</div></a>
+				<a href="TECH_ORGANICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ORGANICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ORGANICS" class="menuitem">Chemia organiczna</div></a>
+				<a href="TECH_DARK_NETWORKS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_DARK_NETWORKS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_DARK_NETWORKS" class="menuitem">Ciemnych sieci</div></a>
+				<a href="TECH_CYBERNETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CYBERNETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CYBERNETICS" class="menuitem">Cybernetyka</div></a>
+				<a href="TECH_SOCIAL_DYNAMICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SOCIAL_DYNAMICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SOCIAL_DYNAMICS" class="menuitem">Dynamika spo&#322;eczna</div></a>
+				<a href="TECH_ECOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ECOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ECOLOGY" class="menuitem">Ekologia</div></a>
+				<a href="TECH_ALIEN_ECOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_ECOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_ECOLOGY" class="menuitem">Ekologia obcych</div></a>
+				<a href="TECH_INDUSTRIAL_ECOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_INDUSTRIAL_ECOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_INDUSTRIAL_ECOLOGY" class="menuitem">Ekologia przemys&#322;owa</div></a>
+				<a href="TECH_ALIEN_ETHICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_ETHICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_ETHICS" class="menuitem">Etyka obcych</div></a>
+				<a href="TECH_EUTHENICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_EUTHENICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_EUTHENICS" class="menuitem">Eutenika</div></a>
+				<a href="TECH_ALIEN_EVOLUTION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_EVOLUTION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_EVOLUTION" class="menuitem">Ewolucja obcych</div></a>
+				<a href="TECH_PHYSICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PHYSICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PHYSICS" class="menuitem">Fizyka</div></a>
+				<a href="TECH_PHOTOSYSTEMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PHOTOSYSTEMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PHOTOSYSTEMS" class="menuitem">Fotosystem&oacute;w</div></a>
+				<a href="TECH_GENETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GENETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GENETICS" class="menuitem">Genetyka</div></a>
+				<a href="TECH_ALIEN_GENETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_GENETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_GENETICS" class="menuitem">Genetyka obcych</div></a>
+				<a href="TECH_GEOPHYSICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GEOPHYSICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GEOPHYSICS" class="menuitem">Geofizyka</div></a>
+				<a href="TECH_HYPERCOMPUTING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HYPERCOMPUTING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HYPERCOMPUTING" class="menuitem">Hiperkomputer&oacute;w</div></a>
+				<a href="TECH_HYPERCONDUCTORS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HYPERCONDUCTORS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HYPERCONDUCTORS" class="menuitem">Hiperprzewodnik&oacute;w</div></a>
+				<a href="TECH_ALIEN_HYBRIDIZATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_HYBRIDIZATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_HYBRIDIZATION" class="menuitem">Hybrydyzacja obcych</div></a>
+				<a href="TECH_HUMAN_IDEALISM.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HUMAN_IDEALISM.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HUMAN_IDEALISM" class="menuitem">Idealizm ludzki</div></a>
+				<a href="TECH_ENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ENGINEERING" class="menuitem">In&#380;ynieria</div></a>
+				<a href="TECH_PLANETARY_ENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PLANETARY_ENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PLANETARY_ENGINEERING" class="menuitem">In&#380;ynieria planetarna</div></a>
+				<a href="TECH_TISSUE_ENGINEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TISSUE_ENGINEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TISSUE_ENGINEERING" class="menuitem">In&#380;ynieria tkanek</div></a>
+				<a href="TECH_SEISMIC_INDUCTION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SEISMIC_INDUCTION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SEISMIC_INDUCTION" class="menuitem">Indukcja sejsmiczna</div></a>
+				<a href="TECH_COMPUTING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COMPUTING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COMPUTING" class="menuitem">Informatyka</div></a>
+				<a href="TECH_SWARM_INTELLIGENCE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SWARM_INTELLIGENCE.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SWARM_INTELLIGENCE" class="menuitem">Inteligencja roju</div></a>
+				<a href="TECH_COGNITION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COGNITION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COGNITION" class="menuitem">Kognicja</div></a>
+				<a href="TECH_COMMUNICATIONS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COMMUNICATIONS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COMMUNICATIONS" class="menuitem">Komunikacja</div></a>
+				<a href="TECH_BALLISTIC_LEV.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_BALLISTIC_LEV.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_BALLISTIC_LEV" class="menuitem">Magnetyzm balistyczny</div></a>
+				<a href="TECH_MOBILE_LEV.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_MOBILE_LEV.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_MOBILE_LEV" class="menuitem">Magnetyzm mobilny</div></a>
+				<a href="TECH_TACTICAL_LEV.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TACTICAL_LEV.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TACTICAL_LEV" class="menuitem">Magnetyzm taktyczny</div></a>
+				<a href="TECH_PLANETARY_SURVEY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PLANETARY_SURVEY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PLANETARY_SURVEY" class="menuitem">Map gwiazd</div></a>
+				<a href="TECH_GENETIC_MAPPING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GENETIC_MAPPING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GENETIC_MAPPING" class="menuitem">Mapowanie genomu</div></a>
+				<a href="TECH_TRANSCENDENTAL_MATH.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TRANSCENDENTAL_MATH.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TRANSCENDENTAL_MATH" class="menuitem">Matematyka transcendentna</div></a>
+				<a href="TECH_EXOTIC_MATTER.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_EXOTIC_MATTER.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_EXOTIC_MATTER" class="menuitem">Materia egzotyczna</div></a>
+				<a href="TECH_ALIEN_MATERIALS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_MATERIALS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_MATERIALS" class="menuitem">Materia&#322;&oacute;w obcych</div></a>
+				<a href="TECH_MECHATRONICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_MECHATRONICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_MECHATRONICS" class="menuitem">Mechatronika</div></a>
+				<a href="TECH_METAMATERIALS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_METAMATERIALS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_METAMATERIALS" class="menuitem">Metamateria&#322;&oacute;w</div></a>
+				<a href="TECH_SYNTHETIC_THOUGHT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SYNTHETIC_THOUGHT.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SYNTHETIC_THOUGHT" class="menuitem">My&#347;l syntetyczna</div></a>
+				<a href="TECH_COLLABORATIVE_THOUGHT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_COLLABORATIVE_THOUGHT.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_COLLABORATIVE_THOUGHT" class="menuitem">My&#347;lenie kolaboratywne</div></a>
+				<a href="TECH_NANOROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_NANOROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_NANOROBOTICS" class="menuitem">Nanorobotyka</div></a>
+				<a href="TECH_NANOTECHNOLOGY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_NANOTECHNOLOGY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_NANOTECHNOLOGY" class="menuitem">Nanotechnologia</div></a>
+				<a href="TECH_ALIEN_SCIENCES.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_SCIENCES.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_SCIENCES" class="menuitem">Nauk o obcych</div></a>
+				<a href="TECH_ALIEN_LIFEFORMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_LIFEFORMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_LIFEFORMS" class="menuitem">Obcych form &#380;ycia</div></a>
+				<a href="TECH_HUMAN_CONSERVATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HUMAN_CONSERVATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HUMAN_CONSERVATION" class="menuitem">Ochrona cz&#322;owiecze&#324;stwa</div></a>
+				<a href="TECH_PIONEERING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PIONEERING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PIONEERING" class="menuitem">Pionierstwo</div></a>
+				<a href="TECH_DESIGNER_LIFEFORMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_DESIGNER_LIFEFORMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_DESIGNER_LIFEFORMS" class="menuitem">Projektowanie form &#380;ycia</div></a>
+				<a href="TECH_GENETIC_DESIGN.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_GENETIC_DESIGN.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_GENETIC_DESIGN" class="menuitem">Projektowanie genetyczne</div></a>
+				<a href="TECH_PROTOGENETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_PROTOGENETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_PROTOGENETICS" class="menuitem">Protogenetyka</div></a>
+				<a href="TECH_NEURAL_UPLOADING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_NEURAL_UPLOADING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_NEURAL_UPLOADING" class="menuitem">Przesy&#322; neuronowy</div></a>
+				<a href="TECH_ROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ROBOTICS" class="menuitem">Robotyka</div></a>
+				<a href="TECH_SWARM_ROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SWARM_ROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SWARM_ROBOTICS" class="menuitem">Robotyka roju</div></a>
+				<a href="TECH_TACTICAL_ROBOTICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TACTICAL_ROBOTICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TACTICAL_ROBOTICS" class="menuitem">Robotyka taktyczna</div></a>
+				<a href="TECH_VERTICAL_FARMING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_VERTICAL_FARMING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_VERTICAL_FARMING" class="menuitem">Rolnictwo pionowe</div></a>
+				<a href="TECH_SERVOMACHINERY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SERVOMACHINERY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SERVOMACHINERY" class="menuitem">Serwomaszyn</div></a>
+				<a href="TECH_DEFENSE_GRID.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_DEFENSE_GRID.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_DEFENSE_GRID" class="menuitem">Sie&#263; obronna</div></a>
+				<a href="TECH_ORBITAL_NETWORKS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ORBITAL_NETWORKS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ORBITAL_NETWORKS" class="menuitem">Sieci orbitalnych</div></a>
+				<a href="TECH_CLIMATE_CONTROL.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CLIMATE_CONTROL.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CLIMATE_CONTROL" class="menuitem">Sterowanie klimatem</div></a>
+				<a href="TECH_SURROGACY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SURROGACY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SURROGACY" class="menuitem">Surogatyzm</div></a>
+				<a href="TECH_SYNERGETICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_SYNERGETICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_SYNERGETICS" class="menuitem">Synergetyka</div></a>
+				<a href="TECH_AUTONOMOUS_SYSTEMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_AUTONOMOUS_SYSTEMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_AUTONOMOUS_SYSTEMS" class="menuitem">System&oacute;w autonomicznych</div></a>
+				<a href="TECH_POWER_SYSTEMS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_POWER_SYSTEMS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_POWER_SYSTEMS" class="menuitem">System&oacute;w zasilania</div></a>
+				<a href="TECH_ARTIFICIAL_EVOLUTION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ARTIFICIAL_EVOLUTION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ARTIFICIAL_EVOLUTION" class="menuitem">Sztuczna ewolucja</div></a>
+				<a href="TECH_ARTIFICIAL_INTELLIGENCE.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ARTIFICIAL_INTELLIGENCE.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ARTIFICIAL_INTELLIGENCE" class="menuitem">Sztuczna inteligencja</div></a>
+				<a href="TECH_HABITATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_HABITATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_HABITATION" class="menuitem">Technologii budowy dom&oacute;w</div></a>
+				<a href="TECH_FIELD_THEORY.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_FIELD_THEORY.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_FIELD_THEORY" class="menuitem">Teoria pola</div></a>
+				<a href="TECH_TERRAFORMING.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TERRAFORMING.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TERRAFORMING" class="menuitem">Terraformowanie</div></a>
+				<a href="TECH_TRANSGENICS.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_TRANSGENICS.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_TRANSGENICS" class="menuitem">Transgenika</div></a>
+				<a href="TECH_ALIEN_DOMESTICATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_ALIEN_DOMESTICATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_ALIEN_DOMESTICATION" class="menuitem">Udomawianie obcych</div></a>
+				<a href="TECH_AUGMENTATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_AUGMENTATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_AUGMENTATION" class="menuitem">Ulepszanie cia&#322;a</div></a>
+				<a href="TECH_CIVIL_SUPPORT.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_CIVIL_SUPPORT.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_CIVIL_SUPPORT" class="menuitem">Wsparcie cywilne</div></a>
+				<a href="TECH_FABRICATION.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/TECH_FABRICATION.png\' />', true);" onmouseout="return hideTip();"><div id="TECH_FABRICATION" class="menuitem">Wytwarzanie</div></a>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

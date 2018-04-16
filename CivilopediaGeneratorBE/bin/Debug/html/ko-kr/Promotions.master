@@ -1,0 +1,240 @@
+﻿<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-kr">
+<head id="Head1" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+	<meta name="keywords" content="civilopedia,civilopedia online,civilization,civilization beyond earth,civilization be,civilizationbe,promotion,promotions" />
+	<meta name="description" content="Civilization Beyond Earth CIVILOPEDIA ONLINE" />
+	<link rel="Stylesheet" type="text/css" href="/civilopediabe/styles.css" />
+	<script type="text/javascript">
+		function doSearch() {
+			if (document.getElementById("txtSearch").value == "") {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			if (document.getElementById("txtSearch").value.length < 4) {
+				document.getElementById("searchresults").innerHTML = "";
+				document.getElementById("searchresults").style.display = "hidden";
+				return;
+			}
+
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {
+				xmlhttp = new ActiveXObject("microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var x, i, strName, strURL;
+					x = xmlhttp.responseXML.documentElement.getElementsByTagName("page");
+					document.getElementById("searchresults").innerHTML = "";
+					if (x.length > 0) {
+						document.getElementById("searchresults").style.display = "inline";
+						for (i = 0; i < x.length; i++) {
+							strName = x[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+							strURL = x[i].getElementsByTagName("url")[0].firstChild.nodeValue;
+							document.getElementById("searchresults").innerHTML += "<a href='" + strURL + ".aspx'><div class='menuitem'>" + strName + "</div></a><br />";
+						}
+					}
+					else {
+						document.getElementById("searchresults").style.display = "hidden";
+					}
+				}
+			}
+			xmlhttp.open("GET", "search.aspx?url=&search=" + document.getElementById("txtSearch").value, true);
+			xmlhttp.send();
+		}
+	</script>
+	<script type="text/javascript" src="/civilopediabe/skinnytip.js" />
+</head>
+<body>
+    <form id="form1" runat="server">
+	<script type="text/javascript">
+
+	</script>
+	<div id="tiplayer" style="position:absolute; visibility:hidden; z-index:10000;"></div>
+	<div class="container">
+		<div class="header"><a href="default.aspx" class="titlelink">Civilization Beyond Earth CIVILOPEDIA Online</a></div>
+		<div class="tabrow">
+			<a href="CONCEPT_HOME.aspx" onmouseover="return tooltip('게임 콘셉트');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_concept_off.png" class="tab" id="tab01" onmouseover="this.src='/civilopediabe/images/tab_concept_on.png';" onmouseout="this.src='/civilopediabe/images/tab_concept_off.png';" /></a>
+			<a href="TECH_HOME.aspx" onmouseover="return tooltip('기술');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_tech_off.png" class="tab" id="tab02" onmouseover="this.src='/civilopediabe/images/tab_tech_on.png';" onmouseout="this.src='/civilopediabe/images/tab_tech_off.png';" /></a>
+			<a href="UNIT_HOME.aspx" onmouseover="return tooltip('유닛');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_unit_off.png" class="tab" id="tab03" onmouseover="this.src='/civilopediabe/images/tab_unit_on.png';" onmouseout="this.src='/civilopediabe/images/tab_unit_off.png';" /></a>
+			<a href="PROMOTION_HOME.aspx" onmouseover="return tooltip('유닛 업그레이드');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_promotion_on.png" class="tab" id="tab04" /></a>
+			<a href="BUILDING_HOME.aspx" onmouseover="return tooltip('건물');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_building_off.png" class="tab" id="tab05" onmouseover="this.src='/civilopediabe/images/tab_building_on.png';" onmouseout="this.src='/civilopediabe/images/tab_building_off.png';" /></a>
+			<a href="WONDER_HOME.aspx" onmouseover="return tooltip('불가사의');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_wonder_off.png" class="tab" id="tab06" onmouseover="this.src='/civilopediabe/images/tab_wonder_on.png';" onmouseout="this.src='/civilopediabe/images/tab_wonder_off.png';" /></a>
+			<a href="POLICY_HOME.aspx" onmouseover="return tooltip('미덕');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_virtues_off.png" class="tab" id="tab07" onmouseover="this.src='/civilopediabe/images/tab_virtues_on.png';" onmouseout="this.src='/civilopediabe/images/tab_virtues_off.png';" /></a>
+			<a href="COVERT_HOME.aspx" onmouseover="return tooltip('비밀 작전');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_covert_ops_off.png" class="tab" id="tab08" onmouseover="this.src='/civilopediabe/images/tab_covert_ops_on.png';" onmouseout="this.src='/civilopediabe/images/tab_covert_ops_off.png';" /></a>
+			<a href="CIVILIZATION_HOME.aspx" onmouseover="return tooltip('후원자와 지도자');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_civilization_off.png" class="tab" id="tab09" onmouseover="this.src='/civilopediabe/images/tab_civilization_on.png';" onmouseout="this.src='/civilopediabe/images/tab_civilization_off.png';" /></a>
+			<a href="QUEST_HOME.aspx" onmouseover="return tooltip('퀘스트');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_quests_off.png" class="tab" id="tab10" onmouseover="this.src='/civilopediabe/images/tab_quests_on.png';" onmouseout="this.src='/civilopediabe/images/tab_quests_off.png';" /></a>
+			<a href="TERRAIN_HOME.aspx" onmouseover="return tooltip('지형 및 지형 특성');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_terrain_off.png" class="tab" id="tab11" onmouseover="this.src='/civilopediabe/images/tab_terrain_on.png';" onmouseout="this.src='/civilopediabe/images/tab_terrain_off.png';" /></a>
+			<a href="RESOURCE_HOME.aspx" onmouseover="return tooltip('자원');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_resources_off.png" class="tab" id="tab12" onmouseover="this.src='/civilopediabe/images/tab_resources_on.png';" onmouseout="this.src='/civilopediabe/images/tab_resources_off.png';" /></a>
+			<a href="IMPROVEMENT_HOME.aspx" onmouseover="return tooltip('시설');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_improvement_off.png" class="tab" id="tab13" onmouseover="this.src='/civilopediabe/images/tab_improvement_on.png';" onmouseout="this.src='/civilopediabe/images/tab_improvement_off.png';" /></a>
+            <a href="AFFINITY_HOME.aspx" onmouseover="return tooltip('친화력');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_affinity_off.png" class="tab" id="tab14" onmouseover="this.src='/civilopediabe/images/tab_affinity_on.png';" onmouseout="this.src='/civilopediabe/images/tab_affinity_off.png';" /></a>
+			<a href="STATION_HOME.aspx" onmouseover="return tooltip('주둔지');" onmouseout="return hideTip();"><img src="/civilopediabe/images/tab_stations_off.png" class="tab" id="tab15" onmouseover="this.src='/civilopediabe/images/tab_stations_on.png';" onmouseout="this.src='/civilopediabe/images/tab_stations_off.png';" /></a>
+			<input type="text" id="txtSearch" onkeyup="doSearch();" class="searchbox" />
+			<span style="display: none; position: absolute; top: 77px; left: 720px; width: 272px; float: left;" id="searchresults">
+			</span>
+		</div>
+		<div class="bordertop">유닛 업그레이드
+			<div style="position: absolute; top: 78px; left: 860px;">
+				<select name="cboLanguage" id="cboLanguage" style="float: left; margin-top: 20px;" onchange="cboLanguage_SelectedIndexChanged();">
+					<option value="">Language:</option>
+					<option value="">English</option>
+					<option value="de-de">Deutsch</option>
+					<option value="es-es">Español</option>
+					<option value="fr-fr">Français</option>
+					<option value="it-it">Italiano</option>
+					<option value="ja-jp">日本語</option>
+					<option value="ko-kr">한국어</option>
+					<option value="pl-pl">Polski</option>
+					<option value="ru-ru">Русский</option>
+					<option value="zh-hans-cn">中文 (简体)</option>
+					<option value="zh-hant-hk">中文 (繁體)</option>
+				</select>
+			</div>
+		</div>
+		<div class="content">
+			<div class="menu">
+				
+				<a href="PROMOTION_HOME.aspx"><div id="PROMOTION_HOME" class="menuitem">진급 홈페이지</div></a>
+			<div id="GROUP_UNIT_MARINE" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_MARINE_CONTENT');"><div id="UNIT_MARINE" class="menugroup">군인</div></a><div id="UNIT_MARINE_CONTENT">
+				<a href="UNITUPGRADE_MARINE_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_3H" class="menuitem">머로더</div></a>
+				<a href="UNITUPGRADE_MARINE_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_3P" class="menuitem">백인대장</div></a>
+				<a href="UNITUPGRADE_MARINE_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_1" class="menuitem">병사</div></a>
+				<a href="UNITUPGRADE_MARINE_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_2H" class="menuitem">브롤러</div></a>
+				<a href="UNITUPGRADE_MARINE_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_3S" class="menuitem">사도</div></a>
+				<a href="UNITUPGRADE_MARINE_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_2P" class="menuitem">센티넬</div></a>
+				<a href="UNITUPGRADE_MARINE_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_MARINE_2S" class="menuitem">신봉자</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_RANGED_MARINE" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_RANGED_MARINE_CONTENT');"><div id="UNIT_RANGED_MARINE" class="menugroup">레인저</div></a><div id="UNIT_RANGED_MARINE_CONTENT">
+				<a href="UNITUPGRADE_RANGED_MARINE_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_2P" class="menuitem">가디언</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_2S" class="menuitem">감독관</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_3P" class="menuitem">감시관</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_2H" class="menuitem">공격수</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_3S" class="menuitem">집행자</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_3H" class="menuitem">파쇄자</div></a>
+				<a href="UNITUPGRADE_RANGED_MARINE_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_RANGED_MARINE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_RANGED_MARINE_1" class="menuitem">포수</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_CAVALRY" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_CAVALRY_CONTENT');"><div id="UNIT_CAVALRY" class="menugroup">기병대</div></a><div id="UNIT_CAVALRY_CONTENT">
+				<a href="UNITUPGRADE_CAVALRY_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_1" class="menuitem">갑옷</div></a>
+				<a href="UNITUPGRADE_CAVALRY_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_3S" class="menuitem">구세주</div></a>
+				<a href="UNITUPGRADE_CAVALRY_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_2H" class="menuitem">독사</div></a>
+				<a href="UNITUPGRADE_CAVALRY_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_3P" class="menuitem">드라군</div></a>
+				<a href="UNITUPGRADE_CAVALRY_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_2S" class="menuitem">선지자</div></a>
+				<a href="UNITUPGRADE_CAVALRY_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_2P" class="menuitem">창기병</div></a>
+				<a href="UNITUPGRADE_CAVALRY_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CAVALRY_3H" class="menuitem">코브라</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_SIEGE" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_SIEGE_CONTENT');"><div id="UNIT_SIEGE" class="menugroup">대위성 미사일</div></a><div id="UNIT_SIEGE_CONTENT">
+				<a href="UNITUPGRADE_SIEGE_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_2S" class="menuitem">교육가</div></a>
+				<a href="UNITUPGRADE_SIEGE_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_3S" class="menuitem">대사</div></a>
+				<a href="UNITUPGRADE_SIEGE_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_3H" class="menuitem">미노타우로스</div></a>
+				<a href="UNITUPGRADE_SIEGE_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_2H" class="menuitem">켄타우로스</div></a>
+				<a href="UNITUPGRADE_SIEGE_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_3P" class="menuitem">파괴자</div></a>
+				<a href="UNITUPGRADE_SIEGE_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_1" class="menuitem">포병대</div></a>
+				<a href="UNITUPGRADE_SIEGE_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SIEGE.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SIEGE_2P" class="menuitem">해결사</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_NAVAL_FIGHTER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_NAVAL_FIGHTER_CONTENT');"><div id="UNIT_NAVAL_FIGHTER" class="menugroup">해군 전함</div></a><div id="UNIT_NAVAL_FIGHTER_CONTENT">
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_2P" class="menuitem">구축함</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_3P" class="menuitem">드레드노트</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_1" class="menuitem">순양함</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_3S" class="menuitem">옹호자</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_2S" class="menuitem">조정자</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_2H" class="menuitem">트리톤</div></a>
+				<a href="UNITUPGRADE_NAVAL_FIGHTER_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_FIGHTER_3H" class="menuitem">포세이돈</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_AIR_FIGHTER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_AIR_FIGHTER_CONTENT');"><div id="UNIT_AIR_FIGHTER" class="menugroup">전투기</div></a><div id="UNIT_AIR_FIGHTER_CONTENT">
+				<a href="UNITUPGRADE_AIR_FIGHTER_1.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_1" class="menuitem">니들제트</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_2P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_2P" class="menuitem">레이더</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_2H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_2H" class="menuitem">로커스트</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_3S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_3S" class="menuitem">세라프</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_3H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_3H" class="menuitem">셔라이크</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_3P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_3P" class="menuitem">프레데이터</div></a>
+				<a href="UNITUPGRADE_AIR_FIGHTER_2S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AIR_FIGHTER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AIR_FIGHTER_2S" class="menuitem">헤럴드</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_NAVAL_CARRIER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_NAVAL_CARRIER_CONTENT');"><div id="UNIT_NAVAL_CARRIER" class="menugroup">항공모함</div></a><div id="UNIT_NAVAL_CARRIER_CONTENT">
+				<a href="UNITUPGRADE_NAVAL_CARRIER_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_CARRIER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_CARRIER_1P" class="menuitem">배스천</div></a>
+				<a href="UNITUPGRADE_NAVAL_CARRIER_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_CARRIER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_CARRIER_1S" class="menuitem">셰퍼드</div></a>
+				<a href="UNITUPGRADE_NAVAL_CARRIER_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_NAVAL_CARRIER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_NAVAL_CARRIER_1H" class="menuitem">히드라</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_XENO_SWARM" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_XENO_SWARM_CONTENT');"><div id="UNIT_XENO_SWARM" class="menugroup">제노 군집</div></a><div id="UNIT_XENO_SWARM_CONTENT">
+				<a href="UNITUPGRADE_XENO_SWARM_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_SWARM.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_SWARM_1P" class="menuitem">진정한 제노 군집</div></a>
+				<a href="UNITUPGRADE_XENO_SWARM_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_SWARM.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_SWARM_1H" class="menuitem">진화한 제노 군집</div></a>
+				<a href="UNITUPGRADE_XENO_SWARM_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_SWARM.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_SWARM_1S" class="menuitem">최상의 제노 군집</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_XENO_CAVALRY" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_XENO_CAVALRY_CONTENT');"><div id="UNIT_XENO_CAVALRY" class="menugroup">제노 기마대</div></a><div id="UNIT_XENO_CAVALRY_CONTENT">
+				<a href="UNITUPGRADE_XENO_CAVALRY_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_CAVALRY_1P" class="menuitem">진정한 제노 기마대</div></a>
+				<a href="UNITUPGRADE_XENO_CAVALRY_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_CAVALRY_1H" class="menuitem">진화한 제노 기마대</div></a>
+				<a href="UNITUPGRADE_XENO_CAVALRY_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_CAVALRY.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_CAVALRY_1S" class="menuitem">최상의 제노 기마대</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_ROCKTOPUS" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_ROCKTOPUS_CONTENT');"><div id="UNIT_ROCKTOPUS" class="menugroup">록토퍼스</div></a><div id="UNIT_ROCKTOPUS_CONTENT">
+				<a href="UNITUPGRADE_ROCKTOPUS_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ROCKTOPUS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ROCKTOPUS_1P" class="menuitem">진정한 록토퍼스</div></a>
+				<a href="UNITUPGRADE_ROCKTOPUS_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ROCKTOPUS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ROCKTOPUS_1H" class="menuitem">진화한 록토퍼스</div></a>
+				<a href="UNITUPGRADE_ROCKTOPUS_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ROCKTOPUS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ROCKTOPUS_1S" class="menuitem">최상의 록토퍼스</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_XENO_TITAN" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_XENO_TITAN_CONTENT');"><div id="UNIT_XENO_TITAN" class="menugroup">제노 타이탄</div></a><div id="UNIT_XENO_TITAN_CONTENT">
+				<a href="UNITUPGRADE_XENO_TITAN_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_TITAN.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_TITAN_1P" class="menuitem">진정한 제노 타이탄</div></a>
+				<a href="UNITUPGRADE_XENO_TITAN_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_TITAN.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_TITAN_1H" class="menuitem">진화한 제노 타이탄</div></a>
+				<a href="UNITUPGRADE_XENO_TITAN_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_XENO_TITAN.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_XENO_TITAN_1S" class="menuitem">최상의 제노 타이탄</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_BATTLESUIT" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_BATTLESUIT_CONTENT');"><div id="UNIT_BATTLESUIT" class="menugroup">배틀슈트</div></a><div id="UNIT_BATTLESUIT_CONTENT">
+				<a href="UNITUPGRADE_BATTLESUIT_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_BATTLESUIT.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_BATTLESUIT_1P" class="menuitem">진정한 배틀슈트</div></a>
+				<a href="UNITUPGRADE_BATTLESUIT_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_BATTLESUIT.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_BATTLESUIT_1H" class="menuitem">진화한 배틀슈트</div></a>
+				<a href="UNITUPGRADE_BATTLESUIT_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_BATTLESUIT.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_BATTLESUIT_1S" class="menuitem">최상의 배틀슈트</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_AEGIS" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_AEGIS_CONTENT');"><div id="UNIT_AEGIS" class="menugroup">이지스</div></a><div id="UNIT_AEGIS_CONTENT">
+				<a href="UNITUPGRADE_AEGIS_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AEGIS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AEGIS_1P" class="menuitem">진정한 이지스</div></a>
+				<a href="UNITUPGRADE_AEGIS_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AEGIS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AEGIS_1H" class="menuitem">진화한 이지스</div></a>
+				<a href="UNITUPGRADE_AEGIS_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_AEGIS.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_AEGIS_1S" class="menuitem">최상의 이지스</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_LEV_TANK" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_LEV_TANK_CONTENT');"><div id="UNIT_LEV_TANK" class="menugroup">공중부양 탱크</div></a><div id="UNIT_LEV_TANK_CONTENT">
+				<a href="UNITUPGRADE_LEV_TANK_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_TANK.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_TANK_1P" class="menuitem">진정한 공중부양 탱크</div></a>
+				<a href="UNITUPGRADE_LEV_TANK_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_TANK.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_TANK_1H" class="menuitem">진화한 공중부양 탱크</div></a>
+				<a href="UNITUPGRADE_LEV_TANK_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_TANK.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_TANK_1S" class="menuitem">최상의 공중부양 탱크</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_LEV_DESTROYER" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_LEV_DESTROYER_CONTENT');"><div id="UNIT_LEV_DESTROYER" class="menugroup">공중부양 구축함</div></a><div id="UNIT_LEV_DESTROYER_CONTENT">
+				<a href="UNITUPGRADE_LEV_DESTROYER_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_DESTROYER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_DESTROYER_1P" class="menuitem">진정한 공중부양 구축함</div></a>
+				<a href="UNITUPGRADE_LEV_DESTROYER_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_DESTROYER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_DESTROYER_1H" class="menuitem">진화한 공중부양 구축함</div></a>
+				<a href="UNITUPGRADE_LEV_DESTROYER_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_LEV_DESTROYER.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_LEV_DESTROYER_1S" class="menuitem">최상의 공중부양 구축함</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_CNDR" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_CNDR_CONTENT');"><div id="UNIT_CNDR" class="menugroup">CNDR</div></a><div id="UNIT_CNDR_CONTENT">
+				<a href="UNITUPGRADE_CNDR_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CNDR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CNDR_1P" class="menuitem">진정한 CNDR</div></a>
+				<a href="UNITUPGRADE_CNDR_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CNDR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CNDR_1H" class="menuitem">진화한 CNDR</div></a>
+				<a href="UNITUPGRADE_CNDR_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CNDR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CNDR_1S" class="menuitem">최상의 CNDR</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_CARVR" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_CARVR_CONTENT');"><div id="UNIT_CARVR" class="menugroup">CARVR</div></a><div id="UNIT_CARVR_CONTENT">
+				<a href="UNITUPGRADE_CARVR_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CARVR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CARVR_1P" class="menuitem">진정한 CARVR</div></a>
+				<a href="UNITUPGRADE_CARVR_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CARVR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CARVR_1H" class="menuitem">진화한 CARVR</div></a>
+				<a href="UNITUPGRADE_CARVR_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_CARVR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_CARVR_1S" class="menuitem">최상의 CARVR</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_SABR" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_SABR_CONTENT');"><div id="UNIT_SABR" class="menugroup">SABR</div></a><div id="UNIT_SABR_CONTENT">
+				<a href="UNITUPGRADE_SABR_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SABR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SABR_1P" class="menuitem">진정한 SABR</div></a>
+				<a href="UNITUPGRADE_SABR_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SABR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SABR_1H" class="menuitem">진화한 SABR</div></a>
+				<a href="UNITUPGRADE_SABR_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_SABR.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_SABR_1S" class="menuitem">최상의 SABR</div></a>
+			</div></div>
+			<div id="GROUP_UNIT_ANGEL" class="menugroupcontainer"><a href="javascript:togglediv('UNIT_ANGEL_CONTENT');"><div id="UNIT_ANGEL" class="menugroup">ANGEL</div></a><div id="UNIT_ANGEL_CONTENT">
+				<a href="UNITUPGRADE_ANGEL_1P.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ANGEL.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ANGEL_1P" class="menuitem">진정한 ANGEL</div></a>
+				<a href="UNITUPGRADE_ANGEL_1H.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ANGEL.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ANGEL_1H" class="menuitem">진화한 ANGEL</div></a>
+				<a href="UNITUPGRADE_ANGEL_1S.aspx" onmouseover="return tooltip('<img src=\'/civilopediabe/images/small/UNIT_ANGEL.png\' />', true);" onmouseout="return hideTip();"><div id="UNITUPGRADE_ANGEL_1S" class="menuitem">최상의 ANGEL</div></a>
+			</div></div>
+			</div>
+			<div>
+				<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+				</asp:ContentPlaceHolder>
+			</div>
+		</div>
+		<div class="borderbottom">&nbsp;</div>
+		<div class="footer">
+			<p>The artwork and designs contained on this site were not created by the site owner. All artwork and designs were done by <a href="http://www.firaxis.com/" target="_blank">Firaxis</a> and have been exported from their game <a href=http://www.civilization.com/en/games/civilization-beyond-earth/"" target="_blank">Civilization Beyond Earth</a>. The site owner does not hold any rights on the art or designs. All content was generated using the game's XML data files.</p>
+		</div>
+	</div>
+    </form>
+</body>
+</html>

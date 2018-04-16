@@ -1,0 +1,16 @@
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.Form1.resources
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.Properties.Resources.resources
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.csproj.GenerateResource.Cache
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\bin\Debug\CivilopediaGeneratorBE.exe
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\bin\Debug\CivilopediaGeneratorBE.pdb
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.exe
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.pdb
+D:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.csprojResolveAssemblyReference.cache
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.exe
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.pdb
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\bin\Debug\CivilopediaGeneratorBE.exe
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\bin\Debug\CivilopediaGeneratorBE.pdb
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.csprojResolveAssemblyReference.cache
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.Form1.resources
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.Properties.Resources.resources
+C:\source\CivilopediaGeneratorBE\CivilopediaGeneratorBE\obj\x86\Debug\CivilopediaGeneratorBE.csproj.GenerateResource.Cache
